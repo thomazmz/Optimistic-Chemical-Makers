@@ -8,7 +8,7 @@ public class Hello {
 
     @RequestMapping("/")
     public String hello() {
-        return "Hello World!";
+        return "Hello World! Just testing Heroku/Github integration.";
     }
 }
 
