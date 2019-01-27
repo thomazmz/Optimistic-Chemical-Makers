@@ -1,4 +1,7 @@
 package com.OptimisticChemicalMakers.MapFood.repositories;
 
-public class DeliveryOrderRepository {
+import com.OptimisticChemicalMakers.MapFood.models.DeliveryOrder;
+import org.springframework.data.repository.CrudRepository;
+
+public interface DeliveryOrderRepository extends CrudRepository<DeliveryOrder, Long> {
 }
