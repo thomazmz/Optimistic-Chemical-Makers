@@ -1,12 +1,9 @@
 package com.OptimisticChemicalMakers.MapFood.models;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.Embeddable;
 
-@Entity
-public class GeographicPosition {
+@Embeddable
+public class Geolocation {
 
     // Static Properties
 
@@ -14,19 +11,22 @@ public class GeographicPosition {
 
     // Class Properties
 
-    @Id                                                 // It tells the JPA that it is an ID
-    @GeneratedValue(strategy = GenerationType.AUTO)     // It tells the JPA how to autogenerate the ID value
-    private Long id;
-
     private double latitude;
 
     private double longitude;
 
     // Constructors
 
-    public GeographicPosition(double latitude, double longitude) {
-        this.latitude = latitude;
-        this.longitude = longitude;
+    public Geolocation(double latitude, double longitude) {
+
+        if (latitude < -90 || latitude > 90) {
+            throw new NullPointerException("Latitude values must be between -90 and 90!");
+        } else if (longitude < -180 || longitude > 180) {
+            throw new NullPointerException("Longitude values must be between -180 and 180!");
+        } else {
+            this.latitude = latitude;
+            this.longitude = longitude;
+        }
     }
 
     // Static Methods
@@ -50,10 +50,6 @@ public class GeographicPosition {
     }
 
     // Get Methods
-
-    public Long getId() {
-        return id;
-    }
 
     public double getLatitude() {
         return latitude;
@@ -80,13 +76,13 @@ public class GeographicPosition {
 
     // Class Methods
 
-    public double distanceTo(GeographicPosition geographicPosition) {
+    public double distanceTo(Geolocation geographicPosition) {
 
-        return this.haversinDistance(this.getLatitude(), this.getLongitude(), geographicPosition.getLatitude(), geographicPosition.getLongitude());
+        return this.haversinDistance(this.latitude, this.longitude, geographicPosition.getLatitude(), geographicPosition.getLongitude());
 
     }
 
+
+
+
 }
-
-
-
