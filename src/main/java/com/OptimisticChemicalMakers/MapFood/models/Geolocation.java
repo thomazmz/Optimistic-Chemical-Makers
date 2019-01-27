@@ -17,6 +17,10 @@ public class Geolocation {
 
     // Constructors
 
+    public Geolocation() {
+
+    }
+
     public Geolocation(double latitude, double longitude) {
 
         if (latitude < -90 || latitude > 90) {

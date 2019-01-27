@@ -30,7 +30,7 @@ public class DeliveryOrder {
     })
     private Geolocation endingGeolocation;
 
-    public DeliveryOrder(Long originLatitude, Long originLongitude, Long endingLatitude, Long endingLongitude) {
+    public DeliveryOrder(Double originLatitude, Double originLongitude, Double endingLatitude, Double endingLongitude) {
 
         this.originGeolocation = new Geolocation(originLatitude, originLongitude);
 
