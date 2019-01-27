@@ -1,18 +1,20 @@
 package com.OptimisticChemicalMakers.MapFood.controllers;
 
-import com.OptimisticChemicalMakers.MapFood.models.GeographicPosition;
-import com.OptimisticChemicalMakers.MapFood.models.User;
-import com.OptimisticChemicalMakers.MapFood.repositories.UserRepository;
-import org.springframework.ui.Model;
+import com.OptimisticChemicalMakers.MapFood.Services.GeolocationService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-public class GeographicPositionController {
+public class GeolocationController {
+
+    @Autowired
+    private GeolocationService geolocationService;
 
     // GET /distance
     // Return the distance between points
     @GetMapping(value = "/distance")
-    public String getDistance(
+    public ResponseEntity<?> getDistance(
 
             @RequestParam("sLatitude") double sLatitude,
             @RequestParam("sLongitude") double sLongitude,
@@ -20,11 +22,7 @@ public class GeographicPositionController {
             @RequestParam("eLongitude") double eLongitude
 
     ) {
-
-        double distance = GeographicPosition.haversinDistance(sLatitude, sLongitude, eLatitude, eLongitude);
-
-        return Double.toString(distance);
-
+        return ResponseEntity.ok(geolocationService.getDistance(sLatitude, sLongitude, eLatitude, eLongitude));
     }
 
 }
