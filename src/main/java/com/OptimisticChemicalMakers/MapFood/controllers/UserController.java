@@ -1,9 +1,7 @@
 package com.OptimisticChemicalMakers.MapFood.controllers;
 
-import com.OptimisticChemicalMakers.MapFood.models.GeographicPosition;
 import com.OptimisticChemicalMakers.MapFood.models.User;
 import com.OptimisticChemicalMakers.MapFood.repositories.UserRepository;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
