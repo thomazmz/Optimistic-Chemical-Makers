@@ -1,9 +1,6 @@
 package com.OptimisticChemicalMakers.MapFood.models;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.Set;
 
 @Entity
@@ -24,6 +21,12 @@ public class Store {
     private String dishDescription;
 
     private String city;
+
+    @OneToMany(mappedBy="store", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<Product> products;
+
+    @OneToMany(mappedBy="store", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<DeliveryOrder> deliveryOrders;
 
     // Constructors
 
@@ -64,6 +67,14 @@ public class Store {
 
     public String getCity() {
         return city;
+    }
+
+    public Set<Product> getAvailableProducts() {
+        return this.products;
+    }
+
+    public Set<DeliveryOrder> getDeliveryOrders() {
+        return this.deliveryOrders;
     }
 
     // Set Methods
