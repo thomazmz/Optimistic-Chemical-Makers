@@ -1,0 +1,20 @@
+<div class="row"><a href="/" class="btn btn-link">Return</a></div>
+<div *ngIf="products !== undefined">
+  <div class="row m-3">
+    <div class="col-6 col-md-4 text-center my-3 d-flex align-items-stretch" *ngFor="let product of products">
+      <div class="card w-100 shadow">
+        <div class="card-body">
+          <h5 class="card-title">{{product.description}}</h5>
+          <p class="card-text">{{product.classification}}</p>
+          <p class="card-text">R$ {{product.price | number}}</p>
+          <button (click)='addItem(product)' class="btn btn-outline-danger">Add</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-12 text-center">
+      <button (click)='buy()' class="btn btn-outline-secondary">Buy</button>
+    </div>
+  </div>

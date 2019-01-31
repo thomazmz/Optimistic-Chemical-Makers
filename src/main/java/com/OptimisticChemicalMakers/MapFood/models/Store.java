@@ -1,19 +1,25 @@
 package com.OptimisticChemicalMakers.MapFood.models;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Transient;
+import javax.validation.constraints.NotNull;
+
+import java.io.Serializable;
 import java.util.Set;
 
 @Entity
-public class Store {
+public class Store implements Serializable {
+	
+	private static final long serialVersionUID = 1L;
 
     // Properties
 
     @Id                                                 // It tells the JPA that it is an ID
-    @GeneratedValue(strategy = GenerationType.AUTO)     // It tells the JPA how to autogenerate the ID value
-    private Long id;
+    private String id;
 
     private Long latitude;
 
@@ -21,12 +27,19 @@ public class Store {
 
     private String name;
 
+    @Column(name = "dish_description")
     private String dishDescription;
 
+    @Column(name = "address_city")
     private String city;
+    
+    //@Transient
+    private String distance;
 
     // Constructors
 
+    public Store() {}
+    
     public Store(Long latitude, Long longitude, String name) {
         this.name = name;
         this.latitude = latitude;
@@ -42,7 +55,7 @@ public class Store {
 
     // Get Methods
 
-    public Long getId() {
+    public String getId() {
         return id;
     }
 
@@ -66,9 +79,21 @@ public class Store {
         return city;
     }
 
+    public String getDistance() {
+		return distance;
+	}
+    
     // Set Methods
 
-    public void setLatitude(Long latitude) {
+	public void setId(String id) {
+		this.id = id;
+	}
+	
+	public void setDistance(String distance) {
+		this.distance = distance;
+	}
+
+	public void setLatitude(Long latitude) {
         this.latitude = latitude;
     }
 

@@ -1,0 +1,5 @@
+<div class="row m-3">
+  <div class="col-6 col-md-4 text-center my-3" *ngFor="let cliente of clientes">
+    <a (click)="setCliente(cliente)" class='btn btn-outline-danger btn-lg'>Cliente {{cliente.id}}</a>
+  </div>
+</div>

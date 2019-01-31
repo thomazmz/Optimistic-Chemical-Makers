@@ -2,6 +2,7 @@ package com.OptimisticChemicalMakers.MapFood.models;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 public class DeliveryOrder {
@@ -29,6 +30,11 @@ public class DeliveryOrder {
             @AttributeOverride(name = "longitude", column = @Column(name = "ending_longitude"))
     })
     private Geolocation endingGeolocation;
+    
+    @Transient 
+    private List<Product> products;
+    
+    public DeliveryOrder() {}
 
     public DeliveryOrder(Double originLatitude, Double originLongitude, Double endingLatitude, Double endingLongitude) {
 
@@ -39,10 +45,13 @@ public class DeliveryOrder {
         this.createdAt = new Date();
 
     }
+    
+    
 
     // Getters
 
-    public Long getId() {
+
+	public Long getId() {
         return this.id;
     }
 
@@ -75,4 +84,19 @@ public class DeliveryOrder {
     public void setCreatedAt(Date createdAt) {
         this.createdAt = createdAt;
     }
+
+	public List<Product> getProducts() {
+		return products;
+	}
+
+	public void setProducts(List<Product> products) {
+		this.products = products;
+	}
+
+	@Override
+	public String toString() {
+		return "DeliveryOrder [createdAt=" + createdAt + ", originGeolocation=" + originGeolocation + ", products="
+				+ products + "]";
+	}
+   
 }

@@ -1,0 +1,15 @@
+<div class="row"><a href="/" class="btn btn-link">Return</a></div>
+<div *ngIf="stores !== undefined">
+  <div class="row m-3">
+    <div class="col-6 col-md-4 text-center my-3 d-flex align-items-stretch" *ngFor="let store of stores">
+      <a [routerLink]="['/stores',store.id]" class="card w-100 shadow">
+        <div class="card-body">
+          <h5 class="card-title">{{store.name}}</h5>
+          <p class="card-text">{{store.dishDescription}}</p>
+          <p class="card-text">{{store.distance | number}} Km</p>
+        </div>
+      </a>
+    </div>
+  </div>
+
+
