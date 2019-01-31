@@ -8,8 +8,8 @@ public class Store {
 
     // Properties
 
-    @Id                                                 // It tells the JPA that it is an ID
-    @GeneratedValue(strategy = GenerationType.AUTO)     // It tells the JPA how to autogenerate the ID value
+    @Id                                                     // It tells the JPA that it is an ID
+    @GeneratedValue(strategy = GenerationType.IDENTITY)     // It tells the JPA how to autogenerate the ID value
     private Long id;
 
     private Long latitude;
@@ -30,10 +30,7 @@ public class Store {
 
     // Constructors
 
-    public Store(Long latitude, Long longitude, String name) {
-        this.name = name;
-        this.latitude = latitude;
-        this.longitude = longitude;
+    public Store() {
     }
 
     public Store(Long latitude, Long longitude, String name, String dishDescription) {
