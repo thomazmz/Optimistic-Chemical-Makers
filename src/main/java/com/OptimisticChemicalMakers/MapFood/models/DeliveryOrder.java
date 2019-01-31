@@ -12,16 +12,9 @@ public class DeliveryOrder {
     @GeneratedValue(strategy = GenerationType.AUTO)     // It tells the JPA how to autogenerate the ID value
     private Long id;
 
-    private Date createdAt;
-
-    private Date acceptedAt;
-
-    @Embedded
-    @AttributeOverrides(value = {
-            @AttributeOverride(name = "latitude", column = @Column(name = "origin_latitude")),
-            @AttributeOverride(name = "longitude", column = @Column(name = "origin_longitude"))
-    })
-    private Geolocation originGeolocation;
+    @ManyToOne
+    @JoinColumn(name="store_id", nullable=false)
+    private Store store;
 
     @Embedded
     @AttributeOverrides(value = {
@@ -30,13 +23,11 @@ public class DeliveryOrder {
     })
     private Geolocation endingGeolocation;
 
-    public DeliveryOrder(Double originLatitude, Double originLongitude, Double endingLatitude, Double endingLongitude) {
+    public DeliveryOrder(Store store,  Double endingLatitude, Double endingLongitude) {
 
-        this.originGeolocation = new Geolocation(originLatitude, originLongitude);
+        this.store = store;
 
         this.endingGeolocation = new Geolocation(endingLatitude, endingLongitude);
-
-        this.createdAt = new Date();
 
     }
 
@@ -46,20 +37,8 @@ public class DeliveryOrder {
         return this.id;
     }
 
-    public Date getCreatedAt() {
-        return this.createdAt;
-    }
-
-    public Date getAcceptedAt() {
-        return this.acceptedAt;
-    }
-
-    public Double getLinearDistance() {
-        return this.getOriginGeolocation().distanceTo(this.getEndingGeolocation());
-    }
-
-    public Geolocation getOriginGeolocation() {
-        return originGeolocation;
+    public Store getStore() {
+        return this.store;
     }
 
     public Geolocation getEndingGeolocation() {
@@ -68,11 +47,4 @@ public class DeliveryOrder {
 
     // Setters
 
-    public void setAcceptedAt(Date acceptedAt) {
-        this.acceptedAt = acceptedAt;
-    }
-
-    public void setCreatedAt(Date createdAt) {
-        this.createdAt = createdAt;
-    }
 }

@@ -17,7 +17,9 @@ public class Product {
     private BigDecimal price;
 
     @ManyToOne
+    @JoinColumn(name="store_id", nullable=false)
     private Store store;
+
 
     // Constructors
 
