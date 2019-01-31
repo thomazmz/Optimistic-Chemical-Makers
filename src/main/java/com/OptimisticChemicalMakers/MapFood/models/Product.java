@@ -9,7 +9,7 @@ public class Product {
     // Properties
 
     @Id                                                 // It tells the JPA that it is an ID
-    @GeneratedValue(strategy = GenerationType.AUTO)     // It tells the JPA how to autogenerate the ID value
+    @GeneratedValue(strategy = GenerationType.IDENTITY)     // It tells the JPA how to autogenerate the ID value
     private Long id;
 
     private String description;
@@ -20,9 +20,11 @@ public class Product {
     @JoinColumn(name="store_id", nullable=false)
     private Store store;
 
-
     // Constructors
 
+    public Product() {
+    }
+    
     public Product(Store store, String description, BigDecimal price) {
         this.store = store;
         this.description = description;
