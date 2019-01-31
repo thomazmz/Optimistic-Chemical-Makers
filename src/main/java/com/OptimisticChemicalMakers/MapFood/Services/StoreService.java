@@ -7,6 +7,7 @@ import com.OptimisticChemicalMakers.MapFood.repositories.StoreRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Set;
 
 @Service
@@ -14,6 +15,13 @@ public class StoreService {
 
     @Autowired
     private StoreRepository storeRepository;
+
+
+    public Store getStoreInfo(Long id) {
+
+        return storeRepository.findById(id).get();
+
+    }
 
     public Set<Product> getStoreProducts(Long id) {
 

@@ -18,14 +18,6 @@ public class StoreDto {
 
     }
 
-    public StoreDto(Long latitude, Long longitude, String name, String dishDescription, String city) {
-        this.latitude = latitude;
-        this.longitude = longitude;
-        this.name = name;
-        this.dishDescription = dishDescription;
-        this.city = city;
-    }
-
     // Getters
 
     public Long getId() {
