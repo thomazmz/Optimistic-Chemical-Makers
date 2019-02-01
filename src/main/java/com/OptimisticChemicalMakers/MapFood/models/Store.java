@@ -22,10 +22,10 @@ public class Store {
 
     private String city;
 
-    @OneToMany(mappedBy="store", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy="store", cascade = CascadeType.ALL)
     private Set<Product> products;
 
-    @OneToMany(mappedBy="store", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy="store", cascade = CascadeType.ALL)
     private Set<DeliveryOrder> deliveryOrders;
 
     // Constructors
@@ -97,5 +97,13 @@ public class Store {
     }
 
     // Methods
+
+    public void addDeliveryOrder(DeliveryOrder deliveryOrder) {
+        this.deliveryOrders.add(deliveryOrder);
+    }
+
+    public void addProduct(Product product) {
+        this.products.add(product);
+    }
 
 }
