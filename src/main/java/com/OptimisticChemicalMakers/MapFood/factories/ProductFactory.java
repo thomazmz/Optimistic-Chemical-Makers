@@ -14,4 +14,11 @@ public class ProductFactory {
         productDto.setDescription(product.getDescription());
         return productDto;
     }
+
+    public Product getInstance(ProductDto productDto) {
+        Product product = new Product();
+        product.setPrice(productDto.getPrice());
+        product.setDescription(productDto.getDescription());
+        return product;
+    }
 }
