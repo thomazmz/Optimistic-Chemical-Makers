@@ -1,10 +1,13 @@
 package com.OptimisticChemicalMakers.MapFood.controllers;
 
 import com.OptimisticChemicalMakers.MapFood.Services.StoreService;
+import com.OptimisticChemicalMakers.MapFood.dtos.DeliveryOrderDto;
 import com.OptimisticChemicalMakers.MapFood.dtos.ProductDto;
 import com.OptimisticChemicalMakers.MapFood.dtos.StoreDto;
+import com.OptimisticChemicalMakers.MapFood.factories.DeliveryOrderFactory;
 import com.OptimisticChemicalMakers.MapFood.factories.ProductFactory;
 import com.OptimisticChemicalMakers.MapFood.factories.StoreFactory;
+import com.OptimisticChemicalMakers.MapFood.models.DeliveryOrder;
 import com.OptimisticChemicalMakers.MapFood.models.Store;
 import com.OptimisticChemicalMakers.MapFood.repositories.StoreRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,66 +27,54 @@ public class StoreController {
     @Autowired
     private StoreService storeService;
 
-    @Autowired
-    private StoreRepository storeRepository;
-
-    @Autowired
-    private StoreFactory storeFactory;
-
-    @Autowired
-    private ProductFactory productFactory;
-
-
-    // Basic CRUD operations
-
-    // GET /api/store
+    // GET /api/stores
     // Get All Stores
-    @GetMapping("/store")
+    @GetMapping("/stores")
     public List<StoreDto> getAllStores() {
-        return StreamSupport.stream(storeRepository.findAll().spliterator(), false).map(storeFactory::getInstance).collect(Collectors.toList());
-    }
-
-    // POST /api/store
-    // Create a new Store
-    @PostMapping("/store")
-    public Store createNote(@Valid @RequestBody StoreDto storeDto) {
-        return storeRepository.save(storeFactory.getInstance(storeDto));
+        return storeService.getStores();
     }
 
     // GET /api/store/id
     // Get a Single Store
     @GetMapping("/store/{id}")
-    public StoreDto getStoreById(@PathVariable(value = "id") Long storeId) {
-        return storeFactory.getInstance(storeRepository.findById(storeId).orElseThrow(RuntimeException::new));
+    public StoreDto getStoreById(@PathVariable(value = "id") Long id) {
+        return storeService.getStore(id);
+    }
+
+    // POST /api/stores
+    // Create a new Store
+    @PostMapping("/stores")
+    public StoreDto createStore(@RequestBody StoreDto storeDto) {
+        return storeService.createStore(storeDto);
     }
 
     // GET /api/store/id/products
     // Get products by store id
     @GetMapping(value = "/store/{id}/products")
-    public List<ProductDto> getProductsByStoreId(@PathVariable(value="id") Long storeId) {
-        Store store = storeRepository.findById(storeId).orElseThrow(RuntimeException::new);
-        return StreamSupport.stream(store.getAvailableProducts().spliterator(), false).map(productFactory::getInstance).collect(Collectors.toList());
+    public List<ProductDto> getProducts(@PathVariable(value="id") Long id) {
+        return storeService.getProducts(id);
+    }
+
+    // POST /api/store/id/products
+    // Create products by store id
+    @PostMapping(value = "/store/{id}/products")
+    public ProductDto createProduct( @PathVariable(value="id") Long id, @RequestBody ProductDto productDto) {
+      return storeService.createProduct(id, productDto);
+    }
+
+    // GET /api/store/id/orders
+    // Get delivery orders by store id
+    @GetMapping(value="/store/{id}/orders")
+    public List<DeliveryOrderDto> getDeliveryOrders(@PathVariable(value="id") Long id) {
+        return storeService.getDeliveryOrders(id);
+    }
+
+    // POST api/store/id/orders
+    // Create a delivery order by store if
+    @PostMapping(value="/store/{id}/orders")
+    public DeliveryOrderDto createDeliveryOrder(@PathVariable(value="id") Long id, @RequestBody DeliveryOrderDto deliveryOrderDto) {
+        return storeService.createDeliveryOrder(id, deliveryOrderDto);
     }
 
 
-
-    //
-
-    // GET /
-    // Get store info by id
-//    @RequestMapping(value = "/{id}/", method = RequestMethod.GET, produces = "application/json")
-//    public Store getStoreInfo(@PathVariable(value = "id") Long storeId) {
-//        return storeService.getStoreInfo(storeId);
-//    }
-
-
-
-    // GET /orders
-    // Get all store delivery orders
-//    @RequestMapping(value = "/orders", method = RequestMethod.GET, produces = "application/json")
-//    public ResponseEntity<?> getOrders(@PathVariable Long storeId) {
-//        return ResponseEntity.ok(storeService.getStoreOrders(storeId));
-//    }
-
 }
-
