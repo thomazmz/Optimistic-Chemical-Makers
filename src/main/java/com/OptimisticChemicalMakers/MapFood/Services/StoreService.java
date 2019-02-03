@@ -12,11 +12,13 @@ import com.OptimisticChemicalMakers.MapFood.models.Store;
 import com.OptimisticChemicalMakers.MapFood.repositories.StoreRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.CrossOrigin;
 
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
+@CrossOrigin(origins="http://localhost:4200") // Temporary for the Angular App test
 @Service
 public class StoreService {
 
@@ -45,6 +47,14 @@ public class StoreService {
                 .collect(Collectors.toList());
 
     }
+    
+    public List<StoreDto> getCloser(String latitude, String longitude) {
+    	int distance = 5;
+    	return  storeRepository.getCloser(latitude, longitude, distance)
+				.stream()
+				.map(storeFactory::getInstance)
+		        .collect(Collectors.toList());
+	}
 
     public StoreDto getStore(Long id) {
 

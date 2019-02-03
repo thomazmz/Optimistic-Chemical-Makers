@@ -19,6 +19,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
+@CrossOrigin(origins="http://localhost:4200") // Temporary for the Angular App test
 @RestController
 @RequestMapping(value = "/api")
 public class StoreController {
@@ -32,6 +33,13 @@ public class StoreController {
     @GetMapping("/stores")
     public List<StoreDto> getAllStores() {
         return storeService.getStores();
+    }
+    
+    // GET /api/stores/latitude/longitude
+    // Get All Closer Stores
+    @GetMapping(value = "/stores/{latitude}/{longitude}")
+    public List<StoreDto> getStoreCloser(@PathVariable String latitude,@PathVariable String longitude) {
+        return storeService.getCloser(latitude,longitude);
     }
 
     // GET /api/store/id

@@ -12,14 +12,18 @@ public class Store {
     @GeneratedValue(strategy = GenerationType.IDENTITY)     // It tells the JPA how to autogenerate the ID value
     private Long id;
 
-    private Long latitude;
+    private String restaurantId;
+    
+    private Float latitude;
 
-    private Long longitude;
+    private Float longitude;
 
+    @Column(name="restaurant")
     private String name;
 
     private String dishDescription;
 
+    @Column(name="address_city")
     private String city;
 
     @OneToMany(mappedBy="store", cascade = CascadeType.ALL)
@@ -28,12 +32,14 @@ public class Store {
     @OneToMany(mappedBy="store", cascade = CascadeType.ALL)
     private Set<DeliveryOrder> deliveryOrders;
 
+    private String distance;
+    
     // Constructors
 
     public Store() {
     }
 
-    public Store(Long latitude, Long longitude, String name, String dishDescription) {
+    public Store(Float latitude, Float longitude, String name, String dishDescription) {
         this.name = name;
         this.dishDescription = dishDescription;
         this.latitude = latitude;
@@ -41,19 +47,33 @@ public class Store {
     }
 
     // Get Methods
+    
+    
 
     public Long getId() {
         return id;
     }
 
-    public Long getLatitude() {
+	public String getRestaurantId() {
+		return restaurantId;
+	}
+
+	public String getDistance() {
+		return distance;
+	}
+
+	public Float getLatitude() {
         return latitude;
     }
+    
+    public Float getLongitude() {
+		return longitude;
+	}
 
-    public Long getLongitude() {
-        return longitude;
-    }
-
+	public void setLongitude(Float longitude) {
+		this.longitude = longitude;
+	}
+	
     public String getName() {
         return name;
     }
@@ -76,12 +96,16 @@ public class Store {
 
     // Set Methods
 
-    public void setLatitude(Long latitude) {
+	public void setDistance(String distance) {
+		this.distance = distance;
+	}
+	
+	public void setRestaurantId(String restaurantId) {
+		this.restaurantId = restaurantId;
+	}
+	
+    public void setLatitude(Float latitude) {
         this.latitude = latitude;
-    }
-
-    public void setLongitude(Long longitude) {
-        this.longitude = longitude;
     }
 
     public void setName(String name) {
