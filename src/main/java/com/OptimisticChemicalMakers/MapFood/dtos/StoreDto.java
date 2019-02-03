@@ -2,35 +2,41 @@ package com.OptimisticChemicalMakers.MapFood.dtos;
 
 public class StoreDto {
 
-    private Long id;
+    private String restaurantId;
+    
+    private Float latitude;
 
-    private Long latitude;
-
-    private Long longitude;
+    private Float longitude;
 
     private String name;
 
     private String dishDescription;
 
     private String city;
+    
+    private String distance;
 
     public StoreDto() {
 
     }
 
     // Getters
+    
+    public String getRestaurantId() {
+		return restaurantId;
+	}
 
-    public Long getId() {
-        return id;
-    }
+	public String getDistance() {
+		return distance;
+	}
 
-    public Long getLatitude() {
+	public Float getLatitude() {
         return latitude;
     }
 
-    public Long getLongitude() {
-        return longitude;
-    }
+    public Float getLongitude() {
+		return longitude;
+	}
 
     public String getName() {
         return name;
@@ -46,21 +52,25 @@ public class StoreDto {
 
     // Setters
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public void setLatitude(Long latitude) {
+    public void setLatitude(Float latitude) {
         this.latitude = latitude;
-    }
-
-    public void setLongitude(Long longitude) {
-        this.longitude = longitude;
     }
 
     public void setName(String name) {
         this.name = name;
     }
+    
+	public void setLongitude(Float longitude) {
+		this.longitude = longitude;
+	}
+
+	public void setRestaurantId(String restaurantId) {
+		this.restaurantId = restaurantId;
+	}
+
+	public void setDistance(String distance) {
+		this.distance = distance;
+	}
 
     public void setDishDescription(String dishDescription) {
         this.dishDescription = dishDescription;
