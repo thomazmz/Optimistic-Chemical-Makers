@@ -1,10 +1,23 @@
 package com.OptimisticChemicalMakers.MapFood.models;
 
-import javax.persistence.*;
-import java.util.Date;
 import java.util.Set;
 
+import javax.persistence.AttributeOverride;
+import javax.persistence.AttributeOverrides;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Embedded;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
 @Entity
+@Table(name="orders")
 public class DeliveryOrder {
 
     // Class Properties
@@ -14,11 +27,15 @@ public class DeliveryOrder {
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name="store_id", nullable=false)
+    @JoinColumn(name="restaurant_id", nullable=false)
     private Store store;
 
     @OneToMany(mappedBy="deliveryOrder", cascade = CascadeType.ALL)
     private Set<DeliveryItem> deliveryItems;
+    
+    @ManyToOne
+    @JoinColumn(name="customer_id", nullable=false)
+    private Customer customer;
 
     @Embedded
     @AttributeOverrides(value = {
@@ -50,10 +67,18 @@ public class DeliveryOrder {
     public Geolocation getEndingGeolocation() {
         return endingGeolocation;
     }
+    
+    public Customer getCustomer() {
+		return customer;
+	}
 
     // Setters
 
-    public void setEndingGeolocation(double latitude, double longitude) {
+	public void setCustomer(Customer customer) {
+		this.customer = customer;
+	}
+
+	public void setEndingGeolocation(Float latitude, Float longitude) {
         this.endingGeolocation = new Geolocation(latitude, longitude);
     }
 

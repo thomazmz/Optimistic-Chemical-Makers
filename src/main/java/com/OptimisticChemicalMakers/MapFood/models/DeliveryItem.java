@@ -3,6 +3,7 @@ package com.OptimisticChemicalMakers.MapFood.models;
 import javax.persistence.*;
 
 @Entity
+@Table(name="item_order")
 public class DeliveryItem {
 
     // Class Properties
@@ -16,7 +17,7 @@ public class DeliveryItem {
     private Product product;
 
     @ManyToOne
-    @JoinColumn(name="delivery_order_id", nullable=false)
+    @JoinColumn(name="order_id", nullable=false)
     private DeliveryOrder deliveryOrder;
 
     private Integer quantity;
