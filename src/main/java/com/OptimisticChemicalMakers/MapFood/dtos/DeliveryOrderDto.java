@@ -2,15 +2,19 @@ package com.OptimisticChemicalMakers.MapFood.dtos;
 
 import java.util.Set;
 
+import com.OptimisticChemicalMakers.MapFood.models.Customer;
+
 public class DeliveryOrderDto {
 
     private Long id;
 
-    private Long storeId;
+    private String restaurantId;
 
-    private Double endingLatitude;
+    private Float endingLatitude;
 
-    private Double endingLongitude;
+    private Float endingLongitude;
+    
+    private Long customerId;
 
     private Set<DeliveryItemDto> deliveryItems;
 
@@ -25,37 +29,46 @@ public class DeliveryOrderDto {
         return this.id;
     }
 
-    public Long getStoreId() {
-        return this.storeId;
-    }
+	public String getRestaurantId() {
+		return restaurantId;
+	}
 
-    public Double getEndingLatitude() {
+	public Float getEndingLatitude() {
         return this.endingLatitude;
     }
 
-    public Double getEndingLongitude() {
+    public Float getEndingLongitude() {
         return this.endingLongitude;
     }
 
     public Set<DeliveryItemDto> getDeliveryItems() {
         return this.deliveryItems;
     }
+    
+    public Long getCustomerId() {
+		return customerId;
+	}
+    
 
     // Setters
 
-    public void setId(Long id) {
+	public void setCustomerId(Long customerId) {
+		this.customerId = customerId;
+	}
+
+	public void setId(Long id) {
         this.id = id;
     }
 
-    public void setStoreId(Long store_id) {
-        this.storeId = store_id;
-    }
+    public void setRestaurantId(String restaurantId) {
+		this.restaurantId = restaurantId;
+	}
 
-    public void setEndingLatitude(Double originLatitude) {
+    public void setEndingLatitude(Float originLatitude) {
         this.endingLatitude = originLatitude;
     }
 
-    public void setEndingLongitude(Double originLongitude) {
+    public void setEndingLongitude(Float originLongitude) {
         this.endingLongitude = originLongitude;
     }
 

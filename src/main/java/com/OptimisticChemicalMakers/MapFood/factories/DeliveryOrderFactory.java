@@ -2,6 +2,7 @@ package com.OptimisticChemicalMakers.MapFood.factories;
 
 import com.OptimisticChemicalMakers.MapFood.dtos.DeliveryItemDto;
 import com.OptimisticChemicalMakers.MapFood.dtos.DeliveryOrderDto;
+import com.OptimisticChemicalMakers.MapFood.models.Customer;
 import com.OptimisticChemicalMakers.MapFood.models.DeliveryItem;
 import com.OptimisticChemicalMakers.MapFood.models.DeliveryOrder;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +28,8 @@ public class DeliveryOrderFactory {
                 .map(deliveryItemFactory::getInstance)
                 .collect(Collectors.toSet());
 
+        deliveryOrder.setCustomer(new Customer(deliveryOrderDto.getCustomerId()));
+        
         deliveryItems.forEach(deliveryItem -> deliveryItem.setDeliveryOrder(deliveryOrder));
 
         deliveryOrder.setDeliveryItems(deliveryItems);
@@ -41,8 +44,10 @@ public class DeliveryOrderFactory {
 
         deliveryOrderDto.setId(deliveryOrder.getId());
 
-        deliveryOrderDto.setStoreId(deliveryOrder.getStore().getId());
+        deliveryOrderDto.setRestaurantId(deliveryOrder.getStore().getRestaurantId());
 
+        deliveryOrderDto.setCustomerId(deliveryOrder.getCustomer().getId());
+        
         deliveryOrderDto.setEndingLatitude(deliveryOrder.getEndingGeolocation().getLatitude());
 
         deliveryOrderDto.setEndingLongitude(deliveryOrder.getEndingGeolocation().getLongitude());

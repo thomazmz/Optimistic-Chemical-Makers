@@ -11,9 +11,9 @@ public class Geolocation {
 
     // Class Properties
 
-    private double latitude;
+    private Float latitude;
 
-    private double longitude;
+    private Float longitude;
 
     // Constructors
 
@@ -21,7 +21,7 @@ public class Geolocation {
 
     }
 
-    public Geolocation(double latitude, double longitude) {
+    public Geolocation(Float latitude, Float longitude) {
 
         if (latitude < -90 || latitude > 90) {
             throw new NullPointerException("Latitude values must be between -90 and 90!");
@@ -55,25 +55,25 @@ public class Geolocation {
 
     // Get Methods
 
-    public double getLatitude() {
+    public Float getLatitude() {
         return latitude;
     }
 
-    public double getLongitude() {
+    public Float getLongitude() {
         return longitude;
     }
 
     // Set Methods
 
-    public void setLatitude(double latitude) {
+    public void setLatitude(Float latitude) {
         this.latitude = latitude;
     }
 
-    public void setLongitude(double longitude) {
+    public void setLongitude(Float longitude) {
         this.longitude = longitude;
     }
 
-    public void setPosition(double latitude, double longitude) {
+    public void setPosition(Float latitude, Float longitude) {
         this.latitude = latitude;
         this.longitude = longitude;
     }
