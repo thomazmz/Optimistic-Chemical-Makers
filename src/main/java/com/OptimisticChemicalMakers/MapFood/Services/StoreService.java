@@ -37,6 +37,9 @@ public class StoreService {
 
     @Autowired
     private DeliveryOrderFactory deliveryOrderFactory;
+    
+    @Autowired
+    private GeolocationService geolocationService;
 
     // Methods - Store
 
@@ -48,13 +51,21 @@ public class StoreService {
 
     }
     
-    public List<StoreDto> getCloser(String latitude, String longitude) {
+    public List<StoreDto> getCloser(Float latitude, Float longitude) {
     	int distance = 5;
-    	return  storeRepository.getCloser(latitude, longitude, distance)
+    	return  storeRepository
+    			.getCloser(latitude, longitude, distance)
 				.stream()
-				.map(storeFactory::getInstance)
+				.map(store -> {
+					store.setDistance(geolocationService.getDistance(latitude, longitude, store.getLatitude(), store.getLongitude()));
+					return storeFactory.getInstance(store);
+				})
 		        .collect(Collectors.toList());
 	}
+    
+    public Store getStore(String restaurantId) {
+        return storeRepository.findByRestaurantId(restaurantId).orElseThrow(RuntimeException::new);
+    }
 
     public StoreDto getStore(Long id) {
 
@@ -72,10 +83,11 @@ public class StoreService {
 
     // Methods - Store/Products
 
+    
     public List<ProductDto> getProducts(Long id) {
-
+    	
         Store store = storeRepository.findById(id).orElseThrow(RuntimeException::new);
-
+        
         return StreamSupport.stream(store.getAvailableProducts().spliterator(), false)
                 .map(productFactory::getInstance)
                 .collect(Collectors.toList());

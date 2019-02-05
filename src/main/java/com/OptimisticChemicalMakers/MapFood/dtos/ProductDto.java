@@ -11,6 +11,10 @@ public class ProductDto {
     private String description;
 
     private BigDecimal price;
+    
+    private String restaurant;
+    
+    private String classification;
 
     // Constructor
 
@@ -31,9 +35,17 @@ public class ProductDto {
         this.price = price;
     }
 
+    public void setRestaurant(String restaurant) {
+		this.restaurant = restaurant;
+	}
+    
+    public String getClassification() {
+		return classification;
+	}
+    
     // Getters
 
-    public Long getId() {
+	public Long getId() {
         return id;
     }
 
@@ -44,5 +56,14 @@ public class ProductDto {
     public BigDecimal getPrice() {
         return price;
     }
+
+	public void setClassification(String classification) {
+		this.classification = classification;
+	}
+
+	
+	public String getRestaurant() {
+		return restaurant;
+	}
 
 }
