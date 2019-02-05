@@ -1,10 +1,15 @@
 package com.OptimisticChemicalMakers.MapFood.models;
 
 import javax.persistence.*;
+
+import java.io.Serializable;
 import java.util.Set;
 
 @Entity
-public class Store {
+public class Store implements Serializable {
+
+	private static final long serialVersionUID = 1L;
+
 
     // Properties
 
@@ -12,6 +17,7 @@ public class Store {
     @GeneratedValue(strategy = GenerationType.IDENTITY)     // It tells the JPA how to autogenerate the ID value
     private Long id;
 
+    @Column(name="restaurant_id")
     private String restaurantId;
     
     private Float latitude;
@@ -32,6 +38,7 @@ public class Store {
     @OneToMany(mappedBy="store", cascade = CascadeType.ALL)
     private Set<DeliveryOrder> deliveryOrders;
 
+    @Transient
     private String distance;
     
     // Constructors
@@ -48,8 +55,6 @@ public class Store {
 
     // Get Methods
     
-    
-
     public Long getId() {
         return id;
     }
@@ -94,6 +99,10 @@ public class Store {
         return this.deliveryOrders;
     }
 
+    public Set<Product> getProducts() {
+		return products;
+	}
+    
     // Set Methods
 
 	public void setDistance(String distance) {
@@ -120,14 +129,17 @@ public class Store {
         this.city = city;
     }
 
+    public void setProducts(Set<Product> products) {
+		this.products = products;
+	}
+    
     // Methods
 
-    public void addDeliveryOrder(DeliveryOrder deliveryOrder) {
+	public void addDeliveryOrder(DeliveryOrder deliveryOrder) {
         this.deliveryOrders.add(deliveryOrder);
     }
-
+	
     public void addProduct(Product product) {
         this.products.add(product);
     }
-
 }

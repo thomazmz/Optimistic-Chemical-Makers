@@ -38,7 +38,7 @@ public class StoreController {
     // GET /api/stores/latitude/longitude
     // Get All Closer Stores
     @GetMapping(value = "/stores/{latitude}/{longitude}")
-    public List<StoreDto> getStoreCloser(@PathVariable String latitude,@PathVariable String longitude) {
+    public List<StoreDto> getStoreCloser(@PathVariable Float latitude,@PathVariable Float longitude) {
         return storeService.getCloser(latitude,longitude);
     }
 
