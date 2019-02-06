@@ -8,9 +8,9 @@ public class DeliveryOrderDto {
 
     private Long storeId;
 
-    private Double endingLatitude;
+    private Double latitude;
 
-    private Double endingLongitude;
+    private Double longitude;
 
     private Set<DeliveryItemDto> deliveryItems;
 
@@ -29,12 +29,12 @@ public class DeliveryOrderDto {
         return this.storeId;
     }
 
-    public Double getEndingLatitude() {
-        return this.endingLatitude;
+    public Double getLatitude() {
+        return this.latitude;
     }
 
-    public Double getEndingLongitude() {
-        return this.endingLongitude;
+    public Double getLongitude() {
+        return this.longitude;
     }
 
     public Set<DeliveryItemDto> getDeliveryItems() {
@@ -51,12 +51,12 @@ public class DeliveryOrderDto {
         this.storeId = store_id;
     }
 
-    public void setEndingLatitude(Double originLatitude) {
-        this.endingLatitude = originLatitude;
+    public void setLatitude(Double latitude) {
+        this.latitude = latitude;
     }
 
-    public void setEndingLongitude(Double originLongitude) {
-        this.endingLongitude = originLongitude;
+    public void setLongitude(Double longitude) {
+        this.longitude = longitude;
     }
 
     public void setDeliveryItems(Set<DeliveryItemDto> deliveryItems) {

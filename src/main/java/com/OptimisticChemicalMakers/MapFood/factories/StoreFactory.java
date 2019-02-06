@@ -18,10 +18,15 @@ public class StoreFactory {
         return storeDto;
     }
 
+    public StoreDto getInstance(Store store, Double distance) {
+        StoreDto storeDto = this.getInstance(store);
+        storeDto.setRequestorDistance(distance);
+        return storeDto;
+    }
+
     public Store getInstance(StoreDto storeDto) {
         Store store = new Store();
-        store.setLatitude(storeDto.getLatitude());
-        store.setLongitude(storeDto.getLongitude());
+        store.setGeolocation(storeDto.getLatitude(), storeDto.getLongitude());
         store.setName(storeDto.getName());
         store.setCity(storeDto.getCity());
         store.setDishDescription(storeDto.getDishDescription());

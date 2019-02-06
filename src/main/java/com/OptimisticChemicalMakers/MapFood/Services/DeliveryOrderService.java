@@ -32,13 +32,10 @@ public class DeliveryOrderService {
 
         store.addDeliveryOrder(deliveryOrder);
 
-//        deliveryOrder.setStore(store);
-
         storeRepository.save(store);
 
         return deliveryOrderDto;
+
     }
-
-
 
 }

@@ -4,17 +4,13 @@ import javax.persistence.*;
 import java.util.Set;
 
 @Entity
-public class Store {
+public class Store extends Geolocation {
 
     // Properties
 
-    @Id                                                     // It tells the JPA that it is an ID
-    @GeneratedValue(strategy = GenerationType.IDENTITY)     // It tells the JPA how to autogenerate the ID value
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    private Long latitude;
-
-    private Long longitude;
 
     private String name;
 
@@ -34,24 +30,15 @@ public class Store {
     }
 
     public Store(Long latitude, Long longitude, String name, String dishDescription) {
+        super(latitude, longitude);
         this.name = name;
         this.dishDescription = dishDescription;
-        this.latitude = latitude;
-        this.longitude = longitude;
     }
 
     // Get Methods
 
     public Long getId() {
         return id;
-    }
-
-    public Long getLatitude() {
-        return latitude;
-    }
-
-    public Long getLongitude() {
-        return longitude;
     }
 
     public String getName() {
@@ -75,14 +62,6 @@ public class Store {
     }
 
     // Set Methods
-
-    public void setLatitude(Long latitude) {
-        this.latitude = latitude;
-    }
-
-    public void setLongitude(Long longitude) {
-        this.longitude = longitude;
-    }
 
     public void setName(String name) {
         this.name = name;

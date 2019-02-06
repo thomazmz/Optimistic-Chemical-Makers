@@ -11,6 +11,7 @@ import com.OptimisticChemicalMakers.MapFood.models.DeliveryOrder;
 import com.OptimisticChemicalMakers.MapFood.models.Store;
 import com.OptimisticChemicalMakers.MapFood.repositories.StoreRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -23,9 +24,11 @@ import java.util.stream.StreamSupport;
 @RequestMapping(value = "/api")
 public class StoreController {
 
-
     @Autowired
     private StoreService storeService;
+
+    @Autowired
+    private StoreFactory storeFactory;
 
     // GET /api/stores
     // Get All Stores
@@ -34,11 +37,25 @@ public class StoreController {
         return storeService.getStores();
     }
 
+    // GET /api/stores/latitude/longitude
+    // Get All Closer Stores
+    @GetMapping(value = "/stores/nearest")
+    public List<StoreDto> getNearestStores(@RequestParam("latitude") Long latitude, @RequestParam("longitude") Long longitude, @RequestParam("longitude") Long radius) {
+        return storeService.getNearestStores(latitude,longitude,radius).stream().map(store -> storeFactory.getInstance(store, store.distanceTo(latitude, longitude))).collect(Collectors.toList());
+    }
+
     // GET /api/store/id
-    // Get a Single Store
+    // Get a Single store
     @GetMapping("/store/{id}")
     public StoreDto getStoreById(@PathVariable(value = "id") Long id) {
         return storeService.getStore(id);
+    }
+
+    // DELETE /api/store/id
+    // Delete a single store
+    @DeleteMapping("/store/{id}")
+    public ResponseEntity<?> deleteStoreById(@PathVariable(value = "id") Long id) {
+        return storeService.deleteStoreById(id);
     }
 
     // POST /api/stores

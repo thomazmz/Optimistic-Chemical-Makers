@@ -5,12 +5,12 @@ import java.util.Date;
 import java.util.Set;
 
 @Entity
-public class DeliveryOrder {
+public class DeliveryOrder extends Geolocation {
 
     // Class Properties
 
-    @Id                                                 // It tells the JPA that it is an ID
-    @GeneratedValue(strategy = GenerationType.IDENTITY)     // It tells the JPA how to autogenerate the ID value
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @ManyToOne
@@ -19,13 +19,6 @@ public class DeliveryOrder {
 
     @OneToMany(mappedBy="deliveryOrder", cascade = CascadeType.ALL)
     private Set<DeliveryItem> deliveryItems;
-
-    @Embedded
-    @AttributeOverrides(value = {
-            @AttributeOverride(name = "latitude", column = @Column(name = "ending_latitude")),
-            @AttributeOverride(name = "longitude", column = @Column(name = "ending_longitude"))
-    })
-    private Geolocation endingGeolocation;
 
     // Constructors
 
@@ -47,15 +40,7 @@ public class DeliveryOrder {
         return this.deliveryItems;
     }
 
-    public Geolocation getEndingGeolocation() {
-        return endingGeolocation;
-    }
-
     // Setters
-
-    public void setEndingGeolocation(double latitude, double longitude) {
-        this.endingGeolocation = new Geolocation(latitude, longitude);
-    }
 
     public void setStore(Store store) {
         this.store = store;

@@ -11,6 +11,7 @@ import com.OptimisticChemicalMakers.MapFood.models.Product;
 import com.OptimisticChemicalMakers.MapFood.models.Store;
 import com.OptimisticChemicalMakers.MapFood.repositories.StoreRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -46,6 +47,14 @@ public class StoreService {
 
     }
 
+    public List<Store> getNearestStores( Long latitude, Long longitude, Long radius) {
+
+        radius = 5L;
+
+        return storeRepository.getNearestStores(latitude, longitude, radius);
+
+    }
+
     public StoreDto getStore(Long id) {
 
         return storeFactory.getInstance(storeRepository.findById(id).orElseThrow(RuntimeException::new));
@@ -54,9 +63,22 @@ public class StoreService {
 
     public StoreDto createStore(StoreDto storeDto) {
 
+
+
         Store store = storeRepository.save(storeFactory.getInstance(storeDto));
 
         return storeFactory.getInstance(store);
+
+    }
+
+    public ResponseEntity<?> deleteStoreById(Long id) {
+
+        try {
+            storeRepository.deleteById(id);
+            return ResponseEntity.noContent().build();
+        } catch (Exception ex) {
+            return ResponseEntity.notFound().build();
+        }
 
     }
 
