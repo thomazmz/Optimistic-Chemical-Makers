@@ -2,19 +2,15 @@ package com.OptimisticChemicalMakers.MapFood.dtos;
 
 import java.util.Set;
 
-import com.OptimisticChemicalMakers.MapFood.models.Customer;
-
 public class DeliveryOrderDto {
 
     private Long id;
 
-    private String restaurantId;
+    private Long storeId;
 
-    private Float endingLatitude;
+    private Double latitude;
 
-    private Float endingLongitude;
-    
-    private Long customerId;
+    private Double longitude;
 
     private Set<DeliveryItemDto> deliveryItems;
 
@@ -29,47 +25,38 @@ public class DeliveryOrderDto {
         return this.id;
     }
 
-	public String getRestaurantId() {
-		return restaurantId;
-	}
-
-	public Float getEndingLatitude() {
-        return this.endingLatitude;
+    public Long getStoreId() {
+        return this.storeId;
     }
 
-    public Float getEndingLongitude() {
-        return this.endingLongitude;
+    public Double getLatitude() {
+        return this.latitude;
+    }
+
+    public Double getLongitude() {
+        return this.longitude;
     }
 
     public Set<DeliveryItemDto> getDeliveryItems() {
         return this.deliveryItems;
     }
-    
-    public Long getCustomerId() {
-		return customerId;
-	}
-    
 
     // Setters
 
-	public void setCustomerId(Long customerId) {
-		this.customerId = customerId;
-	}
-
-	public void setId(Long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
-    public void setRestaurantId(String restaurantId) {
-		this.restaurantId = restaurantId;
-	}
-
-    public void setEndingLatitude(Float originLatitude) {
-        this.endingLatitude = originLatitude;
+    public void setStoreId(Long store_id) {
+        this.storeId = store_id;
     }
 
-    public void setEndingLongitude(Float originLongitude) {
-        this.endingLongitude = originLongitude;
+    public void setLatitude(Double latitude) {
+        this.latitude = latitude;
+    }
+
+    public void setLongitude(Double longitude) {
+        this.longitude = longitude;
     }
 
     public void setDeliveryItems(Set<DeliveryItemDto> deliveryItems) {

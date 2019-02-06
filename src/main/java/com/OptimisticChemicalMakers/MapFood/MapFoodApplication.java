@@ -8,7 +8,7 @@ public class MapFoodApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(MapFoodApplication.class, args);
-	}
+}
 
 }
 
