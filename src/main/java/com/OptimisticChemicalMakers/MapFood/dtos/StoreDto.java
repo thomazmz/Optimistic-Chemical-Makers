@@ -1,18 +1,23 @@
 package com.OptimisticChemicalMakers.MapFood.dtos;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+
 public class StoreDto {
 
     private Long id;
 
-    private Long latitude;
+    private Double latitude;
 
-    private Long longitude;
+    private Double longitude;
 
     private String name;
 
     private String dishDescription;
 
     private String city;
+
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    private Double requestorDistance;
 
     public StoreDto() {
 
@@ -24,11 +29,11 @@ public class StoreDto {
         return id;
     }
 
-    public Long getLatitude() {
+    public Double getLatitude() {
         return latitude;
     }
 
-    public Long getLongitude() {
+    public Double getLongitude() {
         return longitude;
     }
 
@@ -50,11 +55,11 @@ public class StoreDto {
         this.id = id;
     }
 
-    public void setLatitude(Long latitude) {
+    public void setLatitude(Double latitude) {
         this.latitude = latitude;
     }
 
-    public void setLongitude(Long longitude) {
+    public void setLongitude(Double longitude) {
         this.longitude = longitude;
     }
 
@@ -69,4 +74,6 @@ public class StoreDto {
     public void setCity(String city) {
         this.city = city;
     }
+
+    public void setRequestorDistance(Double distance) { this.requestorDistance = distance; }
 }

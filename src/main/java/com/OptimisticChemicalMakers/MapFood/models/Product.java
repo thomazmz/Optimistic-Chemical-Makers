@@ -8,8 +8,8 @@ public class Product {
 
     // Properties
 
-    @Id                                                 // It tells the JPA that it is an ID
-    @GeneratedValue(strategy = GenerationType.IDENTITY)     // It tells the JPA how to autogenerate the ID value
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String description;

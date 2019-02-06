@@ -1,8 +1,9 @@
 package com.OptimisticChemicalMakers.MapFood.models;
 
-import javax.persistence.Embeddable;
+import javax.persistence.*;
 
 @Embeddable
+@MappedSuperclass
 public class Geolocation {
 
     // Static Properties
@@ -16,9 +17,7 @@ public class Geolocation {
     private double longitude;
 
     // Constructors
-
     public Geolocation() {
-
     }
 
     public Geolocation(double latitude, double longitude) {
@@ -56,37 +55,28 @@ public class Geolocation {
     // Get Methods
 
     public double getLatitude() {
-        return latitude;
+        return this.latitude;
     }
 
     public double getLongitude() {
-        return longitude;
+        return this.longitude;
     }
 
     // Set Methods
 
-    public void setLatitude(double latitude) {
-        this.latitude = latitude;
-    }
-
-    public void setLongitude(double longitude) {
-        this.longitude = longitude;
-    }
-
-    public void setPosition(double latitude, double longitude) {
+    public void setGeolocation(double latitude, double longitude) {
         this.latitude = latitude;
         this.longitude = longitude;
     }
 
     // Class Methods
 
-    public double distanceTo(Geolocation geographicPosition) {
-
-        return this.haversinDistance(this.latitude, this.longitude, geographicPosition.getLatitude(), geographicPosition.getLongitude());
-
+    public double distanceTo(Long latitude, Long longitude) {
+        return this.distanceTo(new Geolocation(latitude, longitude));
     }
 
-
-
+    public double distanceTo(Geolocation geolocation) {
+        return this.haversinDistance(this.latitude, this.longitude, geolocation.getLatitude(), geolocation.getLongitude());
+    }
 
 }
