@@ -1,9 +1,12 @@
 package com.OptimisticChemicalMakers.MapFood.repositories;
 
-import com.OptimisticChemicalMakers.MapFood.models.User;
+import com.OptimisticChemicalMakers.MapFood.models.Product;
+
+import java.util.List;
+
 import org.springframework.data.repository.CrudRepository;
 
-public interface ProductRepository extends CrudRepository<User, Long> {
+public interface ProductRepository extends CrudRepository<Product, Long> {
 
 
 }
