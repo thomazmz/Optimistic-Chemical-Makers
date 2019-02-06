@@ -1,27 +1,41 @@
 package com.OptimisticChemicalMakers.MapFood.models;
 
-import javax.persistence.*;
-import java.util.Date;
+import java.util.Set;
+
+import javax.persistence.AttributeOverride;
+import javax.persistence.AttributeOverrides;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Embedded;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 @Entity
+@Table(name="orders")
 public class DeliveryOrder {
 
     // Class Properties
 
     @Id                                                 // It tells the JPA that it is an ID
-    @GeneratedValue(strategy = GenerationType.AUTO)     // It tells the JPA how to autogenerate the ID value
+    @GeneratedValue(strategy = GenerationType.IDENTITY)     // It tells the JPA how to autogenerate the ID value
     private Long id;
 
-    private Date createdAt;
+    @ManyToOne
+    @JoinColumn(name="restaurant_id", nullable=false)
+    private Store store;
 
-    private Date acceptedAt;
-
-    @Embedded
-    @AttributeOverrides(value = {
-            @AttributeOverride(name = "latitude", column = @Column(name = "origin_latitude")),
-            @AttributeOverride(name = "longitude", column = @Column(name = "origin_longitude"))
-    })
-    private Geolocation originGeolocation;
+    @OneToMany(mappedBy="deliveryOrder", cascade = CascadeType.ALL)
+    private Set<DeliveryItem> deliveryItems;
+    
+    @ManyToOne
+    @JoinColumn(name="customer_id", nullable=false)
+    private Customer customer;
 
     @Embedded
     @AttributeOverrides(value = {
@@ -30,13 +44,9 @@ public class DeliveryOrder {
     })
     private Geolocation endingGeolocation;
 
-    public DeliveryOrder(Double originLatitude, Double originLongitude, Double endingLatitude, Double endingLongitude) {
+    // Constructors
 
-        this.originGeolocation = new Geolocation(originLatitude, originLongitude);
-
-        this.endingGeolocation = new Geolocation(endingLatitude, endingLongitude);
-
-        this.createdAt = new Date();
+    public DeliveryOrder(){
 
     }
 
@@ -46,33 +56,39 @@ public class DeliveryOrder {
         return this.id;
     }
 
-    public Date getCreatedAt() {
-        return this.createdAt;
+    public Store getStore() {
+        return this.store;
     }
 
-    public Date getAcceptedAt() {
-        return this.acceptedAt;
-    }
-
-    public Double getLinearDistance() {
-        return this.getOriginGeolocation().distanceTo(this.getEndingGeolocation());
-    }
-
-    public Geolocation getOriginGeolocation() {
-        return originGeolocation;
+    public Set<DeliveryItem> getDeliveryItems() {
+        return this.deliveryItems;
     }
 
     public Geolocation getEndingGeolocation() {
         return endingGeolocation;
     }
+    
+    public Customer getCustomer() {
+		return customer;
+	}
 
     // Setters
 
-    public void setAcceptedAt(Date acceptedAt) {
-        this.acceptedAt = acceptedAt;
+	public void setCustomer(Customer customer) {
+		this.customer = customer;
+	}
+
+	public void setEndingGeolocation(Float latitude, Float longitude) {
+        this.endingGeolocation = new Geolocation(latitude, longitude);
     }
 
-    public void setCreatedAt(Date createdAt) {
-        this.createdAt = createdAt;
+    public void setStore(Store store) {
+        this.store = store;
     }
+
+    public void setDeliveryItems(Set<DeliveryItem> deliveryItems) {
+        this.deliveryItems = deliveryItems;
+    }
+
+
 }

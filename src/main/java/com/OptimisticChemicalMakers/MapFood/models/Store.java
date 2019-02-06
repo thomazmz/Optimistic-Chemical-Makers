@@ -1,39 +1,52 @@
 package com.OptimisticChemicalMakers.MapFood.models;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+
+import java.io.Serializable;
 import java.util.Set;
 
 @Entity
-public class Store {
+public class Store implements Serializable {
+
+	private static final long serialVersionUID = 1L;
+
 
     // Properties
 
-    @Id                                                 // It tells the JPA that it is an ID
-    @GeneratedValue(strategy = GenerationType.AUTO)     // It tells the JPA how to autogenerate the ID value
+    @Id                                                     // It tells the JPA that it is an ID
+    @GeneratedValue(strategy = GenerationType.IDENTITY)     // It tells the JPA how to autogenerate the ID value
     private Long id;
 
-    private Long latitude;
+    @Column(name="restaurant_id")
+    private String restaurantId;
+    
+    private Float latitude;
 
-    private Long longitude;
+    private Float longitude;
 
+    @Column(name="restaurant")
     private String name;
 
     private String dishDescription;
 
+    @Column(name="address_city")
     private String city;
 
+    @OneToMany(mappedBy="store", cascade = CascadeType.ALL)
+    private Set<Product> products;
+
+    @OneToMany(mappedBy="store", cascade = CascadeType.ALL)
+    private Set<DeliveryOrder> deliveryOrders;
+
+    @Transient
+    private String distance;
+    
     // Constructors
 
-    public Store(Long latitude, Long longitude, String name) {
-        this.name = name;
-        this.latitude = latitude;
-        this.longitude = longitude;
+    public Store() {
     }
 
-    public Store(Long latitude, Long longitude, String name, String dishDescription) {
+    public Store(Float latitude, Float longitude, String name, String dishDescription) {
         this.name = name;
         this.dishDescription = dishDescription;
         this.latitude = latitude;
@@ -41,19 +54,31 @@ public class Store {
     }
 
     // Get Methods
-
+    
     public Long getId() {
         return id;
     }
 
-    public Long getLatitude() {
+	public String getRestaurantId() {
+		return restaurantId;
+	}
+
+	public String getDistance() {
+		return distance;
+	}
+
+	public Float getLatitude() {
         return latitude;
     }
+    
+    public Float getLongitude() {
+		return longitude;
+	}
 
-    public Long getLongitude() {
-        return longitude;
-    }
-
+	public void setLongitude(Float longitude) {
+		this.longitude = longitude;
+	}
+	
     public String getName() {
         return name;
     }
@@ -66,14 +91,30 @@ public class Store {
         return city;
     }
 
-    // Set Methods
-
-    public void setLatitude(Long latitude) {
-        this.latitude = latitude;
+    public Set<Product> getAvailableProducts() {
+        return this.products;
     }
 
-    public void setLongitude(Long longitude) {
-        this.longitude = longitude;
+    public Set<DeliveryOrder> getDeliveryOrders() {
+        return this.deliveryOrders;
+    }
+
+    public Set<Product> getProducts() {
+		return products;
+	}
+    
+    // Set Methods
+
+	public void setDistance(String distance) {
+		this.distance = distance;
+	}
+	
+	public void setRestaurantId(String restaurantId) {
+		this.restaurantId = restaurantId;
+	}
+	
+    public void setLatitude(Float latitude) {
+        this.latitude = latitude;
     }
 
     public void setName(String name) {
@@ -88,6 +129,17 @@ public class Store {
         this.city = city;
     }
 
+    public void setProducts(Set<Product> products) {
+		this.products = products;
+	}
+    
     // Methods
 
+	public void addDeliveryOrder(DeliveryOrder deliveryOrder) {
+        this.deliveryOrders.add(deliveryOrder);
+    }
+	
+    public void addProduct(Product product) {
+        this.products.add(product);
+    }
 }
