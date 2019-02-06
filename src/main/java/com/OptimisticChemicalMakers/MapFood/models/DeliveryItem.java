@@ -3,13 +3,12 @@ package com.OptimisticChemicalMakers.MapFood.models;
 import javax.persistence.*;
 
 @Entity
-@Table(name="item_order")
 public class DeliveryItem {
 
     // Class Properties
 
-    @Id                                                     // It tells the JPA that it is an ID
-    @GeneratedValue(strategy = GenerationType.IDENTITY)     // It tells the JPA how to autogenerate the ID value
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @ManyToOne
@@ -17,7 +16,7 @@ public class DeliveryItem {
     private Product product;
 
     @ManyToOne
-    @JoinColumn(name="order_id", nullable=false)
+    @JoinColumn(name="delivery_order_id", nullable=false)
     private DeliveryOrder deliveryOrder;
 
     private Integer quantity;

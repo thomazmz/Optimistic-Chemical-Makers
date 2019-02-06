@@ -1,42 +1,41 @@
 package com.OptimisticChemicalMakers.MapFood.dtos;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+
 public class StoreDto {
 
-    private String restaurantId;
-    
-    private Float latitude;
+    private Long id;
 
-    private Float longitude;
+    private Double latitude;
+
+    private Double longitude;
 
     private String name;
 
     private String dishDescription;
 
     private String city;
-    
-    private String distance;
+
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    private Double requestorDistance;
 
     public StoreDto() {
 
     }
 
     // Getters
-    
-    public String getRestaurantId() {
-		return restaurantId;
-	}
 
-	public String getDistance() {
-		return distance;
-	}
+    public Long getId() {
+        return id;
+    }
 
-	public Float getLatitude() {
+    public Double getLatitude() {
         return latitude;
     }
 
-    public Float getLongitude() {
-		return longitude;
-	}
+    public Double getLongitude() {
+        return longitude;
+    }
 
     public String getName() {
         return name;
@@ -52,25 +51,21 @@ public class StoreDto {
 
     // Setters
 
-    public void setLatitude(Float latitude) {
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public void setLatitude(Double latitude) {
         this.latitude = latitude;
+    }
+
+    public void setLongitude(Double longitude) {
+        this.longitude = longitude;
     }
 
     public void setName(String name) {
         this.name = name;
     }
-    
-	public void setLongitude(Float longitude) {
-		this.longitude = longitude;
-	}
-
-	public void setRestaurantId(String restaurantId) {
-		this.restaurantId = restaurantId;
-	}
-
-	public void setDistance(String distance) {
-		this.distance = distance;
-	}
 
     public void setDishDescription(String dishDescription) {
         this.dishDescription = dishDescription;
@@ -79,4 +74,7 @@ public class StoreDto {
     public void setCity(String city) {
         this.city = city;
     }
+
+    public void setRequestorDistance(Double distance) { this.requestorDistance = distance; }
+
 }

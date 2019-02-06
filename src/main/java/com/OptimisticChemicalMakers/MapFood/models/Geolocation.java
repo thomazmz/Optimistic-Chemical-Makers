@@ -1,8 +1,9 @@
 package com.OptimisticChemicalMakers.MapFood.models;
 
-import javax.persistence.Embeddable;
+import javax.persistence.*;
 
 @Embeddable
+@MappedSuperclass
 public class Geolocation {
 
     // Static Properties
@@ -11,17 +12,15 @@ public class Geolocation {
 
     // Class Properties
 
-    private Float latitude;
+    private double latitude;
 
-    private Float longitude;
+    private double longitude;
 
     // Constructors
-
     public Geolocation() {
-
     }
 
-    public Geolocation(Float latitude, Float longitude) {
+    public Geolocation(double latitude, double longitude) {
 
         if (latitude < -90 || latitude > 90) {
             throw new NullPointerException("Latitude values must be between -90 and 90!");
@@ -55,38 +54,29 @@ public class Geolocation {
 
     // Get Methods
 
-    public Float getLatitude() {
-        return latitude;
+    public double getLatitude() {
+        return this.latitude;
     }
 
-    public Float getLongitude() {
-        return longitude;
+    public double getLongitude() {
+        return this.longitude;
     }
 
     // Set Methods
 
-    public void setLatitude(Float latitude) {
-        this.latitude = latitude;
-    }
-
-    public void setLongitude(Float longitude) {
-        this.longitude = longitude;
-    }
-
-    public void setPosition(Float latitude, Float longitude) {
+    public void setGeolocation(double latitude, double longitude) {
         this.latitude = latitude;
         this.longitude = longitude;
     }
 
     // Class Methods
 
-    public double distanceTo(Geolocation geographicPosition) {
-
-        return this.haversinDistance(this.latitude, this.longitude, geographicPosition.getLatitude(), geographicPosition.getLongitude());
-
+    public double distanceTo(Long latitude, Long longitude) {
+        return this.distanceTo(new Geolocation(latitude, longitude));
     }
 
-
-
+    public double distanceTo(Geolocation geolocation) {
+        return this.haversinDistance(this.latitude, this.longitude, geolocation.getLatitude(), geolocation.getLongitude());
+    }
 
 }
