@@ -50,4 +50,5 @@ public class DeliveryOrder extends Geolocation {
         this.deliveryItems = deliveryItems;
     }
 
+
 }

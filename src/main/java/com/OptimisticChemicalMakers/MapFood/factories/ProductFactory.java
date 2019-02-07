@@ -12,8 +12,6 @@ public class ProductFactory {
         productDto.setId(product.getId());
         productDto.setPrice(product.getPrice());
         productDto.setDescription(product.getDescription());
-        productDto.setRestaurant(product.getStore().getName());
-        productDto.setClassification(product.getClassification());
         return productDto;
     }
 
@@ -21,7 +19,6 @@ public class ProductFactory {
         Product product = new Product();
         product.setPrice(productDto.getPrice());
         product.setDescription(productDto.getDescription());
-        product.setClassification(productDto.getClassification());
         return product;
     }
 }

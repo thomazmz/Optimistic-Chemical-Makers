@@ -76,5 +76,4 @@ public class StoreDto {
     }
 
     public void setRequestorDistance(Double distance) { this.requestorDistance = distance; }
-
 }
