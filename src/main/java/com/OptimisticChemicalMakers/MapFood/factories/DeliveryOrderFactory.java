@@ -22,7 +22,8 @@ public class DeliveryOrderFactory {
 
         DeliveryOrder deliveryOrder = new DeliveryOrder();
 
-        deliveryOrder.setEndingGeolocation(deliveryOrderDto.getEndingLatitude(), deliveryOrderDto.getEndingLongitude());
+        deliveryOrder.setLatitude(deliveryOrderDto.getEndingLatitude());
+        deliveryOrder.setLongitude(deliveryOrderDto.getEndingLongitude());
 
         Set<DeliveryItem> deliveryItems = StreamSupport.stream(deliveryOrderDto.getDeliveryItems().spliterator(), false)
                 .map(deliveryItemFactory::getInstance)
@@ -44,13 +45,13 @@ public class DeliveryOrderFactory {
 
         deliveryOrderDto.setId(deliveryOrder.getId());
 
-        deliveryOrderDto.setRestaurantId(deliveryOrder.getStore().getRestaurantId());
+        deliveryOrderDto.setRestaurantId(deliveryOrder.getStore().getHash());
 
         deliveryOrderDto.setCustomerId(deliveryOrder.getCustomer().getId());
         
-        deliveryOrderDto.setEndingLatitude(deliveryOrder.getEndingGeolocation().getLatitude());
+        deliveryOrderDto.setEndingLatitude(deliveryOrder.getLatitude());
 
-        deliveryOrderDto.setEndingLongitude(deliveryOrder.getEndingGeolocation().getLongitude());
+        deliveryOrderDto.setEndingLongitude(deliveryOrder.getLongitude());
 
         Set<DeliveryItemDto> deliveryItems = StreamSupport.stream(deliveryOrder.getDeliveryItems().spliterator(), false)
                 .map(deliveryItemFactory::getInstance)

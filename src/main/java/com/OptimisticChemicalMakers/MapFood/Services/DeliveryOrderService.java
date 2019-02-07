@@ -31,27 +31,22 @@ public class DeliveryOrderService {
 
     public DeliveryOrderDto createDeliveryOrder(DeliveryOrderDto deliveryOrderDto) {
     	
-    	Store store = storeRepository.findByRestaurantId(deliveryOrderDto.getRestaurantId()).orElseThrow(RuntimeException::new);
-   	
-        //Store store = storeRepository.findById().orElseThrow(RuntimeException::new);
-
-        DeliveryOrder deliveryOrder = deliveryOrderFactory.getInstance(deliveryOrderDto);
+//    	Store store = storeRepository.findById(deliveryOrderDto.getId()).orElseThrow(RuntimeException::new);
+//        DeliveryOrder deliveryOrder = deliveryOrderFactory.getInstance(deliveryOrderDto);
+//        store.addDeliveryOrder(deliveryOrder);
+//        storeRepository.save(store);
         
+        
+    	Store store = storeRepository.findByHash(deliveryOrderDto.getRestaurantId()).orElseThrow(RuntimeException::new);
+   	    DeliveryOrder deliveryOrder = deliveryOrderFactory.getInstance(deliveryOrderDto);
+   	    deliveryOrder.start();
         deliveryOrder = deliveryOrderRepository.save(deliveryOrder);
-        
-        for (DeliveryItem deliveryItem : deliveryOrder.getDeliveryItems()) {
+        for (DeliveryItem deliveryItem : deliveryOrder.getDeliveryItems())
         	deliveryItem = deliveryItemRepository.save(deliveryItem);
-		}
-        
         store.addDeliveryOrder(deliveryOrder);
-
-//        deliveryOrder.setStore(store);
 
         storeRepository.save(store);
 
         return deliveryOrderDto;
     }
-
-
-
 }

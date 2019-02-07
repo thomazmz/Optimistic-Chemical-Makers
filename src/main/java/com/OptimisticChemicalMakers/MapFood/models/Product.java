@@ -16,18 +16,16 @@ public class Product  implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)     // It tells the JPA how to autogenerate the ID value
     private Long id;
    
-    @Column(name="item_description")
+    private String hash;
+    
     private String description;
 
-    @Column(name="unit_price")
     private BigDecimal price;
-    
-    private String itemId;
-    
+
     private String classification;
     
     @ManyToOne
-    @JoinColumn(name="restaurant_id", nullable=false, referencedColumnName="restaurant_id")
+    @JoinColumn(name="hash_restaurant", nullable=false, referencedColumnName="hash")
     private Store store;
 
     // Constructors
@@ -40,47 +38,45 @@ public class Product  implements Serializable {
         this.description = description;
         this.price = price;
     }
-    
-
-    // Get Methods
-
 
 	public Long getId() {
-        return id;
-    }
+		return id;
+	}
 
-    public String getDescription() {
-        return description;
-    }
-    
-	public String getItemId() {
-		return itemId;
+	public String getDescription() {
+		return description;
+	}
+
+	public BigDecimal getPrice() {
+		return price;
+	}
+
+	public String getHash() {
+		return hash;
 	}
 
 	public String getClassification() {
 		return classification;
 	}
 
-    public BigDecimal getPrice() {
-        return price;
-    }
+	public Store getStore() {
+		return store;
+	}
 
-    public Store getStore() {
-        return store;
-    }
+	public void setId(Long id) {
+		this.id = id;
+	}
 
-    // Set Methods
+	public void setDescription(String description) {
+		this.description = description;
+	}
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
+	public void setPrice(BigDecimal price) {
+		this.price = price;
+	}
 
-    public void setPrice(BigDecimal price) {
-        this.price = price;
-    }
-
-	public void setItemId(String itemId) {
-		this.itemId = itemId;
+	public void setHash(String hash) {
+		this.hash = hash;
 	}
 
 	public void setClassification(String classification) {
@@ -90,6 +86,5 @@ public class Product  implements Serializable {
 	public void setStore(Store store) {
 		this.store = store;
 	}
-    
-}
 
+}

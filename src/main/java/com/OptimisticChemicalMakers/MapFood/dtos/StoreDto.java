@@ -1,8 +1,12 @@
 package com.OptimisticChemicalMakers.MapFood.dtos;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+
 public class StoreDto {
 
-    private String restaurantId;
+	private Long id;
+	
+    private String hash;
     
     private Float latitude;
 
@@ -16,67 +20,83 @@ public class StoreDto {
     
     private String distance;
 
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    private Double requestorDistance;
+
     public StoreDto() {
 
     }
 
-    // Getters
-    
-    public String getRestaurantId() {
-		return restaurantId;
+	public Long getId() {
+		return id;
+	}
+
+	public String getHash() {
+		return hash;
+	}
+
+	public Float getLatitude() {
+		return latitude;
+	}
+
+	public Float getLongitude() {
+		return longitude;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public String getDishDescription() {
+		return dishDescription;
+	}
+
+	public String getCity() {
+		return city;
 	}
 
 	public String getDistance() {
 		return distance;
 	}
 
-	public Float getLatitude() {
-        return latitude;
-    }
-
-    public Float getLongitude() {
-		return longitude;
+	public Double getRequestorDistance() {
+		return requestorDistance;
 	}
 
-    public String getName() {
-        return name;
-    }
+	public void setId(Long id) {
+		this.id = id;
+	}
 
-    public String getDishDescription() {
-        return dishDescription;
-    }
+	public void setHash(String hash) {
+		this.hash = hash;
+	}
 
-    public String getCity() {
-        return city;
-    }
+	public void setLatitude(Float latitude) {
+		this.latitude = latitude;
+	}
 
-    // Setters
-
-    public void setLatitude(Float latitude) {
-        this.latitude = latitude;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-    
 	public void setLongitude(Float longitude) {
 		this.longitude = longitude;
 	}
 
-	public void setRestaurantId(String restaurantId) {
-		this.restaurantId = restaurantId;
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public void setDishDescription(String dishDescription) {
+		this.dishDescription = dishDescription;
+	}
+
+	public void setCity(String city) {
+		this.city = city;
 	}
 
 	public void setDistance(String distance) {
 		this.distance = distance;
 	}
 
-    public void setDishDescription(String dishDescription) {
-        this.dishDescription = dishDescription;
-    }
-
-    public void setCity(String city) {
-        this.city = city;
-    }
+	public void setRequestorDistance(Double requestorDistance) {
+		this.requestorDistance = requestorDistance;
+	}
+    
 }

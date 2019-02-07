@@ -1,10 +1,5 @@
 package com.OptimisticChemicalMakers.MapFood.dtos;
 
-import com.OptimisticChemicalMakers.MapFood.models.Product;
-import com.fasterxml.jackson.annotation.JsonInclude;
-
-import java.math.BigDecimal;
-
 public class DeliveryItemDto {
 
     // Class Properties

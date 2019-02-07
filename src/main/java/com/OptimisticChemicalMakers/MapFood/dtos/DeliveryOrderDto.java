@@ -2,8 +2,6 @@ package com.OptimisticChemicalMakers.MapFood.dtos;
 
 import java.util.Set;
 
-import com.OptimisticChemicalMakers.MapFood.models.Customer;
-
 public class DeliveryOrderDto {
 
     private Long id;
@@ -75,6 +73,4 @@ public class DeliveryOrderDto {
     public void setDeliveryItems(Set<DeliveryItemDto> deliveryItems) {
         this.deliveryItems = deliveryItems;
     }
-
-
 }
