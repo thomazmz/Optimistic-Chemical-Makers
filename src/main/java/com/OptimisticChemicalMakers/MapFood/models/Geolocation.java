@@ -21,6 +21,7 @@ public class Geolocation {
     public Geolocation() {
     }
 
+    
     public Geolocation(Float latitude, Float longitude) {
 
         if (latitude < -90 || latitude > 90) {
