@@ -5,27 +5,27 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 public class StoreDto {
 
 	private Long id;
-	
-    private String hash;
-    
-    private Float latitude;
 
-    private Float longitude;
+	private String hash;
 
-    private String name;
+	private Float latitude;
 
-    private String dishDescription;
+	private Float longitude;
 
-    private String city;
-    
-    private String distance;
+	private String name;
 
-    @JsonInclude(JsonInclude.Include.NON_NULL)
-    private Double requestorDistance;
+	private String dishDescription;
 
-    public StoreDto() {
+	private String city;
 
-    }
+	private String distance;
+
+	@JsonInclude(JsonInclude.Include.NON_NULL)
+	private Double requestorDistance;
+
+	public StoreDto() {
+
+	}
 
 	public Long getId() {
 		return id;
@@ -34,14 +34,6 @@ public class StoreDto {
 	public String getHash() {
 		return hash;
 	}
-
-  public Double getLatitude() {
-      return latitude;
-  }
-
-  public Double getLongitude() {
-      return longitude;
-  }
 
 	public String getName() {
 		return name;
@@ -61,6 +53,14 @@ public class StoreDto {
 
 	public Double getRequestorDistance() {
 		return requestorDistance;
+	}	
+
+	public Float getLatitude() {
+		return latitude;
+	}
+
+	public Float getLongitude() {
+		return longitude;
 	}
 
 	public void setId(Long id) {
@@ -87,10 +87,6 @@ public class StoreDto {
 		this.dishDescription = dishDescription;
 	}
 
-	public void setCity(String city) {
-		this.city = city;
-	}
-
 	public void setDistance(String distance) {
 		this.distance = distance;
 	}
@@ -98,9 +94,9 @@ public class StoreDto {
 	public void setRequestorDistance(Double requestorDistance) {
 		this.requestorDistance = requestorDistance;
 	}
-  
-  public void setCity(String city) {
-      this.city = city;
-  }
+
+	public void setCity(String city) {
+		this.city = city;
+	}
 
 }

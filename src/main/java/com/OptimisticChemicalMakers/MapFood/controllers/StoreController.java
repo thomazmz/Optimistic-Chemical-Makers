@@ -19,6 +19,7 @@ import com.OptimisticChemicalMakers.MapFood.Services.StoreService;
 import com.OptimisticChemicalMakers.MapFood.dtos.DeliveryOrderDto;
 import com.OptimisticChemicalMakers.MapFood.dtos.ProductDto;
 import com.OptimisticChemicalMakers.MapFood.dtos.StoreDto;
+import com.OptimisticChemicalMakers.MapFood.factories.StoreFactory;
 
 @CrossOrigin(origins="http://localhost:4200") // Temporary for the Angular App test
 @RestController
@@ -39,7 +40,7 @@ public class StoreController {
     }
 
     // GET /api/stores/latitude/longitude
-    // Get All Closer Stores
+    // Get All Closer Stores    
     @GetMapping(value = "/stores/nearest")
     public List<StoreDto> getNearestStores(@RequestParam("latitude") Float latitude, @RequestParam("longitude") Float longitude, @RequestParam("radius") Long radius) {
         return storeService

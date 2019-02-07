@@ -55,28 +55,8 @@ public class StoreService {
         return storeRepository.getNearestStores(latitude, longitude, radius);
     }
     
-//    public List<StoreDto> getCloser(Float latitude, Float longitude) {
-//    	int distance = 5;
-//    	return  storeRepository
-//    			.getCloser(latitude, longitude, distance)
-//				.stream()
-//				.map(store -> {
-//					store.setDistance(geolocationService.getDistance(latitude, longitude, store.getLatitude(), store.getLongitude()));
-//					return storeFactory.getInstance(store);
-//				})
-//		        .collect(Collectors.toList());
-//	}
-    
     public Store getStore(String restaurantId) {
         return storeRepository.findByHash(restaurantId).orElseThrow(RuntimeException::new);
-    }
-
-    public List<Store> getNearestStores( Long latitude, Long longitude, Long radius) {
-
-        radius = 5L;
-
-        return storeRepository.getNearestStores(latitude, longitude, radius);
-
     }
 
     public StoreDto getStore(Long id) {
@@ -86,18 +66,6 @@ public class StoreService {
     public StoreDto createStore(StoreDto storeDto) {
         Store store = storeRepository.save(storeFactory.getInstance(storeDto));
         return storeFactory.getInstance(store);
-    }
-    
-    
-    public ResponseEntity<?> deleteStoreById(Long id) {
-
-        try {
-            storeRepository.deleteById(id);
-            return ResponseEntity.noContent().build();
-        } catch (Exception ex) {
-            return ResponseEntity.notFound().build();
-        }
-
     }
 
     public ResponseEntity<?> deleteStoreById(Long id) {
