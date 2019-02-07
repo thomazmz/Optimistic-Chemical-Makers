@@ -62,5 +62,4 @@ public class DeliveryOrderFactory {
         return deliveryOrderDto;
 
     }
-
 }

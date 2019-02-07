@@ -18,9 +18,7 @@ public class Geolocation {
     private Float longitude;
 
     // Constructors
-
     public Geolocation() {
-
     }
 
     public Geolocation(Float latitude, Float longitude) {
@@ -79,6 +77,8 @@ public class Geolocation {
         this.latitude = latitude;
         this.longitude = longitude;
     }
+  
+    // Class Methods
 
     public double distanceTo(Float latitude, Float longitude) {
         return this.distanceTo(new Geolocation(latitude, longitude));
@@ -87,5 +87,5 @@ public class Geolocation {
     public double distanceTo(Geolocation geolocation) {
         return this.haversinDistance(this.latitude, this.longitude, geolocation.getLatitude(), geolocation.getLongitude());
     }
-    
+
 }

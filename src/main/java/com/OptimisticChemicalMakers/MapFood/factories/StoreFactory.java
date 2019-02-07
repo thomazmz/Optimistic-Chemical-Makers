@@ -27,6 +27,12 @@ public class StoreFactory {
         return storeDto;
     }
 
+    public StoreDto getInstance(Store store, Double distance) {
+        StoreDto storeDto = this.getInstance(store);
+        storeDto.setRequestorDistance(distance);
+        return storeDto;
+    }
+
     public Store getInstance(StoreDto storeDto) {
         Store store = new Store();
         store.setHash(storeDto.getHash());

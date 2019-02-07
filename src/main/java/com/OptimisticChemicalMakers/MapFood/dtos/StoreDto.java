@@ -35,13 +35,13 @@ public class StoreDto {
 		return hash;
 	}
 
-	public Float getLatitude() {
-		return latitude;
-	}
+  public Double getLatitude() {
+      return latitude;
+  }
 
-	public Float getLongitude() {
-		return longitude;
-	}
+  public Double getLongitude() {
+      return longitude;
+  }
 
 	public String getName() {
 		return name;
@@ -98,5 +98,9 @@ public class StoreDto {
 	public void setRequestorDistance(Double requestorDistance) {
 		this.requestorDistance = requestorDistance;
 	}
-    
+  
+  public void setCity(String city) {
+      this.city = city;
+  }
+
 }
