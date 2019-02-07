@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-@CrossOrigin(origins="http://localhost:4200") // Temporary for the Angular App test
 @RestController
 @RequestMapping(value = "/order")
 public class DeliveryOrderController {
@@ -17,7 +16,7 @@ public class DeliveryOrderController {
 
     // POST /create
     // Create Delivery Order
-    @PostMapping(value = "/create")
+    @RequestMapping(value = "/create", method = RequestMethod.POST, produces = "application/json")
     public ResponseEntity<?> createOrder(@RequestBody DeliveryOrderDto deliveryOrderDto) {
         return ResponseEntity.ok(deliveryOrderService.createDeliveryOrder(deliveryOrderDto));
     }

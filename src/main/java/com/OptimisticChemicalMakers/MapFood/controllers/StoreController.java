@@ -4,21 +4,13 @@ import com.OptimisticChemicalMakers.MapFood.Services.StoreService;
 import com.OptimisticChemicalMakers.MapFood.dtos.DeliveryOrderDto;
 import com.OptimisticChemicalMakers.MapFood.dtos.ProductDto;
 import com.OptimisticChemicalMakers.MapFood.dtos.StoreDto;
-import com.OptimisticChemicalMakers.MapFood.factories.DeliveryOrderFactory;
-import com.OptimisticChemicalMakers.MapFood.factories.ProductFactory;
 import com.OptimisticChemicalMakers.MapFood.factories.StoreFactory;
-import com.OptimisticChemicalMakers.MapFood.models.DeliveryOrder;
-import com.OptimisticChemicalMakers.MapFood.models.Store;
-import com.OptimisticChemicalMakers.MapFood.repositories.StoreRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
-import java.util.stream.StreamSupport;
 
 @RestController
 @RequestMapping(value = "/api")
@@ -92,5 +84,6 @@ public class StoreController {
     public DeliveryOrderDto createDeliveryOrder(@PathVariable(value="id") Long id, @RequestBody DeliveryOrderDto deliveryOrderDto) {
         return storeService.createDeliveryOrder(id, deliveryOrderDto);
     }
+
 
 }
