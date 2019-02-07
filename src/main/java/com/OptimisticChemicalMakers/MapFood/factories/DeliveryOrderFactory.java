@@ -1,16 +1,17 @@
 package com.OptimisticChemicalMakers.MapFood.factories;
 
+import java.util.Set;
+import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
 import com.OptimisticChemicalMakers.MapFood.dtos.DeliveryItemDto;
 import com.OptimisticChemicalMakers.MapFood.dtos.DeliveryOrderDto;
 import com.OptimisticChemicalMakers.MapFood.models.Customer;
 import com.OptimisticChemicalMakers.MapFood.models.DeliveryItem;
 import com.OptimisticChemicalMakers.MapFood.models.DeliveryOrder;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
-
-import java.util.Set;
-import java.util.stream.Collectors;
-import java.util.stream.StreamSupport;
 
 @Component
 public class DeliveryOrderFactory {
@@ -45,7 +46,7 @@ public class DeliveryOrderFactory {
 
         deliveryOrderDto.setId(deliveryOrder.getId());
 
-        deliveryOrderDto.setRestaurantId(deliveryOrder.getStore().getHash());
+        deliveryOrderDto.setHashRestaurant(deliveryOrder.getStore().getHash());
 
         deliveryOrderDto.setCustomerId(deliveryOrder.getCustomer().getId());
         
