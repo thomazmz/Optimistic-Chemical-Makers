@@ -88,5 +88,4 @@ public class Geolocation {
     public double distanceTo(Geolocation geolocation) {
         return this.haversinDistance(this.latitude, this.longitude, geolocation.getLatitude(), geolocation.getLongitude());
     }
-
 }

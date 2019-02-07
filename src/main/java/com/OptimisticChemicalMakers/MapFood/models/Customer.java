@@ -14,6 +14,9 @@ public class Customer {
     @GeneratedValue(strategy = GenerationType.IDENTITY)     // It tells the JPA how to autogenerate the ID value
     private Long id;
 
+    
+	public Customer() {}
+
 	public Customer(Long id) {
 		super();
 		this.id = id;

@@ -47,7 +47,6 @@ public class StoreService {
         return StreamSupport.stream(storeRepository.findAll().spliterator(), false)
                 .map(storeFactory::getInstance)
                 .collect(Collectors.toList());
-
     }
     
     public List<Store> getNearestStores( Float latitude, Float longitude, Long radius) {
@@ -55,8 +54,8 @@ public class StoreService {
         return storeRepository.getNearestStores(latitude, longitude, radius);
     }
     
-    public Store getStore(String restaurantId) {
-        return storeRepository.findByHash(restaurantId).orElseThrow(RuntimeException::new);
+    public Store getStore(String hashRestaurant) {
+        return storeRepository.findByHash(hashRestaurant).orElseThrow(RuntimeException::new);
     }
 
     public StoreDto getStore(Long id) {
@@ -66,6 +65,10 @@ public class StoreService {
     public StoreDto createStore(StoreDto storeDto) {
         Store store = storeRepository.save(storeFactory.getInstance(storeDto));
         return storeFactory.getInstance(store);
+    }
+    
+    public Store save(Store store) {
+        return storeRepository.save(store);
     }
 
     public ResponseEntity<?> deleteStoreById(Long id) {
