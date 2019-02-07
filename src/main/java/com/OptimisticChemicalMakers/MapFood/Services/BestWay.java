@@ -1,7 +1,5 @@
 package com.OptimisticChemicalMakers.MapFood.Services;
 
-import java.util.ArrayList;
-
 import com.OptimisticChemicalMakers.MapFood.models.Geolocation;
 
 public class BestWay {

@@ -11,6 +11,7 @@ import com.OptimisticChemicalMakers.MapFood.models.Product;
 import com.OptimisticChemicalMakers.MapFood.models.Store;
 import com.OptimisticChemicalMakers.MapFood.repositories.StoreRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.CrossOrigin;
 
@@ -37,12 +38,10 @@ public class StoreService {
 
     @Autowired
     private DeliveryOrderFactory deliveryOrderFactory;
-    
-    @Autowired
-    private GeolocationService geolocationService;
 
     // Methods - Store
 
+    
     public List<StoreDto> getStores() {
 
         return StreamSupport.stream(storeRepository.findAll().spliterator(), false)
@@ -51,59 +50,62 @@ public class StoreService {
 
     }
     
-    public List<StoreDto> getCloser(Float latitude, Float longitude) {
-    	int distance = 5;
-    	return  storeRepository
-    			.getCloser(latitude, longitude, distance)
-				.stream()
-				.map(store -> {
-					store.setDistance(geolocationService.getDistance(latitude, longitude, store.getLatitude(), store.getLongitude()));
-					return storeFactory.getInstance(store);
-				})
-		        .collect(Collectors.toList());
-	}
+    public List<Store> getNearestStores( Float latitude, Float longitude, Long radius) {
+        radius = 5L;
+        return storeRepository.getNearestStores(latitude, longitude, radius);
+    }
+    
+//    public List<StoreDto> getCloser(Float latitude, Float longitude) {
+//    	int distance = 5;
+//    	return  storeRepository
+//    			.getCloser(latitude, longitude, distance)
+//				.stream()
+//				.map(store -> {
+//					store.setDistance(geolocationService.getDistance(latitude, longitude, store.getLatitude(), store.getLongitude()));
+//					return storeFactory.getInstance(store);
+//				})
+//		        .collect(Collectors.toList());
+//	}
     
     public Store getStore(String restaurantId) {
-        return storeRepository.findByRestaurantId(restaurantId).orElseThrow(RuntimeException::new);
+        return storeRepository.findByHash(restaurantId).orElseThrow(RuntimeException::new);
     }
 
     public StoreDto getStore(Long id) {
-
         return storeFactory.getInstance(storeRepository.findById(id).orElseThrow(RuntimeException::new));
-
     }
 
     public StoreDto createStore(StoreDto storeDto) {
-
         Store store = storeRepository.save(storeFactory.getInstance(storeDto));
-
         return storeFactory.getInstance(store);
+    }
+    
+    
+    public ResponseEntity<?> deleteStoreById(Long id) {
+
+        try {
+            storeRepository.deleteById(id);
+            return ResponseEntity.noContent().build();
+        } catch (Exception ex) {
+            return ResponseEntity.notFound().build();
+        }
 
     }
 
     // Methods - Store/Products
-
     
     public List<ProductDto> getProducts(Long id) {
-    	
         Store store = storeRepository.findById(id).orElseThrow(RuntimeException::new);
-        
-        return StreamSupport.stream(store.getAvailableProducts().spliterator(), false)
+        return StreamSupport.stream(store.getProducts().spliterator(), false)
                 .map(productFactory::getInstance)
                 .collect(Collectors.toList());
-
     }
 
     public ProductDto createProduct(Long id, ProductDto productDto) {
-
         Store store = storeRepository.findById(id).orElseThrow(RuntimeException::new);
-
         Product product = productFactory.getInstance(productDto);
-
         store.addProduct(product);
-
         storeRepository.save(store);
-
         return productFactory.getInstance(product);
 
     }
@@ -111,33 +113,21 @@ public class StoreService {
     // Methods - Store/DeliveryOrders
 
     public List<DeliveryOrderDto> getDeliveryOrders(Long id) {
-
         Store store = storeRepository.findById(id).orElseThrow(RuntimeException::new);
-
         return StreamSupport.stream(store.getDeliveryOrders().spliterator(), false)
                 .map(deliveryOrderFactory::getInstance)
                 .collect(Collectors.toList());
-
     }
 
+    
     public DeliveryOrderDto createDeliveryOrder (Long id, DeliveryOrderDto deliveryOrderDto) {
-
         // TO DO : Verificar se os produtos solicitados pertencem ao restaurante;
-
         Store store = storeRepository.findById(id).orElseThrow(RuntimeException::new);
-
         DeliveryOrder deliveryOrder = deliveryOrderFactory.getInstance(deliveryOrderDto);
-
         deliveryOrder.setStore(store);
-
         store.addDeliveryOrder(deliveryOrder);
-
         storeRepository.save(store);
-
         return deliveryOrderFactory.getInstance(deliveryOrder);
-
     }
-
-
+    
 }
-
