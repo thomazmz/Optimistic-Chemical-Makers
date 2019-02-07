@@ -19,7 +19,6 @@ import com.OptimisticChemicalMakers.MapFood.Services.StoreService;
 import com.OptimisticChemicalMakers.MapFood.dtos.DeliveryOrderDto;
 import com.OptimisticChemicalMakers.MapFood.dtos.ProductDto;
 import com.OptimisticChemicalMakers.MapFood.dtos.StoreDto;
-import com.OptimisticChemicalMakers.MapFood.factories.StoreFactory;	
 
 @CrossOrigin(origins="http://localhost:4200") // Temporary for the Angular App test
 @RestController

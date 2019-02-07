@@ -71,6 +71,14 @@ public class StoreService {
         return storeRepository.findByHash(restaurantId).orElseThrow(RuntimeException::new);
     }
 
+    public List<Store> getNearestStores( Long latitude, Long longitude, Long radius) {
+
+        radius = 5L;
+
+        return storeRepository.getNearestStores(latitude, longitude, radius);
+
+    }
+
     public StoreDto getStore(Long id) {
         return storeFactory.getInstance(storeRepository.findById(id).orElseThrow(RuntimeException::new));
     }
@@ -81,6 +89,17 @@ public class StoreService {
     }
     
     
+    public ResponseEntity<?> deleteStoreById(Long id) {
+
+        try {
+            storeRepository.deleteById(id);
+            return ResponseEntity.noContent().build();
+        } catch (Exception ex) {
+            return ResponseEntity.notFound().build();
+        }
+
+    }
+
     public ResponseEntity<?> deleteStoreById(Long id) {
 
         try {
