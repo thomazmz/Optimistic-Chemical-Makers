@@ -1,14 +1,18 @@
 package com.OptimisticChemicalMakers.MapFood.controllers;
 
+import java.util.List;
+
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
 import com.OptimisticChemicalMakers.MapFood.dtos.DeliveryOrderDto;
 import com.OptimisticChemicalMakers.MapFood.dtos.ProductDto;
 import com.OptimisticChemicalMakers.MapFood.dtos.StoreDto;
-
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
-import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping(value = "/api/requestor")
@@ -40,7 +44,7 @@ public class RequestorController {
     @GetMapping("/store/{protocol}/products")
     public List<ProductDto> getProducts(
             @PathVariable(value="protocol") String protocol) {
-        //return productService.getByHashRestaurant(protocol);
+        //return productService.getByProtocol(protocol);
     	return null;
     }
 

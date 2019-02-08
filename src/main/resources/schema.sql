@@ -61,7 +61,7 @@ CREATE TABLE `delivery_item` (
   `delivery_order_id` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `FK_product_order` (`product_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -78,13 +78,13 @@ CREATE TABLE `delivery_order` (
   `prepared_at` timestamp NULL DEFAULT NULL,
   `estimated_devlivery_time` timestamp NULL DEFAULT NULL,
   `customer_id` int(11) NOT NULL,
-  `hash_restaurant` varchar(64) DEFAULT NULL,
+  `store_id` int(11) DEFAULT NULL,
   `latitude` varchar(45) DEFAULT NULL,
   `longitude` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `FK_Customer_Order` (`customer_id`),
   CONSTRAINT `FK_Customer_Order` FOREIGN KEY (`customer_id`) REFERENCES `customer` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -97,8 +97,8 @@ DROP TABLE IF EXISTS `product`;
 CREATE TABLE `product` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `description` varchar(254) DEFAULT NULL,
-  `hash` varchar(65) DEFAULT NULL,
-  `hash_restaurant` varchar(100) DEFAULT NULL,
+  `protocol` varchar(65) DEFAULT NULL,
+  `store_protocol` varchar(65) DEFAULT NULL,
   `restaurant` varchar(254) DEFAULT NULL,
   `classification` varchar(254) DEFAULT NULL,
   `price` varchar(97) DEFAULT NULL,
@@ -116,7 +116,7 @@ DROP TABLE IF EXISTS `store`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `store` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `hash` varchar(254) DEFAULT NULL,
+  `protocol` varchar(65) DEFAULT NULL,
   `name` varchar(254) DEFAULT NULL,
   `city` varchar(254) DEFAULT NULL,
   `longitude` varchar(254) DEFAULT NULL,

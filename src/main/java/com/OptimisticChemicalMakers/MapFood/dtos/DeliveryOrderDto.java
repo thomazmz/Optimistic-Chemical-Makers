@@ -7,7 +7,7 @@ public class DeliveryOrderDto {
 
     private Long id;
 
-    private String hashRestaurant;
+    private String storeProtocol;
 
     private Float endingLatitude;
 
@@ -27,8 +27,8 @@ public class DeliveryOrderDto {
 		return id;
 	}
 
-	public String getHashRestaurant() {
-		return hashRestaurant;
+	public String getStoreProtocol() {
+		return storeProtocol;
 	}
 
 	public Float getEndingLatitude() {
@@ -55,8 +55,8 @@ public class DeliveryOrderDto {
 		this.id = id;
 	}
 
-	public void setHashRestaurant(String hashRestaurant) {
-		this.hashRestaurant = hashRestaurant;
+	public void setStoreProtocol(String storeProtocol) {
+		this.storeProtocol = storeProtocol;
 	}
 
 	public void setEndingLatitude(Float endingLatitude) {

@@ -85,7 +85,8 @@ public class Geolocation {
         return this.distanceTo(new Geolocation(latitude, longitude));
     }
 
-    public double distanceTo(Geolocation geolocation) {
+    @SuppressWarnings("static-access")
+	public double distanceTo(Geolocation geolocation) {
         return this.haversinDistance(this.latitude, this.longitude, geolocation.getLatitude(), geolocation.getLongitude());
     }
 }

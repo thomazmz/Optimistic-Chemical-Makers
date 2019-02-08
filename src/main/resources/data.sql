@@ -38,26 +38,6 @@ INSERT INTO `delivery_boy` VALUES (1,-51.21620300,-30.07518676),(2,-51.14220700,
 UNLOCK TABLES;
 
 --
--- Dumping data for table `delivery_item`
---
-
-LOCK TABLES `delivery_item` WRITE;
-/*!40000 ALTER TABLE `delivery_item` DISABLE KEYS */;
-INSERT INTO `delivery_item` VALUES (1,225,0,1),(2,49,0,1),(3,225,0,1),(4,49,0,1);
-/*!40000 ALTER TABLE `delivery_item` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Dumping data for table `delivery_order`
---
-
-LOCK TABLES `delivery_order` WRITE;
-/*!40000 ALTER TABLE `delivery_order` DISABLE KEYS */;
-INSERT INTO `delivery_order` VALUES (1,'2019-02-07 03:08:06',NULL,NULL,NULL,5,NULL,'-30.064472','-51.186634');
-/*!40000 ALTER TABLE `delivery_order` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Dumping data for table `product`
 --
 

@@ -27,8 +27,6 @@ public class Store extends Geolocation implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY) // It tells the JPA how to autogenerate the ID value
 	private Long id;
 
-	private String hash;
-
 	private String name;
 
 	private String dishDescription;
@@ -48,6 +46,12 @@ public class Store extends Geolocation implements Serializable {
 
 	public Store() {
 	}
+    
+	public Store(Float latitude, Float longitude, String name, String dishDescription) {
+		super(latitude, longitude);
+		this.name = name;
+		this.dishDescription = dishDescription;
+	}
 
     public String getProtocol() {
         return this.protocol;
@@ -56,23 +60,9 @@ public class Store extends Geolocation implements Serializable {
     public String getName() {
         return name;
     }
-    
-	public Store(Float latitude, Float longitude, String name, String dishDescription) {
-		super(latitude, longitude);
-		this.name = name;
-		this.dishDescription = dishDescription;
-	}
-
-	public static long getSerialversionuid() {
-		return serialVersionUID;
-	}
 
 	public Long getId() {
 		return id;
-	}
-
-	public String getHash() {
-		return hash;
 	}
 
 	public String getDishDescription() {
@@ -101,10 +91,6 @@ public class Store extends Geolocation implements Serializable {
 
 	public void setId(Long id) {
 		this.id = id;
-	}
-
-	public void setHash(String hash) {
-		this.hash = hash;
 	}
 
 	public void setName(String name) {

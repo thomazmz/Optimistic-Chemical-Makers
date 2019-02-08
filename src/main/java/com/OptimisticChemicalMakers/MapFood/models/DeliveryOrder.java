@@ -30,7 +30,7 @@ public class DeliveryOrder extends Geolocation {
 	private Date estimatedDevliveryTime;
 
 	@ManyToOne
-	@JoinColumn(name = "hash_restaurant", nullable = false)
+	@JoinColumn(name = "store_id", nullable = false)
 	private Store store;
 
 	@OneToMany(mappedBy = "deliveryOrder", cascade = CascadeType.ALL)
