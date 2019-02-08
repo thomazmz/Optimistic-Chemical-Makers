@@ -36,7 +36,7 @@ public class DeliveryOrderService {
     	
     	DeliveryOrder deliveryOrder = deliveryOrderFactory.getInstance(deliveryOrderDto);
     	
-    	Store store = storeService.getStore(deliveryOrderDto.getHashRestaurant());
+    	Store store = storeService.getStore(deliveryOrderDto.getStoreProtocol());
    	    deliveryOrder.setStore(store);
    	    
     	Double distance = store.distanceTo(deliveryOrderDto.getEndingLatitude(), deliveryOrderDto.getEndingLongitude());

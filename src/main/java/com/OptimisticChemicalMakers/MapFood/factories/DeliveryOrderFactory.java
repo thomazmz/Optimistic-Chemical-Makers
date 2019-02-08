@@ -46,7 +46,7 @@ public class DeliveryOrderFactory {
 
         deliveryOrderDto.setId(deliveryOrder.getId());
 
-        deliveryOrderDto.setHashRestaurant(deliveryOrder.getStore().getHash());
+        deliveryOrderDto.setStoreProtocol(deliveryOrder.getStore().getProtocol());
 
         deliveryOrderDto.setCustomerId(deliveryOrder.getCustomer().getId());
         

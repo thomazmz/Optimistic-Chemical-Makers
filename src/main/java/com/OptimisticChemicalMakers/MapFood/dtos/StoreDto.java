@@ -4,9 +4,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 
 public class StoreDto {
 
-    private String protocol;
-
-	private String hash;
+	private String protocol;
 
 	private Float latitude;
 
@@ -27,10 +25,6 @@ public class StoreDto {
 
     public String getProtocol() {
         return this.protocol;
-	}
-
-	public String getHash() {
-		return hash;
 	}
 
 	public String getName() {
@@ -59,10 +53,6 @@ public class StoreDto {
 
 	public Float getLongitude() {
 		return longitude;
-	}
-
-	public void setHash(String hash) {
-		this.hash = hash;
 	}
 
 	public void setLatitude(Float latitude) {

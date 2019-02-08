@@ -1,25 +1,20 @@
 package com.OptimisticChemicalMakers.MapFood.Services;
 
-import com.OptimisticChemicalMakers.MapFood.dtos.DeliveryOrderDto;
-import com.OptimisticChemicalMakers.MapFood.dtos.ProductDto;
+import java.util.Date;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.CrossOrigin;
+
 import com.OptimisticChemicalMakers.MapFood.dtos.StoreDto;
 import com.OptimisticChemicalMakers.MapFood.factories.DeliveryOrderFactory;
 import com.OptimisticChemicalMakers.MapFood.factories.ProductFactory;
 import com.OptimisticChemicalMakers.MapFood.factories.StoreFactory;
 import com.OptimisticChemicalMakers.MapFood.models.DeliveryOrder;
 import com.OptimisticChemicalMakers.MapFood.models.DeliveryRoute;
-import com.OptimisticChemicalMakers.MapFood.models.Product;
 import com.OptimisticChemicalMakers.MapFood.models.Store;
 import com.OptimisticChemicalMakers.MapFood.repositories.StoreRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.CrossOrigin;
-
-import java.util.Date;
-import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.StreamSupport;
 
 @CrossOrigin(origins="http://localhost:4200") // Temporary for the Angular App test
 @Service
@@ -120,5 +115,4 @@ public class StoreService {
         return storeRepository.save(store);
     }
 
-    // Methods - Store/DeliveryOrders
 }

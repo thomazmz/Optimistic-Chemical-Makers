@@ -4,6 +4,7 @@ import javax.persistence.*;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.UUID;
 
 @Entity
 public class Product  implements Serializable {
@@ -16,7 +17,8 @@ public class Product  implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)     // It tells the JPA how to autogenerate the ID value
     private Long id;
    
-    private String hash;
+    @Column(nullable = false)
+    private String protocol = UUID.randomUUID().toString().replace("-", "");
     
     private String description;
 
@@ -25,7 +27,7 @@ public class Product  implements Serializable {
     private String classification;
     
     @ManyToOne
-    @JoinColumn(name="hash_restaurant", nullable=false, referencedColumnName="hash")
+    @JoinColumn(name="store_protocol", nullable=false, referencedColumnName="protocol")
     private Store store;
 
     // Constructors
@@ -51,8 +53,8 @@ public class Product  implements Serializable {
 		return price;
 	}
 
-	public String getHash() {
-		return hash;
+	public String getProtocol() {
+		return protocol;
 	}
 
 	public String getClassification() {
@@ -75,8 +77,8 @@ public class Product  implements Serializable {
 		this.price = price;
 	}
 
-	public void setHash(String hash) {
-		this.hash = hash;
+	public void setProtocol(String protocol) {
+		this.protocol = protocol;
 	}
 
 	public void setClassification(String classification) {

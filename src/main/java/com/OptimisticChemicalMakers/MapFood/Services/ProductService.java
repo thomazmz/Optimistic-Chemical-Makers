@@ -24,9 +24,9 @@ public class ProductService {
     @Autowired
     private ProductFactory productFactory;
     
-    public List<ProductDto> getByHashRestaurant(String hash) {
+    public List<ProductDto> getByStoreProtocol(String protocol) {
     	Store store = new Store();
-    	store.setHash(hash);
+    	store.setProtocol(protocol);
     	
     	return productRepository
     			.findByStore(store)

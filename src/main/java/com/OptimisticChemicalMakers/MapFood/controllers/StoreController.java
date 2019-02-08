@@ -7,7 +7,6 @@ import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -19,15 +18,12 @@ import org.springframework.web.bind.annotation.RestController;
 import com.OptimisticChemicalMakers.MapFood.Services.StoreService;
 import com.OptimisticChemicalMakers.MapFood.dtos.DeliveryOrderDto;
 import com.OptimisticChemicalMakers.MapFood.dtos.DeliveryRouteDto;
-import com.OptimisticChemicalMakers.MapFood.dtos.ProductDto;
 import com.OptimisticChemicalMakers.MapFood.dtos.StoreDto;
 import com.OptimisticChemicalMakers.MapFood.factories.DeliveryOrderFactory;
 import com.OptimisticChemicalMakers.MapFood.factories.DeliveryRouteFactory;
 import com.OptimisticChemicalMakers.MapFood.factories.StoreFactory;
 
 
-
-@CrossOrigin(origins="http://localhost:4200") // Temporary for the Angular App test
 @RestController
 @RequestMapping(value = "/api/store")
 public class StoreController {
