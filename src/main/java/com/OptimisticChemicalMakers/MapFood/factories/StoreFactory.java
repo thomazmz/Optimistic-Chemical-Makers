@@ -14,7 +14,7 @@ public class StoreFactory {
         storeDto.setName(store.getName());
         storeDto.setDishDescription(store.getDishDescription());
         storeDto.setCity(store.getCity());
-        storeDto.setId(store.getId());
+        storeDto.setProtocol(store.getProtocol());
         return storeDto;
     }
 

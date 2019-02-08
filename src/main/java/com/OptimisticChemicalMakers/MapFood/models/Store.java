@@ -15,7 +15,8 @@ public class Store extends Geolocation {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    String protocol = UUID.randomUUID().toString();
+    @Column(nullable = false)
+    private String protocol = UUID.randomUUID().toString().replace("-", "");
 
     private String name;
 
