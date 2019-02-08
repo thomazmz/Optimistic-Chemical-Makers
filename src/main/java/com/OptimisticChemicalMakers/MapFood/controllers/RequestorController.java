@@ -3,34 +3,45 @@ package com.OptimisticChemicalMakers.MapFood.controllers;
 import com.OptimisticChemicalMakers.MapFood.dtos.DeliveryOrderDto;
 import com.OptimisticChemicalMakers.MapFood.dtos.ProductDto;
 import com.OptimisticChemicalMakers.MapFood.dtos.StoreDto;
+
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping(value = "/api/requestor")
 public class RequestorController {
 
+	
+	
     // -----------------------------------------------------------------------------------------------------------------
-    // GET /api/requestor/{userId}/stores
+    // GET /api/requestor/stores
     // Requestor faz uma busca por Stores disponíveis na sua região
     // -----------------------------------------------------------------------------------------------------------------
-    @GetMapping("{id}/stores")
+    @GetMapping("/stores")
     public List<StoreDto> getAvailableSttores(
-            @PathVariable(value="id") String id,
             @RequestParam("latitude") Long latitude,
-            @RequestParam("longitude") Long longitude) {
-        return null;
+            @RequestParam("longitude") Long longitude,
+            @RequestParam("radius") Long radius) {
+    	return null;
+//    	return storeService
+//        		.getNearestStores(latitude,longitude,radius)
+//        		.stream()
+//        		.map(store -> storeFactory.getInstance(store, store.distanceTo(latitude, longitude)))
+//        		.collect(Collectors.toList());
     }
 
     // -----------------------------------------------------------------------------------------------------------------
-    // GET /api/requestor/{userId}/store/products
+    // GET /api/requestor/store/{protocol}/products
     // Requestor faz uma busca de produtos disponíveis em uma determinada Store
     // -----------------------------------------------------------------------------------------------------------------
-    @GetMapping("{id}/store/products")
+    @GetMapping("/store/{protocol}/products")
     public List<ProductDto> getProducts(
-            @PathVariable(value="id") String id) {
-        return null;
+            @PathVariable(value="protocol") String protocol) {
+        //return productService.getByHashRestaurant(protocol);
+    	return null;
     }
 
     // -----------------------------------------------------------------------------------------------------------------
@@ -41,7 +52,8 @@ public class RequestorController {
     public DeliveryOrderDto createDeliveryOrder(
             @PathVariable(value="id") String id,
             @RequestBody DeliveryOrderDto deliveryOrderDto) {
-        return null;
+    	//return storeService.createDeliveryOrder(id, deliveryOrderDto);
+    	return null;
     }
 
     // -----------------------------------------------------------------------------------------------------------------
@@ -63,5 +75,4 @@ public class RequestorController {
             @PathVariable(value="id") String id) {
         return null;
     }
-
 }

@@ -1,51 +1,53 @@
 package com.OptimisticChemicalMakers.MapFood.models;
 
-import org.hibernate.annotations.GenericGenerator;
-
-import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Set;
 import java.util.UUID;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Transient;
+
 @Entity
-public class Store extends Geolocation {
+public class Store extends Geolocation implements Serializable {
 
-    // Properties
+	private static final long serialVersionUID = 1L;
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+	// Properties
 
     @Column(nullable = false)
     private String protocol = UUID.randomUUID().toString().replace("-", "");
 
-    private String name;
+	@Id // It tells the JPA that it is an ID
+	@GeneratedValue(strategy = GenerationType.IDENTITY) // It tells the JPA how to autogenerate the ID value
+	private Long id;
 
-    private String dishDescription;
+	private String hash;
 
-    private String city;
+	private String name;
 
-    @OneToMany(mappedBy="store", cascade = CascadeType.ALL)
-    private Set<Product> products;
+	private String dishDescription;
 
-    @OneToMany(mappedBy="store", cascade = CascadeType.ALL)
-    private Set<DeliveryOrder> deliveryOrders;
+	private String city;
 
-    // Constructors
+	@OneToMany(mappedBy = "store", cascade = CascadeType.ALL)
+	private Set<Product> products;
 
-    public Store() {
-    }
+	@OneToMany(mappedBy = "store", cascade = CascadeType.ALL)
+	private Set<DeliveryOrder> deliveryOrders;
 
-    public Store(Long latitude, Long longitude, String name, String dishDescription) {
-        super(latitude, longitude);
-        this.name = name;
-        this.dishDescription = dishDescription;
-    }
+	@Transient
+	private String distance;
 
-    // Get Methods
+	// Constructors
 
-    public Long getId() {
-        return id;
-    }
+	public Store() {
+	}
 
     public String getProtocol() {
         return this.protocol;
@@ -54,45 +56,88 @@ public class Store extends Geolocation {
     public String getName() {
         return name;
     }
+    
+	public Store(Float latitude, Float longitude, String name, String dishDescription) {
+		super(latitude, longitude);
+		this.name = name;
+		this.dishDescription = dishDescription;
+	}
 
-    public String getDishDescription() {
-        return dishDescription;
-    }
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
 
-    public String getCity() {
-        return city;
-    }
+	public Long getId() {
+		return id;
+	}
 
-    public Set<Product> getAvailableProducts() {
-        return this.products;
-    }
+	public String getHash() {
+		return hash;
+	}
 
-    public Set<DeliveryOrder> getDeliveryOrders() {
-        return this.deliveryOrders;
-    }
+	public String getDishDescription() {
+		return dishDescription;
+	}
 
-    // Set Methods
+	public String getCity() {
+		return city;
+	}
 
-    public void setName(String name) {
-        this.name = name;
-    }
+	public Set<Product> getProducts() {
+		return products;
+	}
 
-    public void setDishDescription(String dishDescription) {
-        this.dishDescription = dishDescription;
-    }
+	public Set<DeliveryOrder> getDeliveryOrders() {
+		return deliveryOrders;
+	}
 
-    public void setCity(String city) {
-        this.city = city;
-    }
+	public String getDistance() {
+		return distance;
+	}
 
-    // Methods
+	public void setProtocol(String protocol) {
+		this.protocol = protocol;
+	}
 
-    public void addDeliveryOrder(DeliveryOrder deliveryOrder) {
-        this.deliveryOrders.add(deliveryOrder);
-    }
+	public void setId(Long id) {
+		this.id = id;
+	}
 
-    public void addProduct(Product product) {
-        this.products.add(product);
-    }
+	public void setHash(String hash) {
+		this.hash = hash;
+	}
 
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public void setDishDescription(String dishDescription) {
+		this.dishDescription = dishDescription;
+	}
+
+	public void setCity(String city) {
+		this.city = city;
+	}
+
+	public void setProducts(Set<Product> products) {
+		this.products = products;
+	}
+
+	public void setDeliveryOrders(Set<DeliveryOrder> deliveryOrders) {
+		this.deliveryOrders = deliveryOrders;
+	}
+
+	public void setDistance(String distance) {
+		this.distance = distance;
+	}
+
+	// Methods
+	
+	public void addDeliveryOrder(DeliveryOrder deliveryOrder) {
+		this.deliveryOrders.add(deliveryOrder);
+	}
+
+	public void addProduct(Product product) {
+		this.products.add(product);
+	}
 }

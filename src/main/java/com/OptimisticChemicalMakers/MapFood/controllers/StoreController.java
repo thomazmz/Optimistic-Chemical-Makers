@@ -1,19 +1,33 @@
 package com.OptimisticChemicalMakers.MapFood.controllers;
 
-import com.OptimisticChemicalMakers.MapFood.Services.StoreService;
-import com.OptimisticChemicalMakers.MapFood.dtos.*;
-import com.OptimisticChemicalMakers.MapFood.factories.DeliveryOrderFactory;
-import com.OptimisticChemicalMakers.MapFood.factories.DeliveryRouteFactory;
-import com.OptimisticChemicalMakers.MapFood.factories.StoreFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
-
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.OptimisticChemicalMakers.MapFood.Services.StoreService;
+import com.OptimisticChemicalMakers.MapFood.dtos.DeliveryOrderDto;
+import com.OptimisticChemicalMakers.MapFood.dtos.DeliveryRouteDto;
+import com.OptimisticChemicalMakers.MapFood.dtos.ProductDto;
+import com.OptimisticChemicalMakers.MapFood.dtos.StoreDto;
+import com.OptimisticChemicalMakers.MapFood.factories.DeliveryOrderFactory;
+import com.OptimisticChemicalMakers.MapFood.factories.DeliveryRouteFactory;
+import com.OptimisticChemicalMakers.MapFood.factories.StoreFactory;
+
+
+
+@CrossOrigin(origins="http://localhost:4200") // Temporary for the Angular App test
 @RestController
 @RequestMapping(value = "/api/store")
 public class StoreController {
@@ -150,52 +164,4 @@ public class StoreController {
         return ResponseEntity.ok(deliveyRouteFactory.getInstance(
                 storeService.createDeliveryRoute(protocol, deliverOrderId)));
     }
-
-
-
-
-
-
-
-    // -----------------------------------------------------------------------------------------------------------------
-    // "COLOCAR" NO CONTROLLER DO USUÁRIO:
-    // -----------------------------------------------------------------------------------------------------------------
-
-    // GET /api/stores/latitude/longitude
-    // Get All Closer Stores
-    @GetMapping(value = "/stores/nearest")
-    public List<StoreDto> getNearestStores(@RequestParam("latitude") Long latitude, @RequestParam("longitude") Long longitude, @RequestParam("longitude") Long radius) {
-        return storeService.getNearestStores(latitude,longitude,radius).stream()
-                .map(store -> storeFactory.getInstance(store, store.distanceTo(latitude, longitude)))
-                .collect(Collectors.toList());
-    }
-
-    // GET /api/store/id/products
-    // Get products by store id
-    @GetMapping(value = "/store/{id}/products")
-    public List<ProductDto> getProducts(@PathVariable(value="id") Long id) {
-        return storeService.getProducts(id);
-    }
-
-    // POST api/store/id/orders
-    // Create a delivery order by store if
-    @PostMapping(value="/store/{id}/orders")
-    public DeliveryOrderDto createDeliveryOrder(@PathVariable(value="id") Long id, @RequestBody DeliveryOrderDto deliveryOrderDto) {
-        return storeService.createDeliveryOrder(id, deliveryOrderDto);
-    }
-
-    // -----------------------------------------------------------------------------------------------------------------
-    // FORA DO ESCOPO MAS PODE SER UTILIZADO SE SOBRAR TEMPO:
-    // -----------------------------------------------------------------------------------------------------------------
-
-    // POST /api/store/id/products
-    // Create products by store id
-    @PostMapping(value = "/store/{id}/products")
-    public ProductDto createProduct( @PathVariable(value="id") Long id, @RequestBody ProductDto productDto) {
-        return storeService.createProduct(id, productDto);
-    }
-
-
-
-
 }

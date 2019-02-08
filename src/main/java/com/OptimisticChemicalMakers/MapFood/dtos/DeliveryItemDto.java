@@ -1,10 +1,5 @@
 package com.OptimisticChemicalMakers.MapFood.dtos;
 
-import com.OptimisticChemicalMakers.MapFood.models.Product;
-import com.fasterxml.jackson.annotation.JsonInclude;
-
-import java.math.BigDecimal;
-
 public class DeliveryItemDto {
 
     // Class Properties
@@ -22,40 +17,36 @@ public class DeliveryItemDto {
     public DeliveryItemDto() {
     }
 
-    // Getters
+	public Long getId() {
+		return id;
+	}
 
-    public Long getId() {
-        return this.id;
-    }
+	public Long getProductId() {
+		return productId;
+	}
 
-    public Long getProductId() {
-        return this.productId;
-    }
+	public Long getDeliveryOrderId() {
+		return deliveryOrderId;
+	}
 
-    public Long getDeliveryOrderId() {
-        return this.deliveryOrderId;
-    }
+	public Integer getQuantity() {
+		return quantity;
+	}
 
-    public Integer getQuantity() {
-        return this.quantity;
-    }
+	public void setId(Long id) {
+		this.id = id;
+	}
 
-    // Setters
+	public void setProductId(Long productId) {
+		this.productId = productId;
+	}
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+	public void setDeliveryOrderId(Long deliveryOrderId) {
+		this.deliveryOrderId = deliveryOrderId;
+	}
 
-    public void setProductId(Long productId) {
-        this.productId = productId;
-    }
-
-    public void setDeliveryOrderId(Long deliveryOrderId) {
-        this.deliveryOrderId = deliveryOrderId;
-    }
-
-    public void setQuantity(Integer quantity) {
-        this.quantity = quantity;
-    }
+	public void setQuantity(Integer quantity) {
+		this.quantity = quantity;
+	}
 
 }

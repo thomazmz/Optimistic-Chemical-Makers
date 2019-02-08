@@ -1,23 +1,31 @@
 package com.OptimisticChemicalMakers.MapFood.models;
 
 import javax.persistence.*;
+
+import java.io.Serializable;
 import java.math.BigDecimal;
 
 @Entity
-public class Product {
+public class Product  implements Serializable {
+
+	private static final long serialVersionUID = 1L;
 
     // Properties
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id                                                 // It tells the JPA that it is an ID
+    @GeneratedValue(strategy = GenerationType.IDENTITY)     // It tells the JPA how to autogenerate the ID value
     private Long id;
-
+   
+    private String hash;
+    
     private String description;
 
     private BigDecimal price;
 
+    private String classification;
+    
     @ManyToOne
-    @JoinColumn(name="store_id", nullable=false)
+    @JoinColumn(name="hash_restaurant", nullable=false, referencedColumnName="hash")
     private Store store;
 
     // Constructors
@@ -31,33 +39,52 @@ public class Product {
         this.price = price;
     }
 
-    // Get Methods
+	public Long getId() {
+		return id;
+	}
 
-    public Long getId() {
-        return id;
-    }
+	public String getDescription() {
+		return description;
+	}
 
-    public String getDescription() {
-        return description;
-    }
+	public BigDecimal getPrice() {
+		return price;
+	}
 
-    public BigDecimal getPrice() {
-        return price;
-    }
+	public String getHash() {
+		return hash;
+	}
 
-    public Store getStore() {
-        return store;
-    }
+	public String getClassification() {
+		return classification;
+	}
 
-    // Set Methods
+	public Store getStore() {
+		return store;
+	}
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
+	public void setId(Long id) {
+		this.id = id;
+	}
 
-    public void setPrice(BigDecimal price) {
-        this.price = price;
-    }
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public void setPrice(BigDecimal price) {
+		this.price = price;
+	}
+
+	public void setHash(String hash) {
+		this.hash = hash;
+	}
+
+	public void setClassification(String classification) {
+		this.classification = classification;
+	}
+
+	public void setStore(Store store) {
+		this.store = store;
+	}
 
 }
-
