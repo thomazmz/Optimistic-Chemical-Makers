@@ -1,8 +1,5 @@
 package com.OptimisticChemicalMakers.MapFood.models;
 
-import org.hibernate.annotations.GenericGenerator;
-import org.springframework.data.annotation.Id;
-
 import javax.persistence.*;
 import java.math.BigDecimal;
 
@@ -12,10 +9,8 @@ public class Product {
     // Properties
 
     @Id
-    @GeneratedValue(generator = "uuid")
-    @GenericGenerator(name = "uuid", strategy = "uuid")
-    @Column(columnDefinition = "CHAR(32)")
-    private String id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     private String description;
 
@@ -38,20 +33,20 @@ public class Product {
 
     // Get Methods
 
-    public String getId() {
-        return this.id;
+    public Long getId() {
+        return id;
     }
 
     public String getDescription() {
-        return this.description;
+        return description;
     }
 
     public BigDecimal getPrice() {
-        return this.price;
+        return price;
     }
 
     public Store getStore() {
-        return this.store;
+        return store;
     }
 
     // Set Methods

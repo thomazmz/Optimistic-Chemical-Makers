@@ -2,8 +2,6 @@ package com.OptimisticChemicalMakers.MapFood.factories;
 
 import com.OptimisticChemicalMakers.MapFood.dtos.DeliveryItemDto;
 import com.OptimisticChemicalMakers.MapFood.models.DeliveryItem;
-import com.OptimisticChemicalMakers.MapFood.models.DeliveryOrder;
-import com.OptimisticChemicalMakers.MapFood.models.Product;
 import com.OptimisticChemicalMakers.MapFood.repositories.DeliveryOrderRepository;
 import com.OptimisticChemicalMakers.MapFood.repositories.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;

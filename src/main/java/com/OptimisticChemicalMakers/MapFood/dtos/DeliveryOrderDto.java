@@ -4,7 +4,7 @@ import java.util.Set;
 
 public class DeliveryOrderDto {
 
-    private String id;
+    private Long id;
 
     private Long storeId;
 
@@ -21,7 +21,7 @@ public class DeliveryOrderDto {
 
     // Getters
 
-    public String getId() {
+    public Long getId() {
         return this.id;
     }
 
@@ -43,7 +43,7 @@ public class DeliveryOrderDto {
 
     // Setters
 
-    public void setId(String id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
