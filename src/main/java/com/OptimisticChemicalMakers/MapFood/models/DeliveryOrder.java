@@ -1,5 +1,8 @@
 package com.OptimisticChemicalMakers.MapFood.models;
 
+import org.hibernate.annotations.GenericGenerator;
+import org.springframework.data.annotation.Id;
+
 import javax.persistence.*;
 import java.util.Date;
 import java.util.Set;
@@ -10,8 +13,10 @@ public class DeliveryOrder extends Geolocation {
     // Class Properties
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @GeneratedValue(generator = "uuid")
+    @GenericGenerator(name = "uuid", strategy = "uuid")
+    @Column(columnDefinition = "CHAR(32)")
+    private String id;
 
     @ManyToOne
     @JoinColumn(name="store_id", nullable=false)
@@ -19,6 +24,12 @@ public class DeliveryOrder extends Geolocation {
 
     @OneToMany(mappedBy="deliveryOrder", cascade = CascadeType.ALL)
     private Set<DeliveryItem> deliveryItems;
+
+    private Date acceptedByStoreAt;
+
+    private Date acceptedByDeliveryBoyAt;
+
+    private Date deliveredAt;
 
     // Constructors
 
@@ -28,7 +39,7 @@ public class DeliveryOrder extends Geolocation {
 
     // Getters
 
-    public Long getId() {
+    public String getId() {
         return this.id;
     }
 

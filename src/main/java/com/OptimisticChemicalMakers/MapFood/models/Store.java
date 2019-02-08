@@ -1,5 +1,7 @@
 package com.OptimisticChemicalMakers.MapFood.models;
 
+import org.hibernate.annotations.GenericGenerator;
+
 import javax.persistence.*;
 import java.util.Set;
 
@@ -9,8 +11,10 @@ public class Store extends Geolocation {
     // Properties
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @GeneratedValue(generator = "uuid")
+    @GenericGenerator(name = "uuid", strategy = "uuid")
+    @Column(columnDefinition = "CHAR(32)")
+    private String id;
 
     private String name;
 
@@ -37,8 +41,8 @@ public class Store extends Geolocation {
 
     // Get Methods
 
-    public Long getId() {
-        return id;
+    public String getId() {
+        return this.id;
     }
 
     public String getName() {
@@ -60,6 +64,10 @@ public class Store extends Geolocation {
     public Set<DeliveryOrder> getDeliveryOrders() {
         return this.deliveryOrders;
     }
+
+//    public String getProtocol() {
+//        return this.protocol;
+//    }
 
     // Set Methods
 

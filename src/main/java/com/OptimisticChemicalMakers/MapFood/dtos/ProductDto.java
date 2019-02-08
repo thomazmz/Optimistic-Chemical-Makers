@@ -6,7 +6,7 @@ public class ProductDto {
 
     // Properties
 
-    private Long id;
+    private String id;
 
     private String description;
 
@@ -19,7 +19,7 @@ public class ProductDto {
 
     // Setters
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -33,7 +33,7 @@ public class ProductDto {
 
     // Getters
 
-    public Long getId() {
+    public String getId() {
         return id;
     }
 
