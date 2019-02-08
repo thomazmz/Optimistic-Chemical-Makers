@@ -1,9 +1,14 @@
 package com.OptimisticChemicalMakers.MapFood.controllers;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -27,6 +32,19 @@ public class DeliveryOrderController {
         return ResponseEntity.ok(deliveryOrderService.createDeliveryOrder(deliveryOrderDto));
     }
 
+    // PUST /update
+    // Update Delivery Order
+    @PutMapping(value="/update/{id}")
+    public ResponseEntity<?> updateOrder(@RequestBody DeliveryOrderDto deliveryOrderDto) {
+        return ResponseEntity.ok(deliveryOrderService.updateDeliveryOrder(deliveryOrderDto));
+    }
+    
+    // GET /openorders
+    // Get delivery orders by store id
+    @GetMapping(value="/openorders")
+    public List<DeliveryOrderDto> getOpenOrders() {
+        return deliveryOrderService.openOrders();
+    }
 }
 
 
