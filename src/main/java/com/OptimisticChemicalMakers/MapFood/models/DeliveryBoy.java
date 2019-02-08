@@ -1,11 +1,8 @@
 package com.OptimisticChemicalMakers.MapFood.models;
 
 import org.hibernate.annotations.GenericGenerator;
-import org.springframework.data.annotation.Id;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
+import javax.persistence.*;
 
 @Entity
 public class DeliveryBoy {
@@ -13,10 +10,9 @@ public class DeliveryBoy {
     // Properties
 
     @Id
-    @GeneratedValue(generator = "uuid")
-    @GenericGenerator(name = "uuid", strategy = "uuid")
-    @Column(columnDefinition = "CHAR(32)")
-    private String id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
 
     private Long latitude;
 
@@ -31,7 +27,7 @@ public class DeliveryBoy {
 
     // Getters
 
-    public String getId() {
+    public Long getId() {
         return this.id;
     }
 

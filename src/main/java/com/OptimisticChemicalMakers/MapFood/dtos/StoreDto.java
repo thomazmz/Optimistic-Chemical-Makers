@@ -4,7 +4,9 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 
 public class StoreDto {
 
-    private String id;
+    private Long id;
+
+    private String protocol;
 
     private Double latitude;
 
@@ -25,7 +27,7 @@ public class StoreDto {
 
     // Getters
 
-    public String getId() {
+    public Long getId() {
         return id;
     }
 
@@ -51,7 +53,7 @@ public class StoreDto {
 
     // Setters
 
-    public void setId(String id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -76,5 +78,9 @@ public class StoreDto {
     }
 
     public void setRequestorDistance(Double distance) { this.requestorDistance = distance; }
+
+    public void setProtocol(String protocol) {
+        this.protocol = protocol;
+    }
 
 }

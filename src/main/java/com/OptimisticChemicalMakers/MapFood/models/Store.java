@@ -4,6 +4,7 @@ import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.util.Set;
+import java.util.UUID;
 
 @Entity
 public class Store extends Geolocation {
@@ -11,10 +12,10 @@ public class Store extends Geolocation {
     // Properties
 
     @Id
-    @GeneratedValue(generator = "uuid")
-    @GenericGenerator(name = "uuid", strategy = "uuid")
-    @Column(columnDefinition = "CHAR(32)")
-    private String id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    String protocol = UUID.randomUUID().toString();
 
     private String name;
 
@@ -41,8 +42,12 @@ public class Store extends Geolocation {
 
     // Get Methods
 
-    public String getId() {
-        return this.id;
+    public Long getId() {
+        return id;
+    }
+
+    public String getProtocol() {
+        return this.protocol;
     }
 
     public String getName() {
@@ -64,10 +69,6 @@ public class Store extends Geolocation {
     public Set<DeliveryOrder> getDeliveryOrders() {
         return this.deliveryOrders;
     }
-
-//    public String getProtocol() {
-//        return this.protocol;
-//    }
 
     // Set Methods
 
