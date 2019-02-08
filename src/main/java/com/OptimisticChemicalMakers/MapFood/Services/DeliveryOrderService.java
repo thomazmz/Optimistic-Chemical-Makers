@@ -1,8 +1,6 @@
 package com.OptimisticChemicalMakers.MapFood.Services;
 
 import java.util.Date;
-import java.util.List;
-import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -57,18 +55,4 @@ public class DeliveryOrderService {
         storeService.save(store);
         return deliveryOrderDto;
     }
-
-	public DeliveryOrderDto updateDeliveryOrder(DeliveryOrderDto deliveryOrderDto) {
-		DeliveryOrder deliveryOrder = deliveryOrderFactory.getInstance(deliveryOrderDto);
-		// TODO falta implementar
-		return deliveryOrderDto;
-	}
-
-	public List<DeliveryOrderDto> openOrders() {
-		return deliveryOrderRepository
-				.findByPreparedAtIsNull()
-				.stream()
-				.map(deliveryOrderFactory::getInstance)
-				.collect(Collectors.toList());
-	}
 }
