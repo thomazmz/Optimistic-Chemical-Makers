@@ -1,67 +1,82 @@
 package com.OptimisticChemicalMakers.MapFood.dtos;
 
+import java.util.Date;
 import java.util.Set;
 
 public class DeliveryOrderDto {
 
     private Long id;
 
-    private Long storeId;
+    private String hashRestaurant;
 
-    private Double latitude;
+    private Float endingLatitude;
 
-    private Double longitude;
+    private Float endingLongitude;
+    
+    private Long customerId;
+    
+    private Date estimatedDevliveryTime;
 
     private Set<DeliveryItemDto> deliveryItems;
 
     // Constructor
 
-    public DeliveryOrderDto() {
-    }
+    public DeliveryOrderDto() {}
 
-    // Getters
+	public Long getId() {
+		return id;
+	}
 
-    public Long getId() {
-        return this.id;
-    }
+	public String getHashRestaurant() {
+		return hashRestaurant;
+	}
 
-    public Long getStoreId() {
-        return this.storeId;
-    }
+	public Float getEndingLatitude() {
+		return endingLatitude;
+	}
 
-    public Double getLatitude() {
-        return this.latitude;
-    }
+	public Float getEndingLongitude() {
+		return endingLongitude;
+	}
 
-    public Double getLongitude() {
-        return this.longitude;
-    }
+	public Long getCustomerId() {
+		return customerId;
+	}
 
-    public Set<DeliveryItemDto> getDeliveryItems() {
-        return this.deliveryItems;
-    }
+	public Date getEstimatedDevliveryTime() {
+		return estimatedDevliveryTime;
+	}
 
-    // Setters
+	public Set<DeliveryItemDto> getDeliveryItems() {
+		return deliveryItems;
+	}
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+	public void setId(Long id) {
+		this.id = id;
+	}
 
-    public void setStoreId(Long store_id) {
-        this.storeId = store_id;
-    }
+	public void setHashRestaurant(String hashRestaurant) {
+		this.hashRestaurant = hashRestaurant;
+	}
 
-    public void setLatitude(Double latitude) {
-        this.latitude = latitude;
-    }
+	public void setEndingLatitude(Float endingLatitude) {
+		this.endingLatitude = endingLatitude;
+	}
 
-    public void setLongitude(Double longitude) {
-        this.longitude = longitude;
-    }
+	public void setEndingLongitude(Float endingLongitude) {
+		this.endingLongitude = endingLongitude;
+	}
 
-    public void setDeliveryItems(Set<DeliveryItemDto> deliveryItems) {
-        this.deliveryItems = deliveryItems;
-    }
+	public void setCustomerId(Long customerId) {
+		this.customerId = customerId;
+	}
 
+	public void setEstimatedDevliveryTime(Date estimatedDevliveryTime) {
+		this.estimatedDevliveryTime = estimatedDevliveryTime;
+	}
 
+	public void setDeliveryItems(Set<DeliveryItemDto> deliveryItems) {
+		this.deliveryItems = deliveryItems;
+	}
+   
 }

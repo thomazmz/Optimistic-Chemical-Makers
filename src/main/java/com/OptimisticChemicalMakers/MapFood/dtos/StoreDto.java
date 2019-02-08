@@ -6,75 +6,94 @@ public class StoreDto {
 
     private String protocol;
 
-    private Double latitude;
+	private String hash;
 
-    private Double longitude;
+	private Float latitude;
 
-    private String name;
+	private Float longitude;
 
-    private String dishDescription;
+	private String name;
 
-    private String city;
+	private String dishDescription;
 
-    @JsonInclude(JsonInclude.Include.NON_NULL)
-    private Double requestorDistance;
+	private String city;
 
-    public StoreDto() {
+	private String distance;
 
-    }
+	@JsonInclude(JsonInclude.Include.NON_NULL)
+	private Double requestorDistance;
 
-    // Getters
+	public StoreDto() {}
 
     public String getProtocol() {
         return this.protocol;
-    }
+	}
 
-    public Double getLatitude() {
-        return latitude;
-    }
+	public String getHash() {
+		return hash;
+	}
 
-    public Double getLongitude() {
-        return longitude;
-    }
+	public String getName() {
+		return name;
+	}
 
-    public String getName() {
-        return name;
-    }
+	public String getDishDescription() {
+		return dishDescription;
+	}
 
-    public String getDishDescription() {
-        return dishDescription;
-    }
+	public String getCity() {
+		return city;
+	}
 
-    public String getCity() {
-        return city;
-    }
+	public String getDistance() {
+		return distance;
+	}
+    
+	public Double getRequestorDistance() {
+		return requestorDistance;
+	}	
 
-    // Setters
+	public Float getLatitude() {
+		return latitude;
+	}
 
-    public void setLatitude(Double latitude) {
-        this.latitude = latitude;
-    }
+	public Float getLongitude() {
+		return longitude;
+	}
 
-    public void setLongitude(Double longitude) {
-        this.longitude = longitude;
-    }
+	public void setHash(String hash) {
+		this.hash = hash;
+	}
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public void setDishDescription(String dishDescription) {
-        this.dishDescription = dishDescription;
-    }
-
-    public void setCity(String city) {
-        this.city = city;
-    }
-
-    public void setRequestorDistance(Double distance) { this.requestorDistance = distance; }
+	public void setLatitude(Float latitude) {
+		this.latitude = latitude;
+	}
 
     public void setProtocol(String protocol) {
         this.protocol = protocol;
     }
 
+	public void setLongitude(Float longitude) {
+		this.longitude = longitude;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public void setDishDescription(String dishDescription) {
+		this.dishDescription = dishDescription;
+	}
+
+	public void setDistance(String distance) {
+		this.distance = distance;
+	}
+
+	public void setRequestorDistance(Double requestorDistance) {
+		this.requestorDistance = requestorDistance;
+	}
+
+	public void setCity(String city) {
+		this.city = city;
+	}
 }

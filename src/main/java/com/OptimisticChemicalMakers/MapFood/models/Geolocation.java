@@ -1,6 +1,7 @@
 package com.OptimisticChemicalMakers.MapFood.models;
 
-import javax.persistence.*;
+import javax.persistence.Embeddable;
+import javax.persistence.MappedSuperclass;
 
 @Embeddable
 @MappedSuperclass
@@ -12,15 +13,16 @@ public class Geolocation {
 
     // Class Properties
 
-    private double latitude;
+    private Float latitude;
 
-    private double longitude;
+    private Float longitude;
 
     // Constructors
     public Geolocation() {
     }
 
-    public Geolocation(double latitude, double longitude) {
+    
+    public Geolocation(Float latitude, Float longitude) {
 
         if (latitude < -90 || latitude > 90) {
             throw new NullPointerException("Latitude values must be between -90 and 90!");
@@ -54,29 +56,36 @@ public class Geolocation {
 
     // Get Methods
 
-    public double getLatitude() {
-        return this.latitude;
+    public Float getLatitude() {
+        return latitude;
     }
 
-    public double getLongitude() {
-        return this.longitude;
+    public Float getLongitude() {
+        return longitude;
     }
 
     // Set Methods
 
-    public void setGeolocation(double latitude, double longitude) {
+    public void setLatitude(Float latitude) {
         this.latitude = latitude;
+    }
+
+    public void setLongitude(Float longitude) {
         this.longitude = longitude;
     }
 
+    public void setPosition(Float latitude, Float longitude) {
+        this.latitude = latitude;
+        this.longitude = longitude;
+    }
+  
     // Class Methods
 
-    public double distanceTo(Long latitude, Long longitude) {
+    public double distanceTo(Float latitude, Float longitude) {
         return this.distanceTo(new Geolocation(latitude, longitude));
     }
 
     public double distanceTo(Geolocation geolocation) {
         return this.haversinDistance(this.latitude, this.longitude, geolocation.getLatitude(), geolocation.getLongitude());
     }
-
 }

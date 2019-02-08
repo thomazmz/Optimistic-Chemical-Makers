@@ -1,15 +1,17 @@
 package com.OptimisticChemicalMakers.MapFood.factories;
 
-import com.OptimisticChemicalMakers.MapFood.dtos.DeliveryItemDto;
-import com.OptimisticChemicalMakers.MapFood.dtos.DeliveryOrderDto;
-import com.OptimisticChemicalMakers.MapFood.models.DeliveryItem;
-import com.OptimisticChemicalMakers.MapFood.models.DeliveryOrder;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
-
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+import com.OptimisticChemicalMakers.MapFood.dtos.DeliveryItemDto;
+import com.OptimisticChemicalMakers.MapFood.dtos.DeliveryOrderDto;
+import com.OptimisticChemicalMakers.MapFood.models.Customer;
+import com.OptimisticChemicalMakers.MapFood.models.DeliveryItem;
+import com.OptimisticChemicalMakers.MapFood.models.DeliveryOrder;
 
 @Component
 public class DeliveryOrderFactory {
@@ -21,12 +23,15 @@ public class DeliveryOrderFactory {
 
         DeliveryOrder deliveryOrder = new DeliveryOrder();
 
-        deliveryOrder.setGeolocation(deliveryOrderDto.getLatitude(), deliveryOrderDto.getLongitude());
+        deliveryOrder.setLatitude(deliveryOrderDto.getEndingLatitude());
+        deliveryOrder.setLongitude(deliveryOrderDto.getEndingLongitude());
 
         Set<DeliveryItem> deliveryItems = StreamSupport.stream(deliveryOrderDto.getDeliveryItems().spliterator(), false)
                 .map(deliveryItemFactory::getInstance)
                 .collect(Collectors.toSet());
 
+        deliveryOrder.setCustomer(new Customer(deliveryOrderDto.getCustomerId()));
+        
         deliveryItems.forEach(deliveryItem -> deliveryItem.setDeliveryOrder(deliveryOrder));
 
         deliveryOrder.setDeliveryItems(deliveryItems);
@@ -41,11 +46,13 @@ public class DeliveryOrderFactory {
 
         deliveryOrderDto.setId(deliveryOrder.getId());
 
-        deliveryOrderDto.setStoreId(deliveryOrder.getStore().getId());
+        deliveryOrderDto.setHashRestaurant(deliveryOrder.getStore().getHash());
 
-        deliveryOrderDto.setLatitude(deliveryOrder.getLatitude());
+        deliveryOrderDto.setCustomerId(deliveryOrder.getCustomer().getId());
+        
+        deliveryOrderDto.setEndingLatitude(deliveryOrder.getLatitude());
 
-        deliveryOrderDto.setLongitude(deliveryOrder.getLongitude());
+        deliveryOrderDto.setEndingLongitude(deliveryOrder.getLongitude());
 
         Set<DeliveryItemDto> deliveryItems = StreamSupport.stream(deliveryOrder.getDeliveryItems().spliterator(), false)
                 .map(deliveryItemFactory::getInstance)
@@ -56,5 +63,4 @@ public class DeliveryOrderFactory {
         return deliveryOrderDto;
 
     }
-
 }
