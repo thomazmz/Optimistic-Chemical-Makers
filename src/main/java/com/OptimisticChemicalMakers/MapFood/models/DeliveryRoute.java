@@ -1,12 +1,9 @@
 package com.OptimisticChemicalMakers.MapFood.models;
 
 import org.hibernate.annotations.GenericGenerator;
-import org.springframework.data.annotation.Id;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import java.util.LinkedHashMap;
+import javax.persistence.*;
+import java.util.*;
 
 @Entity
 public class DeliveryRoute {
@@ -14,14 +11,20 @@ public class DeliveryRoute {
     // Properties
 
     @Id
-    @GeneratedValue(generator = "uuid")
-    @GenericGenerator(name = "uuid", strategy = "uuid")
-    @Column(columnDefinition = "CHAR(32)")
-    private String id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-    private LinkedHashMap<String, DeliveryOrder> deliveryOrders;
+    @OneToMany(mappedBy="deliveryRoute", cascade = CascadeType.ALL)
+    private List<DeliveryOrder> deliveryOrders;
 
+    @ManyToOne
+    @JoinColumn(name="store_id", nullable=false)
     private Store store;
+
+    @OneToOne
+    private DeliveryBoy deliveryBoy;
+
+    private Date closedAt;
 
     // Constructors
 
@@ -29,15 +32,51 @@ public class DeliveryRoute {
         this.store = store;
     }
 
+    // Getters
+
+    public Long getId() {
+        return this.id;
+    }
+
+    public Store getStore() {
+        return this.store;
+    }
+
+    public DeliveryBoy getDeliveryBoy() {
+        return this.deliveryBoy;
+    }
+
+    public Date getClosedAt() {
+        return this.closedAt;
+    }
+
     // Methods
 
-    public void addDeliveryPoint(DeliveryOrder deliveryOrder) {
+    public ArrayList<Geolocation> getOptimizedRoute() {
+        // TO DO : Calcula melhor rota entre as deliveryOrders;
+        // TO DO : Retorna uma ArrayList no qual o index representa a posição do ponto na rota
+        // OBS1  : O restaurante sempre será o ponto zero;
+        // OBS2  : Se houverem somente uma deliveryOrder só há uma possibilidade de retorno;
+        // OBS1  : Uma DeliveryRoute pode conter de 1 a até 5 DeliveryOrders;
+        return null;
+    }
 
-        if (deliveryOrder.getId()   == this.store.getId()) {
-            this.deliveryOrders.put(deliveryOrder.getId(), deliveryOrder);
+    public void assignDeliveryBoy(DeliveryBoy deliveryBoy) {
+        // TO DO : Se o DeliveryBoy não está realizando outra entrega, pode associar.
+        this.deliveryBoy = deliveryBoy;
+    }
+
+    public void addDeliveryPoint(DeliveryOrder deliveryOrder) {
+        if (deliveryOrder.getId()   == this.store.getId() && this.deliveryOrders.size() <= 4) {
+            this.deliveryOrders.add(deliveryOrder);
         } else {
             throw new RuntimeException();
         }
+    }
+
+    public void closeDeliveryRoute() {
+        // TO DO : Fecha a rota apenas se todas as entregas da rota estão finalizadas
+        this.closedAt = new Date();
 
     }
 
