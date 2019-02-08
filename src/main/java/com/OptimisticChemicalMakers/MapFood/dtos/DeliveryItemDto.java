@@ -9,7 +9,7 @@ public class DeliveryItemDto {
 
     // Class Properties
 
-    private Long id;
+    private String id;
 
     private Long productId;
 
@@ -24,7 +24,7 @@ public class DeliveryItemDto {
 
     // Getters
 
-    public Long getId() {
+    public String getId() {
         return this.id;
     }
 
@@ -42,7 +42,7 @@ public class DeliveryItemDto {
 
     // Setters
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 
