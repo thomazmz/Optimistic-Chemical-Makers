@@ -50,6 +50,7 @@ public class StoreController {
     // Route Methods
     // -----------------------------------------------------------------------------------------------------------------
 
+    // OK
     // -----------------------------------------------------------------------------------------------------------------
     // POST /
     // Cria uma nova Store no banco de dados
@@ -60,7 +61,7 @@ public class StoreController {
 
         return ResponseEntity.ok(storeFactory
                 .getInstance(storeService
-                    .createStore(storeDto)));
+                        .createStore(storeDto)));
     }
 
     // -----------------------------------------------------------------------------------------------------------------
@@ -73,7 +74,7 @@ public class StoreController {
 
         return ResponseEntity.ok(storeFactory
                 .getInstance(storeService
-                    .getStore(protocol)));
+                        .getStore(protocol)));
     }
 
     // -----------------------------------------------------------------------------------------------------------------
@@ -86,12 +87,9 @@ public class StoreController {
             @RequestParam("start") Date start,
             @RequestParam("end") Date end) {
 
-        return ResponseEntity.ok(
-            storeService.getDeliveryOrders(protocol, start, end)
-                .stream()
-                .map(deliveryOrder -> deliveryOrderFactory
-                    .getInstance(deliveryOrder))
-                    .collect(Collectors.toList()));
+        return ResponseEntity.ok(deliveryOrderFactory
+                .getInstanceList(storeService
+                        .getDeliveryOrders(protocol, start, end)));
     }
 
     // -----------------------------------------------------------------------------------------------------------------
@@ -101,13 +99,7 @@ public class StoreController {
     @GetMapping("{protocol}/orders/ongoing")
     public ResponseEntity<List<DeliveryOrderDto>> getOngoingDeliveryOrders(
             @PathVariable(value="protocol") String protocol) {
-
-        return ResponseEntity.ok(
-            storeService.getOngoingDeliveryOrders(protocol)
-                .stream()
-                .map(deliveryOrder -> deliveryOrderFactory
-                    .getInstance(deliveryOrder))
-                    .collect(Collectors.toList()));
+        return ResponseEntity.ok(deliveryOrderFactory.getInstanceList(storeService.getOngoingDeliveryOrders(protocol)));
     }
 
     // -----------------------------------------------------------------------------------------------------------------

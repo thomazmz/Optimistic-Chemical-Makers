@@ -64,9 +64,9 @@ public class DeliveryOrderFactory {
 
     }
 
-    public List<DeliveryOrderDto> getListInstance(List<DeliveryOrder> deliveryOrders) {
+    public List<DeliveryOrderDto> getInstanceList(List<DeliveryOrder> deliveryOrders) {
 
-        return deliveryOrders.stream().map(deliveryOrder -> this.getInstance(deliveryOrder)).collect(Collectors.toList());
+        return deliveryOrders.stream().map(deliveryOrder -> getInstance(deliveryOrder)).collect(Collectors.toList());
 
     }
 }
