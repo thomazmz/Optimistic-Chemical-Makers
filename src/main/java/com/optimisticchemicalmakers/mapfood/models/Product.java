@@ -27,7 +27,7 @@ public class Product  implements Serializable {
     private String classification;
     
     @ManyToOne
-    @JoinColumn(name="store_protocol", nullable=false, referencedColumnName="protocol")
+    @JoinColumn(name="store_id", nullable=false, referencedColumnName="id")
     private Store store;
 
     // Constructors
