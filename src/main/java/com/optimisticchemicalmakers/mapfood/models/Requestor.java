@@ -4,7 +4,7 @@ import javax.persistence.*;
 import java.util.UUID;
 
 @Entity
-public class Customer {
+public class Requestor {
 	
     // Class Properties
 
@@ -14,22 +14,19 @@ public class Customer {
 
 	@Column(nullable = false)
 	private String protocol = UUID.randomUUID().toString().replace("-", "");
-    
-	public Customer() {}
 
-	public Customer(Long id) {
-		super();
-		this.id = id;
-	}
+	// Constructors
+
+	public Requestor() {}
+
+	// Getters
 
 	public Long getId() {
 		return id;
 	}
 
-	public void setId(Long id) {
-		this.id = id;
+	public String getProtocol() {
+		return this.protocol;
 	}
-    
-    
 
 }

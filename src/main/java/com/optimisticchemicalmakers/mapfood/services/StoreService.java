@@ -21,91 +21,63 @@ import com.optimisticchemicalmakers.mapfood.repositories.StoreRepository;
 public class StoreService {
 
     // -----------------------------------------------------------------------------------------------------------------
-    // Repository (Manter apenas um Repository por service)
+    // Repository/Factory
     // -----------------------------------------------------------------------------------------------------------------
 
     @Autowired
     private StoreRepository storeRepository;
 
-
-    // -----------------------------------------------------------------------------------------------------------------
-    // Factories
-    // -----------------------------------------------------------------------------------------------------------------
-
-    @Autowired
-    private ProductFactory productFactory;
-
     @Autowired
     private StoreFactory storeFactory;
-
-    @Autowired
-    private DeliveryOrderFactory deliveryOrderFactory;
-
 
     // -----------------------------------------------------------------------------------------------------------------
     // Methods
     // -----------------------------------------------------------------------------------------------------------------
 
-    // -----------------------------------------------------------------------------------------------------------------
-    // Method - getStore
-    // -----------------------------------------------------------------------------------------------------------------
+    // OK
     public Store getStore(String protocol) {
         return storeRepository.getStoreByProtocol(protocol);
     }
 
-    // -----------------------------------------------------------------------------------------------------------------
-    // Method - createStore
-    // -----------------------------------------------------------------------------------------------------------------
-    public Store createStore(StoreDto storeDto) {
-        return storeRepository.save(storeFactory.getInstance(storeDto));
+    // OK
+    public Store getStore(Long id) {
+        return storeRepository.getStoreById(id);
     }
 
-    // -----------------------------------------------------------------------------------------------------------------
-    // Method - getDeliveryOrders
-    // -----------------------------------------------------------------------------------------------------------------
+    // OK
+    public Store createStore(Store store) {
+        return storeRepository.save(store);
+    }
+
+    // OK
+    public Store createStore(StoreDto storeDto) {
+        return this.createStore(storeFactory.getInstance(storeDto));
+    }
+
     public List<DeliveryOrder> getDeliveryOrders(String protocol, Date start, Date end) {
         return null;
     }
 
-    // -----------------------------------------------------------------------------------------------------------------
-    // Method - getOngoingDeliveryOrders
-    // -----------------------------------------------------------------------------------------------------------------
     public List<DeliveryOrder> getOngoingDeliveryOrders(String protocol) {
         return null;
     }
 
-    // -----------------------------------------------------------------------------------------------------------------
-    // Method - getWatingDeliveryOrders
-    // -----------------------------------------------------------------------------------------------------------------
     public List<DeliveryOrder> getWatingDeliveryOrders(String protocol) {
         return null;
     }
 
-    // -----------------------------------------------------------------------------------------------------------------
-    // Method - acceptDeliveryorder
-    // -----------------------------------------------------------------------------------------------------------------
     public List<DeliveryOrder> acceptDeliveryorder(String protocol) {
         return null;
     }
 
-    // -----------------------------------------------------------------------------------------------------------------
-    // Method - createDeliveryRoute
-    // -----------------------------------------------------------------------------------------------------------------
     public DeliveryRoute createDeliveryRoute(String protocol, List<String> deliveryOrdersProtocols) {
         return null;
     }
 
-    // -----------------------------------------------------------------------------------------------------------------
-    // Method - createDeliveryRoute
-    // -----------------------------------------------------------------------------------------------------------------
     public DeliveryRoute createDeliveryRoute(String protocol, String deliveryOrderProtocol) {
         return null;
     }
 
-    // -----------------------------------------------------------------------------------------------------------------
-    // Method - getNearestStores
-    // -----------------------------------------------------------------------------------------------------------------
-    
     public List<Store> getNearestStores( Float latitude, Float longitude, Long radius) {
         radius = 5L;
         return storeRepository.getNearestStores(latitude, longitude, radius);

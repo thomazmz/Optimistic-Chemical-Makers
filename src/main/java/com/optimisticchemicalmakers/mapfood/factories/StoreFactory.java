@@ -13,7 +13,6 @@ public class StoreFactory {
     public StoreDto getInstance(Store store) {
         StoreDto storeDto = new StoreDto();
         storeDto.setProtocol(store.getProtocol());
-        storeDto.setDistance(store.getDistance());
         storeDto.setLatitude(store.getLatitude());
         storeDto.setLongitude(store.getLongitude());
         storeDto.setName(store.getName());
@@ -31,8 +30,6 @@ public class StoreFactory {
 
     public Store getInstance(StoreDto storeDto) {
         Store store = new Store();
-        store.setProtocol(storeDto.getProtocol());
-        store.setDistance(storeDto.getDistance());
         store.setLatitude(storeDto.getLatitude());
         store.setLongitude(storeDto.getLongitude());
         store.setName(storeDto.getName());

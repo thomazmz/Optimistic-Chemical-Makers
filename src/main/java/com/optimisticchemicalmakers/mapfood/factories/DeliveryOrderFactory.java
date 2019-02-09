@@ -1,5 +1,6 @@
 package com.optimisticchemicalmakers.mapfood.factories;
 
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
@@ -9,7 +10,7 @@ import org.springframework.stereotype.Component;
 
 import com.optimisticchemicalmakers.mapfood.dtos.DeliveryItemDto;
 import com.optimisticchemicalmakers.mapfood.dtos.DeliveryOrderDto;
-import com.optimisticchemicalmakers.mapfood.models.Customer;
+import com.optimisticchemicalmakers.mapfood.models.Requestor;
 import com.optimisticchemicalmakers.mapfood.models.DeliveryItem;
 import com.optimisticchemicalmakers.mapfood.models.DeliveryOrder;
 
@@ -24,13 +25,12 @@ public class DeliveryOrderFactory {
         DeliveryOrder deliveryOrder = new DeliveryOrder();
 
         deliveryOrder.setLatitude(deliveryOrderDto.getEndingLatitude());
+
         deliveryOrder.setLongitude(deliveryOrderDto.getEndingLongitude());
 
         Set<DeliveryItem> deliveryItems = StreamSupport.stream(deliveryOrderDto.getDeliveryItems().spliterator(), false)
                 .map(deliveryItemFactory::getInstance)
                 .collect(Collectors.toSet());
-
-        deliveryOrder.setCustomer(new Customer(deliveryOrderDto.getCustomerId()));
         
         deliveryItems.forEach(deliveryItem -> deliveryItem.setDeliveryOrder(deliveryOrder));
 
@@ -44,11 +44,11 @@ public class DeliveryOrderFactory {
 
         DeliveryOrderDto deliveryOrderDto = new DeliveryOrderDto();
 
-        deliveryOrderDto.setId(deliveryOrder.getId());
+        deliveryOrderDto.setProtocol(deliveryOrder.getProtocol());
 
         deliveryOrderDto.setStoreProtocol(deliveryOrder.getStore().getProtocol());
 
-        deliveryOrderDto.setCustomerId(deliveryOrder.getCustomer().getId());
+        deliveryOrderDto.setRequestorProtocol(deliveryOrder.getRequestor().getProtocol());
         
         deliveryOrderDto.setEndingLatitude(deliveryOrder.getLatitude());
 
@@ -61,6 +61,12 @@ public class DeliveryOrderFactory {
         deliveryOrderDto.setDeliveryItems(deliveryItems);
 
         return deliveryOrderDto;
+
+    }
+
+    public List<DeliveryOrderDto> getListInstance(List<DeliveryOrder> deliveryOrders) {
+
+        return deliveryOrders.stream().map(deliveryOrder -> this.getInstance(deliveryOrder)).collect(Collectors.toList());
 
     }
 }

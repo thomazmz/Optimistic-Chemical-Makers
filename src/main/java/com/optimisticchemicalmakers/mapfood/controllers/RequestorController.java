@@ -33,10 +33,8 @@ public class RequestorController {
 
     @Autowired
     private StoreFactory storeFactory;
-
     @Autowired
     private DeliveryOrderFactory deliveryOrderFactory;
-
     @Autowired
     private ProductFactory productFactory;
 	
@@ -72,33 +70,33 @@ public class RequestorController {
     }
 
     // -----------------------------------------------------------------------------------------------------------------
-    // POST /api/requestor/{userId}/order
+    // POST /api/requestor/{requestorProtocol}/order
     // Requestor cria uma DeliveryOrder
     // -----------------------------------------------------------------------------------------------------------------
-    @PostMapping("/{id}/order")
+    @PostMapping("/{protocol}/order")
     public DeliveryOrderDto createDeliveryOrder(
-            @PathVariable(value="id") String id,
+            @PathVariable(value="protocol") String protocol,
             @RequestBody DeliveryOrderDto deliveryOrderDto) {
-    	return deliveryOrderFactory.getInstance(requestorService.createDeliveryOrder(id, deliveryOrderDto));
+    	return deliveryOrderFactory.getInstance(requestorService.createDeliveryOrder(protocol, deliveryOrderDto));
     }
 
     // -----------------------------------------------------------------------------------------------------------------
-    // GET /api/requestor/{userId}/order/{orderId}
+    // GET /api/requestor/{requestorProtocol}/order/{orderId}
     // Requestor verifica informações sobre a DeliveryOrder (Ex: status -> wating | preparing | delivering | delivered)
     // -----------------------------------------------------------------------------------------------------------------
-    @GetMapping("{id}/order/{orderId}")
+    @GetMapping("{protocol}/order/{orderprotocol}")
     public String getDeliveryorder(
-            @PathVariable(value="id") String id) {
+            @PathVariable(value="protocol") String protocol) {
         return null;
     }
 
     // -----------------------------------------------------------------------------------------------------------------
-    // GET /api/requestor/{userId}/order/{orderId}
+    // GET /api/requestor/{requestorProtocol}/order/{orderId}
     // Requestor verifica lista de entregas já solicitadas
     // -----------------------------------------------------------------------------------------------------------------
-    @GetMapping("{id}/orders")
+    @GetMapping("{protocol}/orders")
     public List<DeliveryOrderDto> getDeliveryOrders(
-            @PathVariable(value="id") String id) {
+            @PathVariable(value="protocol") String protocol) {
         return null;
     }
 }

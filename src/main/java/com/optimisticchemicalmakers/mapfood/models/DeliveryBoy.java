@@ -32,6 +32,8 @@ public class DeliveryBoy {
         return this.id;
     }
 
+    public String getProtocol() { return this.protocol; }
+
     public Long getLatitude() {
         return this.latitude;
     }

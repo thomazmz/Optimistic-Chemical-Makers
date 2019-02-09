@@ -41,13 +41,10 @@ public class StoreController {
 
     @Autowired
     private StoreFactory storeFactory;
-
     @Autowired
     private DeliveryOrderFactory deliveryOrderFactory;
-
     @Autowired
     private DeliveryRouteFactory deliveyRouteFactory;
-
 
     // -----------------------------------------------------------------------------------------------------------------
     // Route Methods
@@ -61,7 +58,9 @@ public class StoreController {
     public ResponseEntity<StoreDto> createStore(
             @RequestBody StoreDto storeDto) {
 
-        return ResponseEntity.ok(storeFactory.getInstance(storeService.createStore(storeDto)));
+        return ResponseEntity.ok(storeFactory
+                .getInstance(storeService
+                    .createStore(storeDto)));
     }
 
     // -----------------------------------------------------------------------------------------------------------------
@@ -72,7 +71,9 @@ public class StoreController {
     public ResponseEntity<StoreDto> getStore(
             @PathVariable(value = "protocol") String protocol) {
 
-        return ResponseEntity.ok(storeFactory.getInstance(storeService.getStore(protocol)));
+        return ResponseEntity.ok(storeFactory
+                .getInstance(storeService
+                    .getStore(protocol)));
     }
 
     // -----------------------------------------------------------------------------------------------------------------
@@ -83,13 +84,14 @@ public class StoreController {
     public ResponseEntity<List<DeliveryOrderDto>> getDeliveryOrders(
             @PathVariable(value="protocol") String protocol,
             @RequestParam("start") Date start,
-            @RequestParam("end") Date end)  {
+            @RequestParam("end") Date end) {
 
         return ResponseEntity.ok(
             storeService.getDeliveryOrders(protocol, start, end)
                 .stream()
-                .map(deliveryOrder -> deliveryOrderFactory.getInstance(deliveryOrder))
-                .collect(Collectors.toList()));
+                .map(deliveryOrder -> deliveryOrderFactory
+                    .getInstance(deliveryOrder))
+                    .collect(Collectors.toList()));
     }
 
     // -----------------------------------------------------------------------------------------------------------------
@@ -103,8 +105,9 @@ public class StoreController {
         return ResponseEntity.ok(
             storeService.getOngoingDeliveryOrders(protocol)
                 .stream()
-                .map(deliveryOrder -> deliveryOrderFactory.getInstance(deliveryOrder))
-                .collect(Collectors.toList()));
+                .map(deliveryOrder -> deliveryOrderFactory
+                    .getInstance(deliveryOrder))
+                    .collect(Collectors.toList()));
     }
 
     // -----------------------------------------------------------------------------------------------------------------
@@ -119,8 +122,9 @@ public class StoreController {
             storeService
                 .getWatingDeliveryOrders(protocol)
                 .stream()
-                .map(deliveryOrder -> deliveryOrderFactory.getInstance(deliveryOrder))
-                .collect(Collectors.toList()));
+                .map(deliveryOrder -> deliveryOrderFactory
+                    .getInstance(deliveryOrder))
+                    .collect(Collectors.toList()));
     }
 
     // -----------------------------------------------------------------------------------------------------------------
@@ -132,7 +136,8 @@ public class StoreController {
             @PathVariable(value="protocol") String protocol,
             @PathVariable(value="deliveryOrderProtocol") String deliveryOrderProtocol) {
 
-        return ResponseEntity.ok(storeService.acceptDeliveryorder(deliveryOrderProtocol));
+        return ResponseEntity.ok(storeService
+            .acceptDeliveryorder(deliveryOrderProtocol));
     }
 
     // -----------------------------------------------------------------------------------------------------------------
@@ -144,8 +149,9 @@ public class StoreController {
             @PathVariable(value="protocol") String protocol,
             @RequestBody ArrayList<String> deliveryOrdersIds) {
 
-        return ResponseEntity.ok(deliveyRouteFactory.getInstance(
-                    storeService.createDeliveryRoute(protocol, deliveryOrdersIds)));
+        return ResponseEntity.ok(deliveyRouteFactory
+            .getInstance(storeService
+                .createDeliveryRoute(protocol, deliveryOrdersIds)));
     }
 
     // -----------------------------------------------------------------------------------------------------------------
@@ -157,7 +163,8 @@ public class StoreController {
             @PathVariable(value="protocol") String protocol,
             @PathVariable(value="deliverOrderId") String deliverOrderId) {
 
-        return ResponseEntity.ok(deliveyRouteFactory.getInstance(
-                storeService.createDeliveryRoute(protocol, deliverOrderId)));
+        return ResponseEntity.ok(deliveyRouteFactory
+            .getInstance(storeService
+                .createDeliveryRoute(protocol, deliverOrderId)));
     }
 }

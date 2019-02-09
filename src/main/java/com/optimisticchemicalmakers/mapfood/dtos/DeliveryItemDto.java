@@ -4,11 +4,11 @@ public class DeliveryItemDto {
 
     // Class Properties
 
-    private Long id;
+    private String protocol;
 
-    private Long productId;
+    private String productProtocol;
 
-    private Long deliveryOrderId;
+    private String deliveryOrderProtocol;
 
     private Integer quantity;
 
@@ -17,32 +17,32 @@ public class DeliveryItemDto {
     public DeliveryItemDto() {
     }
 
-	public Long getId() {
-		return id;
+	public String getProtocol() {
+		return this.protocol;
 	}
 
-	public Long getProductId() {
-		return productId;
+	public String getProductProtcol() {
+		return this.productProtocol;
 	}
 
-	public Long getDeliveryOrderId() {
-		return deliveryOrderId;
+	public String getDeliveryOrderProtocol() {
+		return this.deliveryOrderProtocol;
 	}
 
 	public Integer getQuantity() {
 		return quantity;
 	}
 
-	public void setId(Long id) {
-		this.id = id;
+	public void setProtocol(String protocol) {
+		this.protocol = protocol;
 	}
 
-	public void setProductId(Long productId) {
-		this.productId = productId;
+	public void setProtuctProtocol(String productProtocol) {
+		this.productProtocol = productProtocol;
 	}
 
-	public void setDeliveryOrderId(Long deliveryOrderId) {
-		this.deliveryOrderId = deliveryOrderId;
+	public void setDeliveryOrderProtocol(String deliveryOrderProtocol) {
+		this.deliveryOrderProtocol = deliveryOrderProtocol;
 	}
 
 	public void setQuantity(Integer quantity) {

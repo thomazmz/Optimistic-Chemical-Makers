@@ -27,20 +27,17 @@ public class Store extends Geolocation implements Serializable {
     @Column(nullable = false)
     private String protocol = UUID.randomUUID().toString().replace("-", "");
 
-	private String name;
-
-	private String dishDescription;
-
-	private String city;
-
 	@OneToMany(mappedBy = "store", cascade = CascadeType.ALL)
 	private Set<Product> products;
 
 	@OneToMany(mappedBy = "store", cascade = CascadeType.ALL)
 	private Set<DeliveryOrder> deliveryOrders;
 
-	@Transient
-	private String distance;
+	private String name;
+
+	private String dishDescription;
+
+	private String city;
 
 	// Constructors
 
@@ -53,45 +50,41 @@ public class Store extends Geolocation implements Serializable {
 		this.dishDescription = dishDescription;
 	}
 
+	// Getters
+
     public String getProtocol() {
         return this.protocol;
     }
 
     public String getName() {
-        return name;
+        return this.name;
     }
 
 	public Long getId() {
-		return id;
+		return this.id;
+	}
+
+ 	public String getProcotol() {
+		return this.protocol;
 	}
 
 	public String getDishDescription() {
-		return dishDescription;
+		return this.dishDescription;
 	}
 
 	public String getCity() {
-		return city;
+		return this.city;
 	}
 
 	public Set<Product> getProducts() {
-		return products;
+		return this.products;
 	}
 
 	public Set<DeliveryOrder> getDeliveryOrders() {
-		return deliveryOrders;
+		return this.deliveryOrders;
 	}
 
-	public String getDistance() {
-		return distance;
-	}
-
-	public void setProtocol(String protocol) {
-		this.protocol = protocol;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
+	// Setters
 
 	public void setName(String name) {
 		this.name = name;
@@ -113,10 +106,6 @@ public class Store extends Geolocation implements Serializable {
 		this.deliveryOrders = deliveryOrders;
 	}
 
-	public void setDistance(String distance) {
-		this.distance = distance;
-	}
-
 	// Methods
 	
 	public void addDeliveryOrder(DeliveryOrder deliveryOrder) {
@@ -126,4 +115,5 @@ public class Store extends Geolocation implements Serializable {
 	public void addProduct(Product product) {
 		this.products.add(product);
 	}
+
 }

@@ -41,6 +41,8 @@ public class Product  implements Serializable {
         this.price = price;
     }
 
+    // Get Methods
+
 	public Long getId() {
 		return id;
 	}
@@ -64,6 +66,8 @@ public class Product  implements Serializable {
 	public Store getStore() {
 		return store;
 	}
+
+	// Set Methods
 
 	public void setDescription(String description) {
 		this.description = description;
