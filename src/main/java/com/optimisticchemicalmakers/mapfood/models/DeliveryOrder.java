@@ -2,24 +2,21 @@ package com.optimisticchemicalmakers.mapfood.models;
 
 import java.util.Date;
 import java.util.Set;
+import java.util.UUID;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 
 @Entity
 public class DeliveryOrder extends Geolocation {
 
 	// Class Properties
 
-	@Id // It tells the JPA that it is an ID
-	@GeneratedValue(strategy = GenerationType.IDENTITY) // It tells the JPA how to autogenerate the ID value
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+
+	@Column(nullable = false)
+	private String protocol = UUID.randomUUID().toString().replace("-", "");
 
 	private Date createdAt;
 

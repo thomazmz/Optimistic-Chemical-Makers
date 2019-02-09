@@ -1,9 +1,7 @@
 package com.optimisticchemicalmakers.mapfood.models;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.UUID;
 
 @Entity
 public class DeliveryBoy {
@@ -14,6 +12,8 @@ public class DeliveryBoy {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(nullable = false)
+    private String protocol = UUID.randomUUID().toString().replace("-", "");
 
     private Long latitude;
 
