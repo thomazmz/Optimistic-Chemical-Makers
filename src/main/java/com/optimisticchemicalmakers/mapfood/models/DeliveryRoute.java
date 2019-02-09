@@ -29,6 +29,10 @@ public class DeliveryRoute {
     @OneToOne
     private DeliveryBoy deliveryBoy;
 
+    private Date createdAt;
+
+    private Date startedAt;
+
     private Date closedAt;
 
     // Constructors
@@ -43,6 +47,8 @@ public class DeliveryRoute {
         return this.id;
     }
 
+    public String getProtocol() { return this.protocol; }
+
     public Store getStore() {
         return this.store;
     }
@@ -50,6 +56,10 @@ public class DeliveryRoute {
     public DeliveryBoy getDeliveryBoy() {
         return this.deliveryBoy;
     }
+
+    public Date getCreatedAt() { return this.createdAt; }
+
+    public Date getStartedAt() { return this.startedAt; }
 
     public Date getClosedAt() {
         return this.closedAt;
@@ -77,6 +87,10 @@ public class DeliveryRoute {
         } else {
             throw new RuntimeException();
         }
+    }
+
+    public void startDeliveryRoute() {
+        this.startedAt = new Date();
     }
 
     public void closeDeliveryRoute() {

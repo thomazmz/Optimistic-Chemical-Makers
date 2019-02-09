@@ -5,16 +5,16 @@ import java.util.Set;
 
 public class DeliveryOrderDto {
 
-    private Long id;
+    private String protocol;
 
     private String storeProtocol;
+
+    private String requestorProtocol;
 
     private Float endingLatitude;
 
     private Float endingLongitude;
-    
-    private Long customerId;
-    
+
     private Date estimatedDevliveryTime;
 
     private Set<DeliveryItemDto> deliveryItems;
@@ -23,36 +23,40 @@ public class DeliveryOrderDto {
 
     public DeliveryOrderDto() {}
 
-	public Long getId() {
-		return id;
+    // Get Methods
+
+	public String getProtocol() {
+		return this.protocol;
 	}
 
 	public String getStoreProtocol() {
-		return storeProtocol;
+		return this.storeProtocol;
 	}
 
 	public Float getEndingLatitude() {
-		return endingLatitude;
+		return this.endingLatitude;
 	}
 
 	public Float getEndingLongitude() {
-		return endingLongitude;
+		return this.endingLongitude;
 	}
 
-	public Long getCustomerId() {
-		return customerId;
+	public String getRequestorProtocol() {
+		return this.requestorProtocol;
 	}
 
 	public Date getEstimatedDevliveryTime() {
 		return estimatedDevliveryTime;
 	}
 
+	// Set Methods
+
 	public Set<DeliveryItemDto> getDeliveryItems() {
 		return deliveryItems;
 	}
 
-	public void setId(Long id) {
-		this.id = id;
+	public void setProtocol(String protocol) {
+		this.protocol = protocol;
 	}
 
 	public void setStoreProtocol(String storeProtocol) {
@@ -67,8 +71,8 @@ public class DeliveryOrderDto {
 		this.endingLongitude = endingLongitude;
 	}
 
-	public void setCustomerId(Long customerId) {
-		this.customerId = customerId;
+	public void setRequestorProtocol(String requestorProtocol) {
+		this.requestorProtocol = requestorProtocol;
 	}
 
 	public void setEstimatedDevliveryTime(Date estimatedDevliveryTime) {

@@ -6,7 +6,7 @@ public class ProductDto {
 
     // Properties
 
-    private Long id;
+    private String protocol;
 
     private String description;
 
@@ -19,8 +19,8 @@ public class ProductDto {
 
     // Setters
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setProtocol(String protocol) {
+        this.protocol = protocol;
     }
 
     public void setDescription(String description) {
@@ -33,16 +33,16 @@ public class ProductDto {
 
     // Getters
 
-    public Long getId() {
-        return id;
+    public String getProtocol() {
+        return this.protocol;
     }
 
     public String getDescription() {
-        return description;
+        return this.description;
     }
 
     public BigDecimal getPrice() {
-        return price;
+        return this.price;
     }
 
 }

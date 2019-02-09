@@ -10,7 +10,7 @@ public class ProductFactory {
 
     public ProductDto getInstance(Product product) {
         ProductDto productDto = new ProductDto();
-        productDto.setId(product.getId());
+        productDto.setProtocol(product.getProtocol());
         productDto.setPrice(product.getPrice());
         productDto.setDescription(product.getDescription());
         return productDto;

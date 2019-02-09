@@ -38,8 +38,8 @@ public class DeliveryOrder extends Geolocation {
     private DeliveryRoute deliveryRoute;
     
 	@ManyToOne
-	@JoinColumn(name = "customer_id", nullable = false)
-	private Customer customer;
+	@JoinColumn(name = "requestor_id", nullable = false)
+	private Requestor requestor;
 
 	// Constructors
 
@@ -50,6 +50,8 @@ public class DeliveryOrder extends Geolocation {
 	public Long getId() {
 		return id;
 	}
+
+	public String getProtocol() { return protocol; }
 
 	public Date getCreatedAt() {
 		return createdAt;
@@ -75,12 +77,8 @@ public class DeliveryOrder extends Geolocation {
 		return deliveryItems;
 	}
 
-	public Customer getCustomer() {
-		return customer;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
+	public Requestor getRequestor() {
+		return this.requestor;
 	}
 
 	public void setCreatedAt(Date createdAt) {
@@ -107,8 +105,8 @@ public class DeliveryOrder extends Geolocation {
 		this.deliveryItems = deliveryItems;
 	}
 
-	public void setCustomer(Customer customer) {
-		this.customer = customer;
+	public void setRequestor(Requestor requestor) {
+		this.requestor = requestor;
 	}
 	
 	public void start() {

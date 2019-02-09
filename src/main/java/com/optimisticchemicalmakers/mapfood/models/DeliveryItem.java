@@ -37,6 +37,8 @@ public class DeliveryItem {
         return this.id;
     }
 
+    public String getProtocol() { return this.protocol; }
+
     public Integer getQuantity() {
         return this.quantity;
     }
