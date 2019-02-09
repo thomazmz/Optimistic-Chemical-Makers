@@ -11,9 +11,9 @@ public class DeliveryOrderDto {
 
     private String requestorProtocol;
 
-    private Float endingLatitude;
+    private Double endingLatitude;
 
-    private Float endingLongitude;
+    private Double endingLongitude;
 
     private Date estimatedDevliveryTime;
 
@@ -33,11 +33,11 @@ public class DeliveryOrderDto {
 		return this.storeProtocol;
 	}
 
-	public Float getEndingLatitude() {
+	public Double getEndingLatitude() {
 		return this.endingLatitude;
 	}
 
-	public Float getEndingLongitude() {
+	public Double getEndingLongitude() {
 		return this.endingLongitude;
 	}
 
@@ -63,11 +63,11 @@ public class DeliveryOrderDto {
 		this.storeProtocol = storeProtocol;
 	}
 
-	public void setEndingLatitude(Float endingLatitude) {
+	public void setEndingLatitude(Double endingLatitude) {
 		this.endingLatitude = endingLatitude;
 	}
 
-	public void setEndingLongitude(Float endingLongitude) {
+	public void setEndingLongitude(Double endingLongitude) {
 		this.endingLongitude = endingLongitude;
 	}
 

@@ -44,9 +44,9 @@ public class RequestorController {
     // -----------------------------------------------------------------------------------------------------------------
     @GetMapping("/stores")
     public List<StoreDto> getAvailableStores(
-            @RequestParam("latitude") Float latitude,
-            @RequestParam("longitude") Float longitude,
-            @RequestParam("radius") Long radius) {
+            @RequestParam("latitude") Double latitude,
+            @RequestParam("longitude") Double longitude,
+            @RequestParam("radius") Double radius) {
     	
 		return requestorService
 				.getNearestStores(latitude,longitude,radius)

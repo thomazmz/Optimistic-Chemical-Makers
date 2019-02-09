@@ -3,6 +3,8 @@ package com.optimisticchemicalmakers.mapfood.models;
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
 import javax.persistence.MappedSuperclass;
+import javax.persistence.Transient;
+import java.util.Comparator;
 import java.util.UUID;
 
 @Embeddable
@@ -18,16 +20,16 @@ public class Geolocation {
     @Column(nullable = false)
     private String protocol = UUID.randomUUID().toString().replace("-", "");
 
-    private Float latitude;
+    private Double latitude;
 
-    private Float longitude;
+    private Double longitude;
 
     // Constructors
 
     public Geolocation() {
     }
 
-    public Geolocation(Float latitude, Float longitude) {
+    public Geolocation(Double latitude, Double longitude) {
 
         if (latitude < -90 || latitude > 90)
             throw new NullPointerException("Latitude values must be between -90 and 90!");
@@ -40,9 +42,10 @@ public class Geolocation {
             this.longitude = longitude;
     }
 
+
     // Static Methods
 
-    public static double haversinDistance(double startingPointLatitude, double startingPointLongitude, double endingPointLatitude, double endingPointLongitude) {
+    public static Double haversinDistance(double startingPointLatitude, double startingPointLongitude, double endingPointLatitude, double endingPointLongitude) {
 
         double dLat  = Math.toRadians((endingPointLatitude - startingPointLatitude));
         double dLong = Math.toRadians((endingPointLongitude - startingPointLongitude));
@@ -62,11 +65,11 @@ public class Geolocation {
 
     // Get Methods
 
-    public Float getLatitude() {
+    public Double getLatitude() {
         return latitude;
     }
 
-    public Float getLongitude() {
+    public Double getLongitude() {
         return longitude;
     }
 
@@ -76,27 +79,26 @@ public class Geolocation {
 
     // Set Methods
 
-    public void setLatitude(Float latitude) {
+    public void setLatitude(Double latitude) {
         this.latitude = latitude;
     }
 
-    public void setLongitude(Float longitude) {
+    public void setLongitude(Double longitude) {
         this.longitude = longitude;
     }
 
-    public void setPosition(Float latitude, Float longitude) {
+    public void setPosition(Double latitude, Double longitude) {
         this.latitude = latitude;
         this.longitude = longitude;
     }
   
     // Class Methods
 
-    public double distanceTo(Float latitude, Float longitude) {
+    public double distanceTo(Double latitude, Double longitude) {
         return this.distanceTo(new Geolocation(latitude, longitude));
     }
 
-    @SuppressWarnings("static-access")
 	public double distanceTo(Geolocation geolocation) {
-        return this.haversinDistance(this.latitude, this.longitude, geolocation.getLatitude(), geolocation.getLongitude());
+        return Geolocation.haversinDistance(this.latitude, this.longitude, geolocation.getLatitude(), geolocation.getLongitude());
     }
 }

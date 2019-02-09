@@ -44,10 +44,8 @@ public class Store extends Geolocation implements Serializable {
 	public Store() {
 	}
     
-	public Store(Float latitude, Float longitude, String name, String dishDescription) {
+	public Store(Double latitude, Double longitude) {
 		super(latitude, longitude);
-		this.name = name;
-		this.dishDescription = dishDescription;
 	}
 
 	// Getters
