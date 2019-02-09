@@ -1,9 +1,6 @@
 package com.optimisticchemicalmakers.mapfood.models;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 import javax.persistence.*;
 
@@ -65,22 +62,9 @@ public class DeliveryRoute {
         return this.closedAt;
     }
 
-    // Methods
-
-    public ArrayList<Geolocation> getOptimizedRoute() {
-
-        // TO DO : Calcula melhor rota entre as deliveryOrders;
-        // TO DO : Retorna uma ArrayList no qual o index representa a posição do ponto na rota
-        // OBS1  : O restaurante sempre será o ponto zero;
-        // OBS2  : Se houverem somente uma deliveryOrder só há uma possibilidade de retorno;
-        // OBS1  : Uma DeliveryRoute pode conter de 1 a até 5 DeliveryOrders;
-
-//        ArrayList<Geolocation>
-
-//        Geolocation a = new DeliveryOrder();
-
+    public List<DeliveryOrder> getDeliveryOrders() {
+        return this.deliveryOrders;
     }
-
     public void assignDeliveryBoy(DeliveryBoy deliveryBoy) {
         // TO DO : Se o DeliveryBoy não está realizando outra entrega, pode associar.
         this.deliveryBoy = deliveryBoy;

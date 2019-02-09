@@ -28,7 +28,7 @@ public class RequestorService {
 	// Methods
 	// -----------------------------------------------------------------------------------------------------------------
 
-	public List<Store> getNearestStores(Float latitude, Float longitude, Long radius) {
+	public List<Store> getNearestStores(Double latitude, Double longitude, Double radius) {
 		return storeService.getNearestStores(latitude, longitude, radius);
 	}
 

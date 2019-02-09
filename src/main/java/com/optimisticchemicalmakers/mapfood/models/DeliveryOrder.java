@@ -47,6 +47,13 @@ public class DeliveryOrder extends Geolocation {
 		this.createdAt = new Date();
 	}
 
+	public DeliveryOrder(Store store, Double latitude, Double longitude) {
+		super(latitude, longitude);
+		this.store = store;
+	}
+
+	// Getters
+
 	public Long getId() {
 		return id;
 	}
@@ -81,9 +88,7 @@ public class DeliveryOrder extends Geolocation {
 		return this.requestor;
 	}
 
-	public void setCreatedAt(Date createdAt) {
-		this.createdAt = createdAt;
-	}
+	// Setters
 
 	public void setAcceptedAt(Date acceptedAt) {
 		this.acceptedAt = acceptedAt;

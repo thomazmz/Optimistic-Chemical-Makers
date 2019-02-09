@@ -6,9 +6,9 @@ public class StoreDto {
 
 	private String protocol;
 
-	private Float latitude;
+	private Double latitude;
 
-	private Float longitude;
+	private Double longitude;
 
 	private String name;
 
@@ -47,15 +47,15 @@ public class StoreDto {
 		return requestorDistance;
 	}	
 
-	public Float getLatitude() {
+	public Double getLatitude() {
 		return latitude;
 	}
 
-	public Float getLongitude() {
+	public Double getLongitude() {
 		return longitude;
 	}
 
-	public void setLatitude(Float latitude) {
+	public void setLatitude(Double latitude) {
 		this.latitude = latitude;
 	}
 
@@ -63,7 +63,7 @@ public class StoreDto {
         this.protocol = protocol;
     }
 
-	public void setLongitude(Float longitude) {
+	public void setLongitude(Double longitude) {
 		this.longitude = longitude;
 	}
 

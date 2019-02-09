@@ -78,8 +78,8 @@ public class StoreService {
         return null;
     }
 
-    public List<Store> getNearestStores( Float latitude, Float longitude, Long radius) {
-        radius = 5L;
+    public List<Store> getNearestStores( Double latitude, Double longitude, Double radius) {
+        radius = 5D;
         return storeRepository.getNearestStores(latitude, longitude, radius);
         		
     }
