@@ -81,7 +81,7 @@ public class DeliveryRoute {
         this.deliveryBoy = deliveryBoy;
     }
 
-    public void addDeliveryPoint(DeliveryOrder deliveryOrder) {
+    public void addDeliveryOrder(DeliveryOrder deliveryOrder) {
         if (deliveryOrder.getId()   == this.store.getId() && this.deliveryOrders.size() <= 4) {
             this.deliveryOrders.add(deliveryOrder);
         } else {

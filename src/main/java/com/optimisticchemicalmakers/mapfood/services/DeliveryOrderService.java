@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 
 import com.optimisticchemicalmakers.mapfood.dtos.DeliveryOrderDto;
 import com.optimisticchemicalmakers.mapfood.factories.DeliveryOrderFactory;
-import com.optimisticchemicalmakers.mapfood.models.DeliveryItem;
 import com.optimisticchemicalmakers.mapfood.models.DeliveryOrder;
 import com.optimisticchemicalmakers.mapfood.models.Store;
 import com.optimisticchemicalmakers.mapfood.repositories.DeliveryOrderRepository;
@@ -24,32 +23,28 @@ public class DeliveryOrderService {
 
     // Service Methods
 
-    public DeliveryOrder createDeliveryOrder(DeliveryOrder deliveryOrderDto) {
+    public DeliveryOrder createDeliveryOrder(DeliveryOrderDto deliveryOrderDto) {
 
-    	Long estimatedPreparationTime = 600000L; // 10 min
-    	Long kmTimeTraveled = 12000L; // 2 min
+    	Long estimatedPreparationTime = 600000L;    // 10 min
+    	Long kmTimeTraveled = 12000L;               // 2 min
 
-//    	DeliveryOrder deliveryOrder = deliveryOrderFactory.getInstance(deliveryOrderDto);
+        DeliveryOrder deliveryOrder = new DeliveryOrder();
 
     	Store store = storeService.getStore(deliveryOrderDto.getStoreProtocol());
    	    deliveryOrder.setStore(store);
 
     	Double distance = store.distanceTo(deliveryOrderDto.getEndingLatitude(), deliveryOrderDto.getEndingLongitude());
 
-    	deliveryOrder.start();
     	Date estimatedTime = new Date();
     	estimatedTime.setTime((long) (deliveryOrder.getCreatedAt().getTime() + (distance * kmTimeTraveled) + estimatedPreparationTime));
     	deliveryOrder.setEstimatedDevliveryTime(estimatedTime);
     	deliveryOrderDto.setEstimatedDevliveryTime(estimatedTime);
 
+        deliveryOrder.setDeliveryItems(deliveryOrder.getDeliveryItems());
         deliveryOrder = deliveryOrderRepository.save(deliveryOrder);
-        for (DeliveryItem deliveryItem : deliveryOrder.getDeliveryItems())
-        	deliveryItem = deliveryItemService.save(deliveryItem);
-        store.addDeliveryOrder(deliveryOrder);
 
         storeService.save(store);
         return deliveryOrder;
 
-        return null;
     }
 }

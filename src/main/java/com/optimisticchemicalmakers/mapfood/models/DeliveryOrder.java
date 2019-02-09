@@ -44,7 +44,7 @@ public class DeliveryOrder extends Geolocation {
 	// Constructors
 
 	public DeliveryOrder() {
-
+		this.createdAt = new Date();
 	}
 
 	public Long getId() {
