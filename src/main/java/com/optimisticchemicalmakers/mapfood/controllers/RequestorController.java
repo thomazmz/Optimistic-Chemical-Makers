@@ -43,7 +43,7 @@ public class RequestorController {
     // Requestor faz uma busca por Stores disponíveis na sua região
     // -----------------------------------------------------------------------------------------------------------------
     @GetMapping("/stores")
-    public List<StoreDto> getAvailableSttores(
+    public List<StoreDto> getAvailableStores(
             @RequestParam("latitude") Float latitude,
             @RequestParam("longitude") Float longitude,
             @RequestParam("radius") Long radius) {
