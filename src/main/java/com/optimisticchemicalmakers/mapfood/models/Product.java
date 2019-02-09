@@ -13,8 +13,8 @@ public class Product  implements Serializable {
 
     // Properties
 
-    @Id                                                 // It tells the JPA that it is an ID
-    @GeneratedValue(strategy = GenerationType.IDENTITY)     // It tells the JPA how to autogenerate the ID value
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
    
     @Column(nullable = false)
@@ -63,10 +63,6 @@ public class Product  implements Serializable {
 
 	public Store getStore() {
 		return store;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
 	}
 
 	public void setDescription(String description) {

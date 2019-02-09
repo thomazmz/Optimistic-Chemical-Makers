@@ -20,12 +20,12 @@ public class Store extends Geolocation implements Serializable {
 
 	// Properties
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
+
     @Column(nullable = false)
     private String protocol = UUID.randomUUID().toString().replace("-", "");
-
-	@Id // It tells the JPA that it is an ID
-	@GeneratedValue(strategy = GenerationType.IDENTITY) // It tells the JPA how to autogenerate the ID value
-	private Long id;
 
 	private String name;
 

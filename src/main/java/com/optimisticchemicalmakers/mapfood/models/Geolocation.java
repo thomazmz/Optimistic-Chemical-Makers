@@ -1,7 +1,9 @@
 package com.optimisticchemicalmakers.mapfood.models;
 
+import javax.persistence.Column;
 import javax.persistence.Embeddable;
 import javax.persistence.MappedSuperclass;
+import java.util.UUID;
 
 @Embeddable
 @MappedSuperclass
@@ -12,6 +14,9 @@ public class Geolocation {
     private static final int EARTH_RADIUS = 6371; // Approx Earth radius in KM
 
     // Class Properties
+
+    @Column(nullable = false)
+    private String protocol = UUID.randomUUID().toString().replace("-", "");
 
     private Float latitude;
 

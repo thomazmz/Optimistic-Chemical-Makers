@@ -1,19 +1,19 @@
 package com.optimisticchemicalmakers.mapfood.models;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.UUID;
 
 @Entity
 public class Customer {
 	
     // Class Properties
 
-    @Id                                                     // It tells the JPA that it is an ID
-    @GeneratedValue(strategy = GenerationType.IDENTITY)     // It tells the JPA how to autogenerate the ID value
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+	@Column(nullable = false)
+	private String protocol = UUID.randomUUID().toString().replace("-", "");
     
 	public Customer() {}
 
