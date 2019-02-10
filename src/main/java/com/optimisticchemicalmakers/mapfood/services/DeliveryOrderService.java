@@ -1,6 +1,7 @@
 package com.optimisticchemicalmakers.mapfood.services;
 
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -8,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.optimisticchemicalmakers.mapfood.dtos.DeliveryOrderDto;
 import com.optimisticchemicalmakers.mapfood.factories.DeliveryOrderFactory;
 import com.optimisticchemicalmakers.mapfood.models.DeliveryOrder;
+import com.optimisticchemicalmakers.mapfood.models.Requestor;
 import com.optimisticchemicalmakers.mapfood.models.Store;
 import com.optimisticchemicalmakers.mapfood.repositories.DeliveryOrderRepository;
 
@@ -28,23 +30,26 @@ public class DeliveryOrderService {
     	Long estimatedPreparationTime = 600000L;    // 10 min
     	Long kmTimeTraveled = 12000L;               // 2 min
 
-        DeliveryOrder deliveryOrder = new DeliveryOrder();
+        DeliveryOrder deliveryOrder = deliveryOrderFactory.getInstance(deliveryOrderDto);
 
     	Store store = storeService.getStore(deliveryOrderDto.getStoreProtocol());
    	    deliveryOrder.setStore(store);
 
-    	Double distance = store.distanceTo(deliveryOrderDto.getEndingLatitude(), deliveryOrderDto.getEndingLongitude());
+    	Double distance = store.distanceTo(deliveryOrder.getLatitude(), deliveryOrder.getLongitude());
 
     	Date estimatedTime = new Date();
     	estimatedTime.setTime((long) (deliveryOrder.getCreatedAt().getTime() + (distance * kmTimeTraveled) + estimatedPreparationTime));
     	deliveryOrder.setEstimatedDevliveryTime(estimatedTime);
     	deliveryOrderDto.setEstimatedDevliveryTime(estimatedTime);
 
-        deliveryOrder.setDeliveryItems(deliveryOrder.getDeliveryItems());
         deliveryOrder = deliveryOrderRepository.save(deliveryOrder);
 
         storeService.save(store);
         return deliveryOrder;
 
     }
+
+	public List<DeliveryOrder> gerDeliveryOrdersByRequestor(Requestor requestor) {
+		return deliveryOrderRepository.findByRequestor(requestor);
+	}
 }

@@ -10,7 +10,6 @@ import org.springframework.stereotype.Component;
 
 import com.optimisticchemicalmakers.mapfood.dtos.DeliveryItemDto;
 import com.optimisticchemicalmakers.mapfood.dtos.DeliveryOrderDto;
-import com.optimisticchemicalmakers.mapfood.models.Requestor;
 import com.optimisticchemicalmakers.mapfood.models.DeliveryItem;
 import com.optimisticchemicalmakers.mapfood.models.DeliveryOrder;
 

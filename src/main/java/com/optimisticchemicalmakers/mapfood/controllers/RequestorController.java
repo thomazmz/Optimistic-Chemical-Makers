@@ -68,6 +68,20 @@ public class RequestorController {
 				.map(productFactory::getInstance)
 				.collect(Collectors.toList());
     }
+    
+    // -----------------------------------------------------------------------------------------------------------------
+    // GET /api/requestor/order/{orderId}
+    // Requestor verifica lista de entregas já solicitadas
+    // -----------------------------------------------------------------------------------------------------------------
+    @GetMapping("/orders/{id}")
+    public List<DeliveryOrderDto> getDeliveryOrders(
+            @PathVariable(value="id") Long id) {
+        return requestorService
+        		.gerDeliveryOrdersByRequestor(id)
+        		.stream()
+				.map(deliveryOrderFactory::getInstance)
+				.collect(Collectors.toList());
+    }
 
     // -----------------------------------------------------------------------------------------------------------------
     // POST /api/requestor/{requestorProtocol}/order
@@ -90,13 +104,4 @@ public class RequestorController {
         return null;
     }
 
-    // -----------------------------------------------------------------------------------------------------------------
-    // GET /api/requestor/{requestorProtocol}/order/{orderId}
-    // Requestor verifica lista de entregas já solicitadas
-    // -----------------------------------------------------------------------------------------------------------------
-    @GetMapping("{protocol}/orders")
-    public List<DeliveryOrderDto> getDeliveryOrders(
-            @PathVariable(value="protocol") String protocol) {
-        return null;
-    }
 }
