@@ -72,20 +72,30 @@ public class DeliveryRoute {
 
     public void addDeliveryOrder(DeliveryOrder deliveryOrder) {
 
-        if (this.deliveryOrders == null ) {
+        if (deliveryOrder.getStore().getId() == this.getStore().getId()) {
 
-            this.deliveryOrders = new ArrayList<DeliveryOrder>();
-            this.deliveryOrders.add(deliveryOrder);
+            if (this.deliveryOrders == null) {
 
-        } else if (this.deliveryOrders.size() <= 4) {
+                this.deliveryOrders = new ArrayList<DeliveryOrder>();
+                this.deliveryOrders.add(deliveryOrder);
 
-            this.deliveryOrders.add(deliveryOrder);
+            } else if (this.deliveryOrders.size() <= 4) {
+
+                this.deliveryOrders.add(deliveryOrder);
+
+            } else {
+
+                throw new RuntimeException();
+
+            }
 
         } else {
 
             throw new RuntimeException();
 
         }
+
+
     }
 
     public void startDeliveryRoute() {

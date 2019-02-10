@@ -24,13 +24,8 @@ public class DeliveryRouteService {
     // Methods
     // -----------------------------------------------------------------------------------------------------------------
 
+    // Get Optimized Delivery Route
     public List<Geolocation> getOptimizedDeliveryRoute(DeliveryRoute deliveryRoute) {
-
-        // TO DO : Calcula melhor rota entre as deliveryOrders;
-        // TO DO : Retorna uma ArrayList no qual o index representa a posição do ponto na rota
-        // OBS1  : O restaurante sempre será o ponto zero;
-        // OBS2  : Se houverem somente uma deliveryOrder só há uma possibilidade de retorno;
-        // OBS1  : Uma DeliveryRoute pode conter de 1 a até 5 DeliveryOrders;
 
         DeliveryOrder nextDeliveryOrder = null;
 
