@@ -16,8 +16,6 @@ public class StoreDto {
 
 	private String city;
 
-	private String distance;
-
 	@JsonInclude(JsonInclude.Include.NON_NULL)
 	private Double requestorDistance;
 
@@ -37,10 +35,6 @@ public class StoreDto {
 
 	public String getCity() {
 		return city;
-	}
-
-	public String getDistance() {
-		return distance;
 	}
     
 	public Double getRequestorDistance() {
@@ -73,10 +67,6 @@ public class StoreDto {
 
 	public void setDishDescription(String dishDescription) {
 		this.dishDescription = dishDescription;
-	}
-
-	public void setDistance(String distance) {
-		this.distance = distance;
 	}
 
 	public void setRequestorDistance(Double requestorDistance) {
