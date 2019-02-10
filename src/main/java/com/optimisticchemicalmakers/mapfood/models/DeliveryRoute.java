@@ -71,10 +71,20 @@ public class DeliveryRoute {
     }
 
     public void addDeliveryOrder(DeliveryOrder deliveryOrder) {
-        if (deliveryOrder.getId()   == this.store.getId() && this.deliveryOrders.size() <= 4) {
+
+        if (this.deliveryOrders == null ) {
+
+            this.deliveryOrders = new ArrayList<DeliveryOrder>();
             this.deliveryOrders.add(deliveryOrder);
+
+        } else if (this.deliveryOrders.size() <= 4) {
+
+            this.deliveryOrders.add(deliveryOrder);
+
         } else {
+
             throw new RuntimeException();
+
         }
     }
 

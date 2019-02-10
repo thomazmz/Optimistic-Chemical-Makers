@@ -8,18 +8,18 @@ import com.optimisticchemicalmakers.mapfood.services.DeliveryRouteService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
-import org.mockito.junit.MockitoJUnitRunner;
+import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 
-@RunWith(MockitoJUnitRunner.class)
+@RunWith(SpringRunner.class)
 public class DeliveryRouteServiceTest {
 
     @InjectMocks
-    DeliveryRouteService deliveryRouteService;
+    private DeliveryRouteService deliveryRouteService;
 
     @Test
     public void getOptimizedDeliveryRouteTrivial() {
@@ -38,6 +38,7 @@ public class DeliveryRouteServiceTest {
         sample.addDeliveryOrder(deliveryOrder4);
 
         List<Geolocation> responseReference = new ArrayList<>();
+        responseReference.add(store);
         responseReference.add(deliveryOrder1);
         responseReference.add(deliveryOrder2);
         responseReference.add(deliveryOrder3);
@@ -48,7 +49,6 @@ public class DeliveryRouteServiceTest {
         assertEquals(response, responseReference);
 
     }
-
 
 }
 

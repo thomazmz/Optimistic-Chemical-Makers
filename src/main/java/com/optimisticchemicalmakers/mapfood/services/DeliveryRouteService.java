@@ -44,7 +44,7 @@ public class DeliveryRouteService {
 
             for (int i = 0; i < deliveryOrders.size(); i++) {
 
-                if (deliveryOrders == null) {
+                if (nextDeliveryOrder == null) {
 
                     nextDeliveryOrder = deliveryOrders.get(i);
 
