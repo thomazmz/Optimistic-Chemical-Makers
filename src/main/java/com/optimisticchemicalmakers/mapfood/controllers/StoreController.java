@@ -1,7 +1,6 @@
 package com.optimisticchemicalmakers.mapfood.controllers;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -15,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.optimisticchemicalmakers.mapfood.dtos.DeliveryOrderDto;
 import com.optimisticchemicalmakers.mapfood.dtos.DeliveryRouteDto;
 import com.optimisticchemicalmakers.mapfood.dtos.StoreDto;
 import com.optimisticchemicalmakers.mapfood.factories.DeliveryOrderFactory;
@@ -64,6 +62,7 @@ public class StoreController {
                         .createStore(storeDto)));
     }
 
+    // OK
     // -----------------------------------------------------------------------------------------------------------------
     // GET /
     // Retorna Store baseado no protoolo
@@ -77,59 +76,22 @@ public class StoreController {
                         .getStore(protocol)));
     }
 
-    // -----------------------------------------------------------------------------------------------------------------
-    // GET /api/store/{storeProtocol}/orders/
-    // Store pode ver as suas DeliveryOrders filtradas por uma janela de tempo
-    // -----------------------------------------------------------------------------------------------------------------
-    @GetMapping("{protocol}/order")
-    public ResponseEntity<List<DeliveryOrderDto>> getDeliveryOrders(
-            @PathVariable(value="protocol") String protocol,
-            @RequestParam("start") Date start,
-            @RequestParam("end") Date end) {
-
-        return ResponseEntity.ok(deliveryOrderFactory
-                .getInstanceList(storeService
-                        .getDeliveryOrders(protocol, start, end)));
-    }
 
     // -----------------------------------------------------------------------------------------------------------------
-    // GET /api/store/{storeProtocol}/orders/ongoing
-    // Store pode ver as suas DeliveryOrders em andamento
+    // GET /api/requestor/stores
+    // Retorna Stores disponíveis em uma região
     // -----------------------------------------------------------------------------------------------------------------
-    @GetMapping("{protocol}/orders/ongoing")
-    public ResponseEntity<List<DeliveryOrderDto>> getOngoingDeliveryOrders(
-            @PathVariable(value="protocol") String protocol) {
-        return ResponseEntity.ok(deliveryOrderFactory.getInstanceList(storeService.getOngoingDeliveryOrders(protocol)));
-    }
+    @GetMapping("/stores")
+    public List<StoreDto> getAvailableStores(
+            @RequestParam("latitude") Double latitude,
+            @RequestParam("longitude") Double longitude,
+            @RequestParam("radius") Double radius) {
 
-    // -----------------------------------------------------------------------------------------------------------------
-    // GET /api/store/{storeProtocol}/orders/wating
-    // Store pode ver as suas DeliveryOrders que ainda não foram aceitas
-    // -----------------------------------------------------------------------------------------------------------------
-    @GetMapping("{protocol}/order/wating")
-    public ResponseEntity<List<DeliveryOrderDto>> getWatingDeliveryOrders(
-            @PathVariable(value="protocol") String protocol) {
-
-        return ResponseEntity.ok(
-            storeService
-                .getWatingDeliveryOrders(protocol)
+        return storeService
+                .getNearestStores(latitude,longitude,radius)
                 .stream()
-                .map(deliveryOrder -> deliveryOrderFactory
-                    .getInstance(deliveryOrder))
-                    .collect(Collectors.toList()));
-    }
-
-    // -----------------------------------------------------------------------------------------------------------------
-    // POST /api/store/{storeProtocol}/order/{deliveryOrderId}
-    // Store pode aceitar uma DeliveryOrder
-    // -----------------------------------------------------------------------------------------------------------------
-    @PostMapping("{protocol}/order/{deliveryOrderProtocol}")
-    public ResponseEntity<?> acceptDeliveryOrder(
-            @PathVariable(value="protocol") String protocol,
-            @PathVariable(value="deliveryOrderProtocol") String deliveryOrderProtocol) {
-
-        return ResponseEntity.ok(storeService
-            .acceptDeliveryorder(deliveryOrderProtocol));
+                .map(store -> storeFactory.getInstance(store, store.distanceTo(latitude, longitude)))
+                .collect(Collectors.toList());
     }
 
     // -----------------------------------------------------------------------------------------------------------------
