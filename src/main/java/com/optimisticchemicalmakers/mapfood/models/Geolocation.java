@@ -17,9 +17,6 @@ public class Geolocation {
 
     // Class Properties
 
-    @Column(nullable = false)
-    private String protocol = UUID.randomUUID().toString().replace("-", "");
-
     private Double latitude;
 
     private Double longitude;
@@ -40,6 +37,7 @@ public class Geolocation {
         else
             this.latitude = latitude;
             this.longitude = longitude;
+
     }
 
 
@@ -71,10 +69,6 @@ public class Geolocation {
 
     public Double getLongitude() {
         return longitude;
-    }
-
-    public String getProtocol() {
-        return this.protocol;
     }
 
     // Set Methods
