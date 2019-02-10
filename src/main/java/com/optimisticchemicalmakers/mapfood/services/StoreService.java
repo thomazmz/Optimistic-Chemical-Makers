@@ -21,6 +21,12 @@ import com.optimisticchemicalmakers.mapfood.repositories.StoreRepository;
 public class StoreService {
 
     // -----------------------------------------------------------------------------------------------------------------
+    // Service Constants
+    // -----------------------------------------------------------------------------------------------------------------
+
+    private Double searestStoresRadius = 3D; // In km
+
+    // -----------------------------------------------------------------------------------------------------------------
     // Repository/Factory
     // -----------------------------------------------------------------------------------------------------------------
 
@@ -54,6 +60,18 @@ public class StoreService {
         return this.createStore(storeFactory.getInstance(storeDto));
     }
 
+    // OK
+    public List<Store> getNearestStores( Double latitude, Double longitude, Double radius) {
+        return storeRepository.getNearestStores(latitude, longitude, radius);
+    }
+
+    // OK
+    public List<Store> getNearestStores( Double latitude, Double longitude) {
+        return this.getNearestStores(latitude, longitude, this.searestStoresRadius);
+    }
+
+    // ------------------------------------------------------------
+
     public List<DeliveryOrder> getDeliveryOrders(String protocol, Date start, Date end) {
         return null;
     }
@@ -76,12 +94,6 @@ public class StoreService {
 
     public DeliveryRoute createDeliveryRoute(String protocol, String deliveryOrderProtocol) {
         return null;
-    }
-
-    public List<Store> getNearestStores( Double latitude, Double longitude, Double radius) {
-        radius = 5D;
-        return storeRepository.getNearestStores(latitude, longitude, radius);
-        		
     }
 
     public Store save(Store store) {

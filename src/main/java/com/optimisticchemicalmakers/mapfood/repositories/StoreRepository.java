@@ -14,6 +14,8 @@ public interface StoreRepository extends CrudRepository<Store, Long> {
 
     Store getStoreById(Long Id);
 
+
+
     String HAVERSINE_PART = "(6371 * acos(cos(radians(:latitude)) * cos(radians(s.latitude)) * cos(radians(s.longitude) - radians(:longitude)) + sin(radians(:latitude)) * sin(radians(s.latitude))))";
 
     @Query(value="SELECT s.*, "+HAVERSINE_PART+" AS distance FROM store s HAVING distance <= :distance order by distance",nativeQuery = true)

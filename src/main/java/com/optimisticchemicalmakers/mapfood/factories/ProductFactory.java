@@ -5,6 +5,9 @@ import org.springframework.stereotype.Component;
 import com.optimisticchemicalmakers.mapfood.dtos.ProductDto;
 import com.optimisticchemicalmakers.mapfood.models.Product;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Component
 public class ProductFactory {
 
@@ -22,4 +25,10 @@ public class ProductFactory {
         product.setDescription(productDto.getDescription());
         return product;
     }
+
+    public List<ProductDto> getListInstance(List<Product> products) {
+        return products.stream().map(product -> getInstance(product)).collect(Collectors.toList());
+    }
+
+
 }

@@ -76,7 +76,7 @@ public class StoreController {
                         .getStore(protocol)));
     }
 
-
+    // OK
     // -----------------------------------------------------------------------------------------------------------------
     // GET /api/requestor/stores
     // Retorna Stores disponíveis em uma região
@@ -84,11 +84,10 @@ public class StoreController {
     @GetMapping("/stores")
     public List<StoreDto> getAvailableStores(
             @RequestParam("latitude") Double latitude,
-            @RequestParam("longitude") Double longitude,
-            @RequestParam("radius") Double radius) {
+            @RequestParam("longitude") Double longitude) {
 
         return storeService
-                .getNearestStores(latitude,longitude,radius)
+                .getNearestStores(latitude,longitude)
                 .stream()
                 .map(store -> storeFactory.getInstance(store, store.distanceTo(latitude, longitude)))
                 .collect(Collectors.toList());
