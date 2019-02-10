@@ -15,13 +15,13 @@ public class DeliveryBoy {
     @Column(nullable = false)
     private String protocol = UUID.randomUUID().toString().replace("-", "");
 
-    private Long latitude;
+    private Double latitude;
 
-    private Long longitude;
+    private Double longitude;
 
     // Constructors
 
-    public DeliveryBoy(Long latitude, Long longitude) {
+    public DeliveryBoy(Double latitude, Double longitude) {
         this.latitude = latitude;
         this.longitude = longitude;
     }
@@ -34,21 +34,21 @@ public class DeliveryBoy {
 
     public String getProtocol() { return this.protocol; }
 
-    public Long getLatitude() {
+    public Double getLatitude() {
         return this.latitude;
     }
 
-    public Long getLongitude() {
+    public Double getLongitude() {
         return this.longitude;
     }
 
     // Setters
 
-    public void setLatitude(Long latitude) {
+    public void setLatitude(Double latitude) {
         this.latitude = latitude;
     }
 
-    public void setLongitude(Long longitude) {
+    public void setLongitude(Double longitude) {
         this.longitude = longitude;
     }
 
