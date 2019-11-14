@@ -1,14 +1,12 @@
 package com.optimisticchemicalmakers.mapfood.controllers;
 
+import com.optimisticchemicalmakers.mapfood.dtos.StoreDto;
 import com.optimisticchemicalmakers.mapfood.models.Store;
 import com.optimisticchemicalmakers.mapfood.repositories.StoreRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping(value = "/stores")
@@ -23,8 +21,9 @@ public class StoreController {
     }
 
     @PostMapping
-    public ResponseEntity<?> createStore(final Store store) {
-        Store savedStore = storeRepository.save(store);
-        return new ResponseEntity<>(savedStore, HttpStatus.ACCEPTED);
+    public ResponseEntity<?> createStore(@RequestBody final StoreDto storeDto) {
+        Store store = new Store(storeDto.getName());
+        store = storeRepository.save(store);
+        return new ResponseEntity<>(store, HttpStatus.ACCEPTED);
     }
 }

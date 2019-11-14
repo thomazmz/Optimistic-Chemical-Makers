@@ -17,4 +17,13 @@ public class Store {
 	@OneToMany(mappedBy = "store", cascade = CascadeType.ALL)
 	private Set<Product> products;
 
+	private String name;
+
+	public Store(){
+	}
+
+	public Store(String name) {
+		this.name = name;
+	}
+
 }
